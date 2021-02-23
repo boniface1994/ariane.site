@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  mariadb:
+    image: mariadb:10.1
+    ports:
+      - 3307:3306
+    volumes:
+      - "./mysql:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: ariane
+
+  php-apache:
+    build: 
+      context: ./docker/php-apache
+      dockerfile: ./Dockerfile
+    depends_on:
+        - mariadb
+    ports:
+        - 81:80
+    volumes:
+        - ./docker/php-apache/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
+        - ./docker/php-apache/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+        - .:/var/www/html
+    environment:
+      VIRTUAL_HOST: ariane.site
+
+  adminer:
+    image: adminer
+    restart: on-failure
+    depends_on:
+        - mariadb
+    environment:
+        ADMINER_DESIGN: nette
+    ports:
+        - '8086:8080'
