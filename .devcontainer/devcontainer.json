@@ -39,12 +39,13 @@
 		"ms-azuretools.vscode-docker",
 		"vscode-icons-team.vscode-icons",
 		"hangxingliu.vscode-nginx-conf-hint",
-		"phproberto.vscode-php-getters-setters"
+		"phproberto.vscode-php-getters-setters",
+		"onecentlin.laravel-blade"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		80
+		80, 81
 	],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.

@@ -8,7 +8,9 @@ services:
     volumes:
       - "./mysql:/var/lib/mysql"
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: ariane
+      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: ariane
 
   php-apache:
@@ -18,11 +20,12 @@ services:
     depends_on:
         - mariadb
     ports:
-        - 81:80
+        - 80:80
+        - 443:443
     volumes:
         - ./docker/php-apache/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
         - ./docker/php-apache/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-        - .:/var/www/html
+        - ./:/var/www/html
     environment:
       VIRTUAL_HOST: ariane.site
 

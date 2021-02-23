@@ -47,3 +47,6 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 COPY .p10k.zsh /root/.p10k.zsh
 COPY .zshrc /root/.zshrc
+
+# RUN chown -R www-data:www-data /var/www
+RUN a2enmod rewrite
