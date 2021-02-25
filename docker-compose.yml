@@ -20,8 +20,8 @@ services:
     depends_on:
         - mariadb
     ports:
-        - 80:80
-        - 443:443
+        - 81:80
+        - 444:443
     volumes:
         - ./docker/php-apache/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
         - ./docker/php-apache/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
