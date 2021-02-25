@@ -59,6 +59,26 @@
         <script>
             document.getElementById('btnLogout').addEventListener('click', function(){
                 document.getElementById('logout-form').submit()
+            });
+            $(document).ready(function(){
+                $('.general_parameter').find('form').each(function(index,element){
+                    $(element).find('input[type="submit"]').on('click',function(event){
+                        event.preventDefault();
+                        let url = $(this).closest('form').attr('action');
+                        let form = $(this).closest('form');
+                        $.ajax({
+                            data: form.serialize(),
+                            url: url,
+                            type: 'POST',
+                            success: function(response){
+                                console.log('data',response)
+                            },
+                            error: function(er,mess){
+                                console.log('errro',er)
+                            }
+                        })
+                    })
+                })
             })
         </script>
 

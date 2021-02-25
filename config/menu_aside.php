@@ -96,7 +96,7 @@ return [
         [
             'title' => 'Paramètres divers',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/parameter',
             'root' => true,
             'new-tab' => false,
         ],
