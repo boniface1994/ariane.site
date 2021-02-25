@@ -9,4 +9,7 @@ Route::group(['namespace' => 'Auth'], function(){
 
 Route::group(['middleware' => 'admin'], function(){
     Route::get('/', 'Dashboard\DashboardController@index')->name('admin.home');
+    Route::group(['namespace'=>'Configurator'],function(){
+        Route::resource('/technical','TechnicalMaturityController');
+    });
 });
