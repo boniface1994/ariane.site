@@ -23,7 +23,7 @@
                                 <button class="btn btn-secondary" type="button">@</button>
                             </div>
                             @if($parameters)
-                                <input type="text" class="form-control" name="sender" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'sender' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control" name="sender" value="{{ isset($parameters['sender']) ? $parameters['sender'] : '' }}">
                             @else
                                 <input type="text" class="form-control" name="sender" value="">
                             @endif
@@ -36,7 +36,7 @@
                                 <button class="btn btn-secondary" type="button">@</button>
                             </div>
                             @if($parameters)
-                                <input type="text" class="form-control" name="recipient" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'recipient' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control" name="recipient" value="{{ isset($parameters['recipient']) ? $parameters['recipient'] : '' }}">
                             @else
                                 <input type="text" class="form-control" name="recipient">
                             @endif
@@ -67,7 +67,7 @@
                                 <button class="btn btn-secondary" type="button">GO</button>
                             </div>
                             @if($parameters)
-                                <input type="text" class="form-control" name="constraint" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'constraint' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control" name="constraint" value="{{ isset($parameters['constraint']) ? $parameters['constraint'] : '' }}">
                             @else
                                 <input type="text" class="form-control" name="constraint">
                             @endif
@@ -80,7 +80,7 @@
                                 <button class="btn btn-secondary" type="button">Ext</button>
                             </div>
                             @if($parameters)
-                                <input type="text" class="form-control" name="extension" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'extension' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control" name="extension" value="{{ isset($parameters['extension']) ? $parameters['extension'] : '' }}">
                             @else
                                 <input type="text" class="form-control" name="extension">
                             @endif
@@ -93,7 +93,7 @@
                                 <button class="btn btn-secondary" type="button"><i class="fa fa-weight-hanging"></i></button>
                             </div>
                             @if($parameters)
-                                <input type="text" class="form-control" name="weight" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'weight' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control" name="weight" value="{{ isset($parameters['weight']) ? $parameters['weight'] : '' }}">
                             @else
                                 <input type="text" class="form-control" name="weight">
                             @endif
@@ -124,7 +124,7 @@
                             <h1 class=""><i class="fa fa-weight-hanging col-md-2 lg-5"></i></h1>
                             <h3 class="card-label">{{ __('Maximum values ​​for SmallSat') }}</small></h3> &nbsp;&nbsp;&nbsp;&nbsp;
                             @if($parameters)
-                                <input type="text" class="form-control" name="smallsat" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'smallsat' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control" name="smallsat" value="{{ isset($parameters['smallsat']) ? $parameters['smallsat'] : '' }}">
                             @else
                                 <input type="text" class="form-control" name="smallsat">
                             @endif
@@ -140,23 +140,23 @@
                         </div>
                         <div class="input-group">
                             @if($parameters)
-                                <input type="text" class="form-control col-md-2" name="dimention_l" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'dimention_l' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control col-md-2" name="dimension_l" value="{{ isset($parameters['dimension_l']) ? $parameters['dimension_l'] : '' }}">
                             @else
-                                <input type="text" class="form-control col-md-2" name="dimention_l">
+                                <input type="text" class="form-control col-md-2" name="dimension_l">
                             @endif
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button">L</button>
                             </div>&nbsp;&nbsp;&nbsp;
                             @if($parameters)
-                                <input type="text" class="form-control col-md-2" name="dimention_i" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'dimention_i' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control col-md-2" name="dimension_i" value="{{ isset($parameters['dimension_i']) ? $parameters['dimension_i'] : '' }}">
                             @else
-                                <input type="text" class="form-control col-md-2" name="dimention_i">
+                                <input type="text" class="form-control col-md-2" name="dimension_i">
                             @endif
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button">I</button>
                             </div>&nbsp;&nbsp;&nbsp;
                             @if($parameters)
-                                <input type="text" class="form-control col-md-2" name="dimension_p" value="<?php foreach ($parameters as $parameter){if($parameter->name != 'dimension_p' ) continue;  echo $parameter->value;}?>">
+                                <input type="text" class="form-control col-md-2" name="dimension_p" value="{{ isset($parameters['dimension_p']) ? $parameters['dimension_p'] : '' }}">
                             @else
                                 <input type="text" class="form-control col-md-2" name="dimension_p">
                             @endif
@@ -169,7 +169,7 @@
                     <div class="form-group">
                         <label class="card-label">{{ __('If the mass or one of the dimensions indicated by the user exceeds the maximum authorized mass, the following text is displayed :') }}</label>
                         @if($parameters)
-                            <textarea class="form-control col-lg-10" rows="4" name="text" > <?php foreach ($parameters as $parameter){if($parameter->name != 'text' ) continue;  echo $parameter->value;} ?> </textarea>
+                            <textarea class="form-control col-lg-10" rows="4" name="text" > {{ isset($parameters['text']) ? $parameters['text'] : '' }} </textarea>
                         @else
                             <textarea class="form-control col-lg-10" rows="4" name="text"></textarea>
                         @endif

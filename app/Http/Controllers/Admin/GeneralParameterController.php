@@ -15,7 +15,14 @@ class GeneralParameterController extends Controller
      */
     public function index()
     {
-        $parameters = GeneralParameter::all();
+        $all = GeneralParameter::all();
+        $parameters = array();
+        if($all){
+            foreach ($all as $parameter) {
+                $parameters[$parameter->name] = $parameter->value; 
+            }
+        }
+
         return view('admin.pages.dashboard.general-parameter',compact('parameters'));
     }
 
