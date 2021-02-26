@@ -75,7 +75,7 @@ return [
         [
             'title' => 'SC Interface',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => '/admin/configurator/scinterface',
             'root' => true,
             'new-tab' => false,
         ],

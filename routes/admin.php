@@ -9,6 +9,11 @@ Route::group(['namespace' => 'Auth'], function(){
 
 Route::group(['middleware' => 'admin'], function(){
     Route::get('/', 'Dashboard\DashboardController@index')->name('admin.home');
+
+    Route::group(['prefix'=> 'configurator', 'namespace' => 'Configurator'], function() {
+    	Route::get('/scinterface', 'ScInterfaceController@index')->name('scinterface.home');
+    });
+
     Route::resource('parameter','GeneralParameterController');
     Route::get('download/{name}','GeneralParameterController@downloadPdf')->name('download');
 
