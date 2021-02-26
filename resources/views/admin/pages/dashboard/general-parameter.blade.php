@@ -192,19 +192,25 @@
                     <h3 class="card-label">{{ __('Standard terms and conditions') }}</small></h3>
                 </div>
             </div>
-            <form class="form" action="{{ route('parameter.store') }}" method="POST" enctype="multipart/form-data">
+            <form class="form upload" action="{{ route('parameter.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
                         <label class="form-label">{{ __('PDF file for CubeSatt*') }}</label>
                         <div class="input-group">
-                            <input type="file" name="cubesatt" value="">
+                            <input type="file" name="cubesatt">
+                            @if($parameters && isset($parameters['cubesatt']) && $parameters['cubesatt'] !== '')
+                                <a class="btn btn-default" href="{{ route('download',$parameters['cubesatt']) }}"><i class="fa fa-download"></i>{{ __('Download current file') }}</a>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">{{ __('PDF file for SmallSatt*') }}</label>
                         <div class="input-group">
-                            <input type="file" name="smallsatt" value="">
+                            <input type="file" name="smallsatt" >
+                            @if($parameters && isset($parameters['smallsatt']) && $parameters['smallsatt'] !== '')
+                                <a class="btn btn-default"  href="{{ route('download',$parameters['smallsatt']) }}"><i class="fa fa-download"></i>{{ __('Download current file') }}</a>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">

@@ -10,5 +10,6 @@ Route::group(['namespace' => 'Auth'], function(){
 Route::group(['middleware' => 'admin'], function(){
     Route::get('/', 'Dashboard\DashboardController@index')->name('admin.home');
     Route::resource('parameter','GeneralParameterController');
+    Route::get('download/{name}','GeneralParameterController@downloadPdf')->name('download');
 
 });
