@@ -13,5 +13,7 @@ Route::group(['middleware' => 'admin'], function(){
     Route::group(['prefix'=> 'configurator', 'namespace' => 'Configurator'], function() {
     	Route::get('/scinterface', 'ScInterfaceController@index')->name('scinterface.home');
     });
-    
+
+    Route::resource('parameter','GeneralParameterController');
+
 });
