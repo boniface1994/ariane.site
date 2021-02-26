@@ -33,7 +33,7 @@ return [
         [
             'title' => 'Trimestres dispo',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/trimester',
             'root' => true,
             'new-tab' => false,
         ],
