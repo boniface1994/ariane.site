@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin\Configurator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Configurator\Quarter;
+use App\Models\Configurator\QuarterAvailable;
+use Illuminate\Support\Facades\Validator;
 
 class QuarterAvailableController extends Controller
 {
@@ -14,7 +17,9 @@ class QuarterAvailableController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.configurator.quarter.index');
+        $quarters = Quarter::all();
+        $quarterAvailable = QuarterAvailable::first();
+        return view('admin.pages.configurator.quarter.index',compact('quarters','quarterAvailable'));
     }
 
     /**
@@ -35,7 +40,23 @@ class QuarterAvailableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $validator = Validator::make($request->all(), [
+        //     'month' => 'required',
+        //     'year' => 'required',
+        //     'quarter' => 'required'
+        // ]);
+        // if ($validator->passes()) {
+        //     return response()->json(['success'=>'Added new records.']);
+        // }
+        // return response()->json(['error'=>$validator->errors()]);
+
+        $input['year'] = $request->year;
+        $input['month'] = $request->month;
+        $input['quarter_id'] = $request->quarter;
+        $input['user_id'] = \Auth::user()->id;
+        $quarterAvailable = QuarterAvailable::create($input);
+
+        return response()->json($quarterAvailable);
     }
 
     /**
@@ -69,7 +90,23 @@ class QuarterAvailableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $validator = Validator::make($request->all(), [
+        //     'month' => 'required',
+        //     'year' => 'required',
+        //     'quarter' => 'required'
+        // ]);
+        
+        // if ($validator->passes()) {
+        //     return response()->json(['success'=>'Added new records.']);
+        // }
+        // return response()->json(['error'=>$validator->errors()]);
+        $quarterAvailable = QuarterAvailable::find($id);
+        $quarterAvailable->year = $request->year;
+        $quarterAvailable->month = $request->month;
+        $quarterAvailable->user_id = \Auth::user()->id;
+        $quarterAvailable->quarter_id = $request->quarter;
+        $quarterAvailable->save();
+        return response()->json($quarterAvailable);
     }
 
     /**

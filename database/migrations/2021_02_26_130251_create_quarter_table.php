@@ -13,15 +13,9 @@ class CreateTrimestreDispoTable extends Migration
      */
     public function up()
     {
-        Schema::create('quarters_availables', function (Blueprint $table) {
+        Schema::create('quarters', function (Blueprint $table) {
             $table->id();
-            $table->string('month')->nullable();
-            $table->string('trimester');
-            $table->integer('year');
-            $table->foreignId('user_id')->references('id')->on('users')
-                  ->unsigned()
-                  ->nullable()
-                  ->onDelete('cascade');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class CreateTrimestreDispoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trimestre_dispo');
+        Schema::dropIfExists('quarters');
     }
 }
