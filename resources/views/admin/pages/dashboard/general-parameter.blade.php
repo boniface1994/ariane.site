@@ -7,7 +7,7 @@
 <div class="card card-custom general_parameter">
     <div class="card-header card-header-tabs-line">
         <div class="card-toolbar">
-            <ul class="nav nav-tabs nav-bold nav-tabs-line">
+            <ul class="nav nav-tabs  nav-tabs-line" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" href="#contact_form">
                         <h5 class="card-label">{{ __('Contact form') }}</h3>

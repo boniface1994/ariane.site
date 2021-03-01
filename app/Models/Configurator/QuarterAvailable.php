@@ -10,7 +10,7 @@ class QuarterAvailable extends Model
 {
     use HasFactory;
 
-    protected $table = "quarters_availables";
+    protected $table = "quarter_availables";
     protected $fillable = [
         'month','trimester','year','user_id','quarter_id'
     ];

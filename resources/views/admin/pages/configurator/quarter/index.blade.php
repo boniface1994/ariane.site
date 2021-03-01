@@ -75,11 +75,7 @@
                 success: function(response){
                     form.attr('action',form.data('url')+'/'+response.id);
                     form.attr('method','PATCH');
-                    // if($.isEmptyObject(response.error)){
-                    //     alert(response.success);
-                    // }else{
-                    //     printErrorMsg(response.error);
-                    // }
+                    toastr.success("Success !");
                 }
             })
         });
