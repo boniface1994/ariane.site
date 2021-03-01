@@ -43,6 +43,7 @@ class PriceListController extends Controller
      */
     public function store(Request $request)
     {
+        var_dump('icii');die();
         $pricelists = PriceList::all();
         $names= array();
         if($pricelists){
@@ -75,8 +76,7 @@ class PriceListController extends Controller
                 }
             }
         }
-        return redirect('admin/configurator/pricelist');
-        // return response()->json($request->all());
+        return response()->json($request->all());
     }
 
     /**

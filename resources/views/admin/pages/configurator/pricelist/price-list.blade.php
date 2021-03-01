@@ -252,31 +252,25 @@
 </div>
 @endsection
 
-@section('scipts')
+@section('scripts')
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        // $('.pricelists .form').each(function(i,element){
-        //     $(element).find('input[type="submit"]').on('click',function(e){
-        //         e.preventDefault();
-
-        //         let form = $(this).closest('form');
-        //         let url = form.attr('action');
-        //         let method = form.attr('method');
-        //         $.ajax({
-        //             url: url,
-        //             method: method,
-        //             data : form.serialize(),
-        //             success: function(response){
-        //                 toastr.success("Success !");
-        //                 // if($.isEmptyObject(response.error)){
-        //                 //     alert(response.success);
-        //                 // }else{
-        //                 //     printErrorMsg(response.error);
-        //                 // }
-        //             }
-        //         })
-        //     });
-        // })
+        $('.pricelists').find('form').each(function(i,element){
+            $(element).find('input[type="submit"]').on('click',function(e){
+                e.preventDefault();
+                let form = $(this).closest('form');
+                let url = form.attr('action');
+                let method = form.attr('method');
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data : form.serialize(),
+                    success: function(response){
+                        toastr.success("Success !");
+                    }
+                })
+            });
+        })
 
     });
 </script>

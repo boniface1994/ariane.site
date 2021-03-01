@@ -40,23 +40,20 @@ class QuarterAvailableController extends Controller
      */
     public function store(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'month' => 'required',
-        //     'year' => 'required',
-        //     'quarter' => 'required'
-        // ]);
-        // if ($validator->passes()) {
-        //     return response()->json(['success'=>'Added new records.']);
-        // }
-        // return response()->json(['error'=>$validator->errors()]);
+        $validator = Validator::make($request->all(), [
+            'year' => 'required',
+            'quarter' => 'required'
+        ]);
+        if ($validator->passes()) {
+            $input['year'] = $request->year;
+            $input['month'] = $request->month;
+            $input['quarter_id'] = $request->quarter;
+            $input['user_id'] = \Auth::user()->id;
+            $quarterAvailable = QuarterAvailable::create($input);
 
-        $input['year'] = $request->year;
-        $input['month'] = $request->month;
-        $input['quarter_id'] = $request->quarter;
-        $input['user_id'] = \Auth::user()->id;
-        $quarterAvailable = QuarterAvailable::create($input);
-
-        return response()->json($quarterAvailable);
+            return response()->json($quarterAvailable);
+        }
+        return response()->json(['error'=>$validator->errors()]);
     }
 
     /**

@@ -73,9 +73,13 @@
                 method: method,
                 data : form.serialize(),
                 success: function(response){
-                    form.attr('action',form.data('url')+'/'+response.id);
-                    form.attr('method','PATCH');
-                    toastr.success("Success !");
+                    if($.isEmptyObject(response.error)){
+                        form.attr('action',form.data('url')+'/'+response.id);
+                        form.attr('method','PATCH');
+                        toastr.success("Success !");
+                    }else{
+                        toastr.error("Remplissez les champs requis")
+                    }
                 }
             })
         });
