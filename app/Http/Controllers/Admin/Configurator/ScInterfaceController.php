@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Configurator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Configurator\ScInterface;
 
 class ScInterfaceController extends Controller
 {
@@ -14,17 +15,8 @@ class ScInterfaceController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.configurator.scinterface.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $interfaces = ScInterface::all();
+        return view('admin.pages.configurator.scinterface.index', compact('interfaces'));
     }
 
     /**
@@ -35,41 +27,35 @@ class ScInterfaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // $errors = array();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        // if(empty($request->name)) $errors = array('name', 'Name is required');
+        // if(empty($request->sicubesat) && empty($request->sismallsat)) $errors = array('type', 'This field is required');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        // return response()->json([
+        //         'success' => false,
+        //         'errors' => $errors
+        //     ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $object = ScInterface::updateOrCreate(
+            [
+                'id' => $request->id
+            ],
+            [
+                'name' => $request->name,
+                'explication' => $request->explication,
+                'sicubesat' => $request->sicubesat,
+                'sismallsat' => $request->sismallsat,
+                'position' => $request->position,
+            ]
+        );
+
+        return response()->json(
+            [
+                'success' => true,
+                'id' => $object->id
+            ]
+        );
     }
 
     /**
@@ -78,8 +64,15 @@ class ScInterfaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        ScInterface::destroy($request->id);
+
+        return response()->json(
+            [
+                'success' => true,
+                'id' => $request->id
+            ]
+        );
     }
 }

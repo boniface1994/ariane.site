@@ -17,7 +17,8 @@ class CreateScInterfacesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('explication');
-            $table->boolean('type');
+            $table->integer('sicubesat');
+            $table->integer('sismallsat');
             $table->integer('position');
             $table->timestamps();
         });
