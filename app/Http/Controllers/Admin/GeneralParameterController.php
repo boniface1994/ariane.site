@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GeneralParameter;
+use Illuminate\Support\Facades\Hash;
 
 class GeneralParameterController extends Controller
 {
@@ -56,11 +57,23 @@ class GeneralParameterController extends Controller
                 if(in_array($key,$names)){
                     if($key != "_token"){
                         $parameter = GeneralParameter::where(['name' => $key])->first();
+                        if($key == "cubesatt" || $key == "smallsatt"){
+                            $ext = $request->file($key)->guessExtension();
+                            $name = md5($request->file($key)->getClientOriginalName()).'.'.$ext;
+                            $value = $name ;
+                            $request->file($key)->storeAs("upload",$name,'public');
+                        }
                         $parameter->value = $value;
                         $parameter->update();
                     }
                 }else{
                     if($key != "_token"){
+                        if($key == "cubesatt" || $key == "smallsatt"){
+                            $ext = $request->file($key)->guessExtension();
+                            $name = md5($request->file($key)->getClientOriginalName()).'.'.$ext;
+                            $value = $name;
+                            $request->file($key)->storeAs("upload",$name,'public');
+                        }
                         $input['name'] = $key;
                         $input['value'] = $value;
                         GeneralParameter::create($input);
@@ -70,11 +83,21 @@ class GeneralParameterController extends Controller
         }else{
             foreach ($request->all() as $key => $value) {
                 if($key != "_token"){
+                    if($key == "cubesatt" || $key == "smallsatt"){
+                        $ext = $request->file($key)->guessExtension();
+                        $name = md5($request->file($key)->getClientOriginalName()).'.'.$ext;
+                        $value = $name;
+                        $request->file($key)->storeAs("upload",$name,'public');
+                    }
                     $input['name'] = $key;
                     $input['value'] = $value;
                     GeneralParameter::create($input);
                 }
             }
+        }
+        if(isset($request->smallsatt) || isset($request->cubesatt))
+        {
+            return redirect('admin/parameter');
         }
         return response()->json($request->all());
     }
@@ -122,5 +145,13 @@ class GeneralParameterController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function downloadPdf($name){
+        $pdf = public_path("upload/".$name);
+        $headers = ['Content-Type: application/pdf'];
+        $newName = time().'.pdf';
+
+        return response()->download($pdf, $newName, $headers);
     }
 }

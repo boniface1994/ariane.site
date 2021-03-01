@@ -4,18 +4,38 @@
 <h3 class="card-title">
             {{ __('General parameters') }}
 </h3>
-<div class="row general_parameter">
-    <div class="col-lg-12 gutter-b">
-        <!--begin::Card-->
-        <div class="card card-custom card-stretch">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">{{ __('Contact form') }}</h3>
-                </div>
-            </div>
-            <form class="form" action="{{ route('parameter.store') }}" method="POST">
-                @csrf
-                <div class="card-body">
+<div class="card card-custom general_parameter">
+    <div class="card-header card-header-tabs-line">
+        <div class="card-toolbar">
+            <ul class="nav nav-tabs  nav-tabs-line" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#contact_form">
+                        <h5 class="card-label">{{ __('Contact form') }}</h3>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#extension">
+                        <h5 class="card-label">{{ __('Extensions and weights for 3D plans') }}</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#smallsat">
+                        <h5 class="card-label">{{ __('Maximum values ​​for SmallSat') }}</h5>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#condition">
+                        <h5 class="card-label">{{ __('Maximum values ​​for SmallSat') }}</h5>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="contact_form" role="tabpanel" aria-labelledby="contact_form">
+                <form class="form" action="{{ route('parameter.store') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <label>{{ __('Sender email address for contact emails *') }}</label>
                         <div class="input-group">
@@ -44,22 +64,11 @@
                     </div>
 
                     <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
-                </div>
-            </form>
-        </div>
-        <!--end::Card-->
-    </div>
-    <div class="col-lg-12 gutter-b">
-        <!--begin::Card-->
-        <div class="card card-custom card-stretch">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">{{ __('Extensions and weights for 3D plans') }}</h3>
-                </div>
+                </form>
             </div>
-            <form class="form" action="{{ route('parameter.store') }}" method="POST">
-                @csrf
-                <div class="card-body">
+            <div class="tab-pane fade" id="extension" role="tabpanel" aria-labelledby="extension">
+                <form class="form" action="{{ route('parameter.store') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <label>{{ __('Name of the constraint to display on the GO *') }}</label>
                         <div class="input-group">
@@ -103,30 +112,19 @@
                     <div class="form-group">
                         <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
                     </div>
-                </div>
-            </form>
-        </div>
-        <!--end::Card-->
-    </div>
-    <div class="col-lg-12 gutter-b">
-        <!--begin::Card-->
-        <div class="card card-custom card-stretch">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">{{ __('Maximum values ​​for SmallSat') }}</small></h3>
-                </div>
+                </form>
             </div>
-            <form class="form" action="{{ route('parameter.store') }}" method="POST">
-                @csrf
-                <div class="card-body">
+            <div class="tab-pane fade" id="smallsat" role="tabpanel" aria-labelledby="smallsat">
+                <form class="form" action="{{ route('parameter.store') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <div class="input-group">
-                            <h1 class=""><i class="fa fa-weight-hanging col-md-2 lg-5"></i></h1>
-                            <h3 class="card-label">{{ __('Maximum values ​​for SmallSat') }}</small></h3> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-weight-hanging icon-3x mt-6 mr-2"></i>
+                            <h5 class="card-label mt-3 mr-4">{{ __('Max authorized mass') }}</h5>
                             @if($parameters)
-                                <input type="text" class="form-control" name="smallsat" value="{{ isset($parameters['smallsat']) ? $parameters['smallsat'] : '' }}">
+                                <input type="text" class="form-control col-lg-6" name="smallsat" value="{{ isset($parameters['smallsat']) ? $parameters['smallsat'] : '' }}">
                             @else
-                                <input type="text" class="form-control" name="smallsat">
+                                <input type="text" class="form-control col-lg-6" name="smallsat">
                             @endif
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button">Kg</button>
@@ -135,26 +133,25 @@
                     </div>
                     <div class ="form-group">
                         <div class="input-group">
-                            <h1 class=""><i class="fa fa-box col-md-2"></i></h1>
-                            <h3 class="card-label">{{ __('Max authorized dimensions') }}</small></h3>
-                        </div>
-                        <div class="input-group">
+                            <i class="fa fa-box icon-3x mt-6 mr-2"></i>
+                            <h5 class="card-label mt-3">{{ __('Max authorized dimensions') }}</h5>
+                        
                             @if($parameters)
-                                <input type="text" class="form-control col-md-2" name="dimension_l" value="{{ isset($parameters['dimension_l']) ? $parameters['dimension_l'] : '' }}">
+                                <input type="text" class="form-control col-md-2 ml-2" name="dimension_l" value="{{ isset($parameters['dimension_l']) ? $parameters['dimension_l'] : '' }}">
                             @else
                                 <input type="text" class="form-control col-md-2" name="dimension_l">
                             @endif
-                            <div class="input-group-append">
+                            <div class="input-group-append mr-4">
                                 <button class="btn btn-secondary" type="button">L</button>
-                            </div>&nbsp;&nbsp;&nbsp;
+                            </div>
                             @if($parameters)
                                 <input type="text" class="form-control col-md-2" name="dimension_i" value="{{ isset($parameters['dimension_i']) ? $parameters['dimension_i'] : '' }}">
                             @else
                                 <input type="text" class="form-control col-md-2" name="dimension_i">
                             @endif
-                            <div class="input-group-append">
+                            <div class="input-group-append mr-4">
                                 <button class="btn btn-secondary" type="button">I</button>
-                            </div>&nbsp;&nbsp;&nbsp;
+                            </div>
                             @if($parameters)
                                 <input type="text" class="form-control col-md-2" name="dimension_p" value="{{ isset($parameters['dimension_p']) ? $parameters['dimension_p'] : '' }}">
                             @else
@@ -179,41 +176,37 @@
                     <div class="form-group">
                         <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
                     </div>
-                </div>
-            </form>
-        </div>
-        <!--end::Card-->
-    </div>
-    <div class="col-lg-12 gutter-b">
-        <!--begin::Card-->
-        <div class="card card-custom card-stretch">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">{{ __('Standard terms and conditions') }}</small></h3>
-                </div>
+                </form>
             </div>
-            <form class="form" action="{{ route('parameter.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="card-body">
+            <div class="tab-pane fade" id="condition" role="tabpanel" aria-labelledby="condition">
+                <form class="form upload" action="{{ route('parameter.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
                         <label class="form-label">{{ __('PDF file for CubeSatt*') }}</label>
                         <div class="input-group">
-                            <input type="file" name="cubesatt" value="">
+                            <input type="file" name="cubesatt">
+                            @if($parameters && isset($parameters['cubesatt']) && $parameters['cubesatt'] !== '')
+                                <a class="btn btn-default" href="{{ route('download',$parameters['cubesatt']) }}"><i class="fa fa-download"></i>{{ __('Download current file') }}</a>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">{{ __('PDF file for SmallSatt*') }}</label>
                         <div class="input-group">
-                            <input type="file" name="smallsatt" value="">
+                            <input type="file" name="smallsatt" >
+                            @if($parameters && isset($parameters['smallsatt']) && $parameters['smallsatt'] !== '')
+                                <a class="btn btn-default"  href="{{ route('download',$parameters['smallsatt']) }}"><i class="fa fa-download"></i>{{ __('Download current file') }}</a>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-        <!--end::Card-->
     </div>
 </div>
+
+
 @endsection

@@ -22,7 +22,7 @@ return [
             'title' => 'Clients',
             'root' => true,
             'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
-            'page' => '/',
+            'page' => 'admin/customer',
             'new-tab' => false,
         ],
 
@@ -33,7 +33,7 @@ return [
         [
             'title' => 'Trimestres dispo',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/trimester',
             'root' => true,
             'new-tab' => false,
         ],
@@ -68,7 +68,7 @@ return [
         [
             'title' => 'Grilles tarifaires',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => '/admin/configurator/pricelist',
             'root' => true,
             'new-tab' => false,
         ],
