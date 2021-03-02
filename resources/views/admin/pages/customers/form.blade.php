@@ -17,9 +17,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <form id="quarter_available" class="form" action="{{ isset($customer) ? route('customer.update',['customer'=>$customer->id]) : route('customer.store') }}" method="{{ isset($customer) ? 'POST' : 'POST' }}">
+                <form id="quarter_available" class="form" action="{{ isset($customer) ? route('customer.update',['customer'=>$customer->id]) : route('customer.store') }}" method="POST">
                     @csrf
-                    @method('PATCH')
+                    @if(isset($customer))
+                        @method('PATCH')
+                    @endif
                     <h4 class="form-label">{{ __('Your company / Institution') }}</h4><br>
                     <div class="form-group row">
                         <div class="input-group col-lg-12">
@@ -59,7 +61,7 @@
                     </div>
 
                     <div class="form-group row ml-1">
-                        <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
+                        <input type="submit" class="btn btn-light-success font-weight-bold" value="{{ __('Validate') }}">
                     </div>
                 </form>
             </div>

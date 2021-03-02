@@ -17,6 +17,8 @@ Route::group(['middleware' => 'admin'], function(){
     });
 
     Route::resource('customer','Customers\CustomerController');
+    Route::post('customer/search','Customers\CustomerController@search')->name('customer_search');
+    Route::get('reset_search','Customers\CustomerController@resetSearch')->name('reset_search');
     Route::resource('parameter','GeneralParameterController');
     Route::get('download/{name}','GeneralParameterController@downloadPdf')->name('download');
 
