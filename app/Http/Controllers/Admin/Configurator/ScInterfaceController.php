@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Configurator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Configurator\ScInterface;
 
 class ScInterfaceController extends Controller
 {
@@ -14,17 +15,8 @@ class ScInterfaceController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.configurator.scinterface.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $interfaces = ScInterface::all();
+        return view('admin.pages.configurator.scinterface.index', compact('interfaces'));
     }
 
     /**
@@ -35,41 +27,38 @@ class ScInterfaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $errors = array();
+        if(!$request->name) $errors[] = trans('Name is required');
+        if(!$request->sicubesat && !$request->sismallsat) $errors[] = trans('Type is required');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if(count($errors) == 0) {
+            $object = ScInterface::updateOrCreate(
+                [
+                    'id' => $request->id
+                ],
+                [
+                    'name' => $request->name,
+                    'explication' => $request->explication,
+                    'sicubesat' => $request->sicubesat,
+                    'sismallsat' => $request->sismallsat,
+                    'position' => $request->position,
+                ]
+            );
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+            return response()->json(
+                [
+                    'success' => true,
+                    'id' => $object->id,
+                    'delete_url' => route('scinterface.destroy', $object->id)
+                ]
+            );
+        }
+        else {
+            return response()->json([
+                'error' => true,
+                'errors' => $errors
+            ]);
+        }
     }
 
     /**
@@ -80,6 +69,13 @@ class ScInterfaceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ScInterface::destroy($id);
+
+        return response()->json(
+            [
+                'success' => true,
+                'id' => $id
+            ]
+        );
     }
 }

@@ -12,6 +12,8 @@ class ScInterface extends Model
     protected $fillable = [
         'name',
         'explication',
-        'type'
+        'sicubesat',
+        'sismallsat',
+        'position'
     ];
 }
