@@ -288,25 +288,25 @@
                     }
                 });
 
-                swappable.on('sortable:stop', function() {
-                    var data = [];
-                    $('.sc-draggable-item').each(function(i, el) {
-                        var id = $(el).find('.index').val();
-                        //i=position
-                        data[i] = id;
+                swappable.on('sortable:stop', function(sortableEvent) {
+                    setTimeout(() => {
+                        var data = [];
+                        $('.sc-draggable-item').each(function(i, el) {
+                            var id = $(el).find('.index').val();
+                            //i=position
+                            data[i] = id;
 
-                    })
-                    data = data.splice(0, data.length - 2);
-                    
-                    $.ajax({
-                        url: "{{ route('scinterface.position') }}",
-                        data: {'_token': '{{ csrf_token() }}', 'data': data},
-                        type: 'POST',
-                        success: function(response) {
-                           
-                            
-                        }
-                    }) 
+                        })
+                        
+                        $.ajax({
+                            url: "{{ route('scinterface.position') }}",
+                            data: {'_token': '{{ csrf_token() }}', 'data': data},
+                            type: 'POST',
+                            success: function(response) {
+                               toastr.success("{{ __('Success!') }}", "{{ __('Position changed') }}");
+                            }
+                        }) 
+                    }, 0)
                 })
                 
             }
