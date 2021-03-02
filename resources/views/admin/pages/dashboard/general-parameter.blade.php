@@ -63,7 +63,7 @@
                         </div>
                     </div>
 
-                    <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
+                    <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
                 </form>
             </div>
             <div class="tab-pane fade" id="extension" role="tabpanel" aria-labelledby="extension">
@@ -110,7 +110,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
+                        <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
                     </div>
                 </form>
             </div>
@@ -174,7 +174,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
+                        <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
                     </div>
                 </form>
             </div>
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
+                        <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
                     </div>
                 </form>
             </div>

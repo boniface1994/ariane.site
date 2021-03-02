@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-light-dark font-weight-bold" value="{{ __('Validate') }}">
+                        <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
                     </div>
                 </div>
             </form>

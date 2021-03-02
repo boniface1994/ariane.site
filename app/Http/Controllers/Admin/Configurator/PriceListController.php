@@ -43,7 +43,6 @@ class PriceListController extends Controller
      */
     public function store(Request $request)
     {
-        var_dump('icii');die();
         $pricelists = PriceList::all();
         $names= array();
         if($pricelists){

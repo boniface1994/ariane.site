@@ -15,7 +15,19 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::paginate(10);
+        if(session('company')  || session('name')){
+            $customers = Customer::where([
+                [function($query){
+                    if(($name = session('name'))){
+                        $query->orWhere('name','like','%'.$name)->get();
+                    }
+                    if(($company = session('company'))){
+                        $query->orWhere('company','like','%'.$company)->get();
+                    }
+                }]
+            ])->paginate(10);
+        }
         return view('admin.pages.customers.index',compact('customers'));
     }
 
@@ -37,20 +49,29 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $customer['name'] = $request->name;
-        $customer['company'] = $request->company;
-        $customer['email'] = $request->email;
-        $customer['phone'] = $request->phone;
-        $customer['phone_company'] = $request->phone_company;
-        $customer['street'] = $request->street;
-        $customer['postal_code'] = $request->postal_code;
-        $customer['function'] = $request->function;
-        $customer['state'] = $request->state;
-        $customer['city'] = $request->city;
-        $customer['country'] = $request->country;
-        Customer::create($customer);
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|mail',
+            'company' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return \Redirect::back()->withInput()->withErrors($validator);
+        }else{
+            $customer['name'] = $request->name;
+            $customer['company'] = $request->company;
+            $customer['email'] = $request->email;
+            $customer['phone'] = $request->phone;
+            $customer['phone_company'] = $request->phone_company;
+            $customer['street'] = $request->street;
+            $customer['postal_code'] = $request->postal_code;
+            $customer['function'] = $request->function;
+            $customer['state'] = $request->state;
+            $customer['city'] = $request->city;
+            $customer['country'] = $request->country;
+            Customer::create($customer);
 
-        return redirect('admin/customer');
+            return redirect('admin/customer');
+         }
     }
 
     /**
@@ -111,9 +132,34 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         $customer = Customer::find($id);
-        
         $customer->delete();
 
+        return redirect('admin/customer');
+    }
+
+    public function search(Request $request){
+        foreach($request->all() as $key=>$value){
+            if($value != ''){
+                \Session::put($key,$value);
+            }
+        }
+        $customers = Customer::where([
+            [function($query) use ($request){
+                if(($name = $request->name)){
+                    $query->orWhere('name','like','%'.$name)->get();
+                }
+                if(($company = $request->company)){
+                    $query->orWhere('company','like','%'.$company)->get();
+                }
+            }]
+        ])->paginate(10);
+
+        return view('admin.pages.customers.index',compact('customers'));
+    }
+
+    public function resetSearch(){
+        \Session::forget('name');
+        \Session::forget('company');
         return redirect('admin/customer');
     }
 }
