@@ -49,12 +49,14 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = \Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|mail',
             'company' => 'required'
         ]);
-        // if ($validator->passes()) {
+        if ($validator->fails()) {
+            return \Redirect::back()->withInput()->withErrors($validator);
+        }else{
             $customer['name'] = $request->name;
             $customer['company'] = $request->company;
             $customer['email'] = $request->email;
@@ -69,7 +71,7 @@ class CustomerController extends Controller
             Customer::create($customer);
 
             return redirect('admin/customer');
-        // }
+         }
     }
 
     /**
