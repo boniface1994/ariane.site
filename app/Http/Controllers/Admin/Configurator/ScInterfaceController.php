@@ -27,35 +27,38 @@ class ScInterfaceController extends Controller
      */
     public function store(Request $request)
     {
-        // $errors = array();
+        $errors = array();
+        if(!$request->name) $errors[] = trans('Name is required');
+        if(!$request->sicubesat && !$request->sismallsat) $errors[] = trans('Type is required');
 
-        // if(empty($request->name)) $errors = array('name', 'Name is required');
-        // if(empty($request->sicubesat) && empty($request->sismallsat)) $errors = array('type', 'This field is required');
+        if(count($errors) == 0) {
+            $object = ScInterface::updateOrCreate(
+                [
+                    'id' => $request->id
+                ],
+                [
+                    'name' => $request->name,
+                    'explication' => $request->explication,
+                    'sicubesat' => $request->sicubesat,
+                    'sismallsat' => $request->sismallsat,
+                    'position' => $request->position,
+                ]
+            );
 
-        // return response()->json([
-        //         'success' => false,
-        //         'errors' => $errors
-        //     ]);
-
-        $object = ScInterface::updateOrCreate(
-            [
-                'id' => $request->id
-            ],
-            [
-                'name' => $request->name,
-                'explication' => $request->explication,
-                'sicubesat' => $request->sicubesat,
-                'sismallsat' => $request->sismallsat,
-                'position' => $request->position,
-            ]
-        );
-
-        return response()->json(
-            [
-                'success' => true,
-                'id' => $object->id
-            ]
-        );
+            return response()->json(
+                [
+                    'success' => true,
+                    'id' => $object->id,
+                    'delete_url' => route('scinterface.destroy', $object->id)
+                ]
+            );
+        }
+        else {
+            return response()->json([
+                'error' => true,
+                'errors' => $errors
+            ]);
+        }
     }
 
     /**
@@ -64,14 +67,14 @@ class ScInterfaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        ScInterface::destroy($request->id);
+        ScInterface::destroy($id);
 
         return response()->json(
             [
                 'success' => true,
-                'id' => $request->id
+                'id' => $id
             ]
         );
     }
