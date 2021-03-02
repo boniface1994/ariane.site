@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateScInterfacesTable extends Migration
+class CreateTechnicalMaturityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateScInterfacesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sc_interfaces', function (Blueprint $table) {
+        Schema::create('technical_maturity', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('explication')->nullable();
-            $table->integer('sicubesat')->nullable();
-            $table->integer('sismallsat')->nullable();
+            $table->string('title');
             $table->integer('position');
+            $table->foreignId('user_id')->references('id')->on('users')
+                  ->unsigned()
+                  ->nullable()
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateScInterfacesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sc_interfaces');
+        Schema::dropIfExists('technical_maturity');
     }
 }

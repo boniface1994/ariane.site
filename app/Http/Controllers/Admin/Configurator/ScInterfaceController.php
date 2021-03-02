@@ -49,6 +49,7 @@ class ScInterfaceController extends Controller
                 [
                     'success' => true,
                     'id' => $object->id,
+                    'name' => $request->name,
                     'delete_url' => route('scinterface.destroy', $object->id)
                 ]
             );
@@ -77,5 +78,9 @@ class ScInterfaceController extends Controller
                 'id' => $id
             ]
         );
+    }
+
+    public function updatePosition(Request $request) {
+        dd($request->data);
     }
 }

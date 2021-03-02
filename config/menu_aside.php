@@ -47,7 +47,7 @@ return [
         [
             'title' => 'Maturité technique',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/technical',
             'root' => true,
             'new-tab' => false,
         ],

@@ -12,15 +12,15 @@ Route::group(['middleware' => 'admin'], function(){
 
     Route::group(['prefix'=> 'configurator', 'namespace' => 'Configurator'], function() {
     	Route::resource('/scinterface', 'ScInterfaceController');
-    	// Route::post('/scinterface/create', 'ScInterfaceController@store')->name('scinterface.create');
-    	// Route::post('/scinterface/remove', 'ScInterfaceController@destroy')->name('scinterface.remove');
-
+    	Route::post('/scinterface/position', 'ScInterfaceController@updatePosition')->name('scinterface.position');
         Route::resource('/trimester','QuarterAvailableController');
+        Route::resource('/technical','TechnicalMaturityController');
         Route::resource('/pricelist','PriceListController');
     });
 
     Route::resource('customer','Customers\CustomerController');
     Route::resource('parameter','GeneralParameterController');
     Route::get('download/{name}','GeneralParameterController@downloadPdf')->name('download');
+
 
 });
