@@ -30,6 +30,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::resource('text','TextController');
         Route::get('text_reset_search','TextController@resetSearch')->name('text_reset_search');
         Route::post('text/search','TextController@search')->name('text_search');
+        Route::resource('/faq','FaqController');
+        Route::post('/faq/position', 'FaqController@updatePosition')->name('faq.position');
     });
 
 

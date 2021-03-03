@@ -121,7 +121,7 @@ return [
         [
             'title' => 'FAQ',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/site-internet/faq',
             'root' => true,
             'new-tab' => false,
         ],
