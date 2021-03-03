@@ -40,7 +40,7 @@ return [
         [
             'title' => 'Types d\'orbite',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/orbittype',
             'root' => true,
             'new-tab' => false,
         ],
