@@ -9,6 +9,7 @@ class ScInterface extends Model
 {
     use HasFactory;
 
+    protected $table = "sc_interfaces";
     protected $fillable = [
         'name',
         'explication',

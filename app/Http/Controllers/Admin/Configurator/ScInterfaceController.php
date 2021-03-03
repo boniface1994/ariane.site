@@ -15,7 +15,7 @@ class ScInterfaceController extends Controller
      */
     public function index()
     {
-        $interfaces = ScInterface::all();
+        $interfaces = ScInterface::orderBy('position')->get();
         return view('admin.pages.configurator.scinterface.index', compact('interfaces'));
     }
 
@@ -49,6 +49,7 @@ class ScInterfaceController extends Controller
                 [
                     'success' => true,
                     'id' => $object->id,
+                    'name' => $request->name,
                     'delete_url' => route('scinterface.destroy', $object->id)
                 ]
             );
@@ -75,6 +76,26 @@ class ScInterfaceController extends Controller
             [
                 'success' => true,
                 'id' => $id
+            ]
+        );
+    }
+
+    public function updatePosition(Request $request) {
+        foreach ($request->data as $position => $id) {
+            if($id) {
+                $scinterface = ScInterface::find($id);
+                $scinterface->update(
+                    [
+                        'id' => $id,
+                        'position' => $position
+                    ]
+                );
+            }
+        }
+
+        return response()->json(
+            [
+                'success' => true
             ]
         );
     }
