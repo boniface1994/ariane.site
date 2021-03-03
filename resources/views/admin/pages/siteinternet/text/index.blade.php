@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form  class="form" data-url="" action="{{ route('customer_search') }}" method="POST">
+                <form  class="form" data-url="" action="{{ route('text_search') }}" method="POST">
                     @csrf
                     <h4 class="form-label">{{ __('Search / Filter') }}</h4><br>
                     <div class="form-group row">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-light-danger" href="{{ route('reset_search') }}"> {{ __('Reset search') }}</a>
+                        <a class="btn btn-light-danger" href="{{ route('text_reset_search') }}"> {{ __('Reset search') }}</a>
                         <input type="submit" class="btn btn-light-primary font-weight-bold" value="{{ __('Search') }}">
                     </div>
                 </form>

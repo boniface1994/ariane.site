@@ -23,7 +23,7 @@ class TextController extends Controller
                         $query->orWhere('slug','like','%'.$slug)->get();
                     }
                     if(($contenue = session('contenue'))){
-                        $query->orWhere('contenue','like','%'.$contenue)->get();
+                        $query->orWhere('contenue','like','%'.$contenue.'%')->get();
                     }
                 }]
             ])->paginate(10);
@@ -50,7 +50,8 @@ class TextController extends Controller
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'contenue' => 'required'
+            'contenue' => 'required',
+            'description' => 'required'
         ]);
         if ($validator->fails()) {
             return \Redirect::back()->withInput()->withErrors($validator);
@@ -96,7 +97,8 @@ class TextController extends Controller
     public function update(Request $request, $id)
     {
         $validator = \Validator::make($request->all(), [
-            'contenue' => 'required'
+            'contenue' => 'required',
+            'description' => 'required'
         ]);
         if ($validator->fails()) {
             return \Redirect::back()->withInput()->withErrors($validator);
@@ -119,6 +121,26 @@ class TextController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request){
+        foreach($request->all() as $key=>$value){
+            if($value != ''){
+                \Session::put($key,$value);
+            }
+        }
+        $texts = Text::where([
+            [function($query) use ($request){
+                if(($slug = $request->slug)){
+                    $query->orWhere('slug','like','%'.$slug.'%')->get();
+                }
+                if(($contenue = $request->contenue)){
+                    $query->orWhere('contenue','like','%'.$contenue.'%')->get();
+                }
+            }]
+        ])->paginate(10);
+
+        return view('admin.pages.siteinternet.text.index',compact('texts'));
     }
 
     public function resetSearch(){

@@ -18,6 +18,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::post('/technical/position','TechnicalMaturityController@updatePosition')->name('technical.position');
         Route::resource('/pricelist','PriceListController');
         Route::resource('/orbittype','OrbitTypeController');
+        Route::resource('/sateliteposition','SatelitePositionController');
     });
 
     Route::resource('customer','Customers\CustomerController');
@@ -28,6 +29,8 @@ Route::group(['middleware' => 'admin'], function(){
     
     Route::group(['prefix' => 'site-internet','namespace' => 'SiteInternet'],function(){
         Route::resource('text','TextController');
+        Route::get('text_reset_search','TextController@resetSearch')->name('text_reset_search');
+        Route::post('text/search','TextController@search')->name('text_search');
         Route::resource('/faq','FaqController');
         Route::post('/faq/position', 'FaqController@updatePosition')->name('faq.position');
     });

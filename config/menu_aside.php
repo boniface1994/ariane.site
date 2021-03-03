@@ -73,6 +73,13 @@ return [
             'new-tab' => false,
         ],
         [
+            'title' => 'Position du satéllite',
+            'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
+            'page' => '/admin/configurator/sateliteposition',
+            'root' => true,
+            'new-tab' => false,
+        ],
+        [
             'title' => 'SC Interface',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
             'page' => '/admin/configurator/scinterface',
