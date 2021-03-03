@@ -15,6 +15,7 @@ Route::group(['middleware' => 'admin'], function(){
     	Route::post('/scinterface/position', 'ScInterfaceController@updatePosition')->name('scinterface.position');
         Route::resource('/trimester','QuarterAvailableController');
         Route::resource('/technical','TechnicalMaturityController');
+        Route::post('/technical/position','TechnicalMaturityController@updatePosition')->name('technical.position');
         Route::resource('/pricelist','PriceListController');
     });
 

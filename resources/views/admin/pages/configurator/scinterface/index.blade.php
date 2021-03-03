@@ -189,6 +189,9 @@
             show: function () {
                 $(this).slideDown();
             },
+            hide: function () {
+                $(this).slideUp();
+            },
             ready: function (setIndexes) {
                 var id = randstr('card_');
                 $(this).attr('id', id);
@@ -246,11 +249,9 @@
         })
 
         $('.action-remove-scinterface').on('click', function() {
-            var form = form_button.closest('form');            
-            var url = $(form).attr('data-action-remove');
-            var id = $(form).find('.index').val();
-
-            console.log(id)
+            let form = form_button.closest('form');            
+            let url = $(form).attr('data-action-remove');
+            let id = $(form).find('.index').val();
                        
             $.ajax({
                 url: url,
