@@ -25,12 +25,12 @@
                     <div class="form-group row">
                         <div class="input-group col-lg-12">
                             <label class="col-form-label mr-2" for="">{{ __('Slug : ') }}</label>
-                            <input type="text" class="form-control col-md-2 " name="slug" value="{{ isset($text) ? $text->slug : '' }}" disabled="disabled">
+                            <input type="text" class="form-control col-md-2 slug" name="slug" value="{{ isset($text) ? $text->slug : '' }}"  readonly>
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label for="">{{ __('Description') }}</label>
-                        <input type="text" class="form-control  form-control-lg col-lg-12" name="description" value="{{ isset($text) ? $text->description : '' }}">
+                        <label for="">{{ __('Description *') }}</label>
+                        <input type="text" class="form-control  form-control-lg col-lg-12 description" name="description" value="{{ isset($text) ? $text->description : '' }}">
                     </div>
                     <div class="form-group">
                         <label for="">{{ __('Text *') }}</label><br>
@@ -55,7 +55,16 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        
+        $('#quarter_available').find('.description').on('keyup',function(){
+            $('#quarter_available').find('.slug').val(convertToSlug($(this).val()));
+        });
+        function convertToSlug(Text){
+            return Text
+                .toLowerCase()
+                .replace(/ /g,'-')
+                .replace(/[^\w-]+/g,'')
+                ;
+        }
     });
 </script>
 @endsection

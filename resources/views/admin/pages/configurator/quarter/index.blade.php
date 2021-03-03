@@ -78,18 +78,11 @@
                         form.attr('method','PATCH');
                         toastr.success("Success !");
                     }else{
-                        toastr.error("Remplissez les champs requis")
+                        toastr.error("Complete the required fields")
                     }
                 }
             })
         });
-        function printErrorMsg (msg) {
-            $.each( msg, function( key, value ) {
-                console.log(key);
-                $('.'+key+'_err').text(value);
-            });
-
-        }
 
     });
 </script>
