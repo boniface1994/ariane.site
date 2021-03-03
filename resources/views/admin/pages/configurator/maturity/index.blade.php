@@ -27,7 +27,7 @@
                         <a class="confirm-remove-maturity btn btn-outline-danger font-weight-bold mr-2" data-action-remove="{{ route('technical.destroy', $maturity['id']) }}">
                             <i class="la la-trash-o"></i> {{ __('Delete') }}
                         </a>
-                        <a href="#" class="appended btn btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
+                        <a href="#" class="btn btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
                             <i class="ki ki-menu "></i>
                         </a>
                     </div>
@@ -50,7 +50,7 @@
                         <a data-repeater-delete class="confirm-remove-maturity btn btn-outline-danger font-weight-bold mr-2">
                             <i class="la la-trash-o"></i> {{ __('Delete') }}
                         </a>
-                        <a href="#" class="appended btn btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
+                        <a href="#" class="btn btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
                             <i class="ki ki-menu "></i>
                         </a>
                     </div>
