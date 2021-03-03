@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Models\SiteInternet;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Text extends Model
+{
+    use HasFactory;
+
+    protected $table = "text";
+    protected $fillable = [
+        'description','contenue'
+    ];
+}

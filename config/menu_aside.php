@@ -100,14 +100,14 @@ return [
             'root' => true,
             'new-tab' => false,
         ],
-        // Configurateur
+        // Site internet
         [
             'section' => 'Site internet',
         ],
         [
             'title' => 'Textes',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/site-internet/text',
             'root' => true,
             'new-tab' => false,
         ],

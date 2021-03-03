@@ -24,5 +24,9 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('reset_search','Customers\CustomerController@resetSearch')->name('reset_search');
     Route::resource('parameter','GeneralParameterController');
     Route::get('download/{name}','GeneralParameterController@downloadPdf')->name('download');
+    
+    Route::group(['prefix' => 'site-internet','namespace' => 'SiteInternet'],function(){
+        Route::resource('text','TextController');
+    });
 
 });
