@@ -54,7 +54,7 @@
                         @if($requests)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td>{{ $request->created_at }}</td>
+                                    <td>{{ date ("d/m/Y h:i:s", strtotime($request->created_at)) }}</td>
                                     <td>
                                         <div class="form-group">
                                             <p>{{ __('Company name : ') }}{{ $request->customer->company }}</p>
