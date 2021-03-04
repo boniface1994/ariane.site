@@ -109,7 +109,8 @@ class CustomerController extends Controller
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|mail',
-            'company' => 'required'
+            'company' => 'required',
+            'city' =>  'required'
         ]);
         if ($validator->fails()) {
             return \Redirect::back()->withInput()->withErrors($validator);

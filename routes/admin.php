@@ -20,6 +20,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::resource('/orbittype','OrbitTypeController');
         Route::post('/orbittype/position','OrbitTypeController@updatePosition')->name('orbittype.position');
         Route::resource('/sateliteposition','SatelitePositionController');
+        Route::resource('/option','OptionController');
     });
 
     Route::resource('customer','Customers\CustomerController');
@@ -27,6 +28,9 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('reset_search','Customers\CustomerController@resetSearch')->name('reset_search');
     Route::resource('parameter','GeneralParameterController');
     Route::get('download/{name}','GeneralParameterController@downloadPdf')->name('download');
+    Route::resource('request','ContactRequestController');
+    Route::post('request/search','ContactRequestController@search')->name('request_search');
+    Route::get('request_reset_search','ContactRequestController@resetSearch')->name('request_reset_search');
     
     Route::group(['prefix' => 'site-internet','namespace' => 'SiteInternet'],function(){
         Route::resource('text','TextController');
