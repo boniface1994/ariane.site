@@ -74,7 +74,7 @@
                                             <p>{{ __('Email : ') }}{{ $request->customer->email }}</p>
                                         </div>
                                     </td>
-                                    <td>{{ $request->message }} {{session('status')}}</td>
+                                    <td>{{ $request->message }}</td>
                                     <td class="datatable-cell">
                                         <div class="col-3">
                                             <span class="switch switch-outline switch-icon switch-primary">
