@@ -19,6 +19,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::resource('/pricelist','PriceListController');
         Route::resource('/orbittype','OrbitTypeController');
         Route::resource('/sateliteposition','SatelitePositionController');
+        Route::resource('/option','OptionController');
     });
 
     Route::resource('customer','Customers\CustomerController');

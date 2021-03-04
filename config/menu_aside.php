@@ -54,7 +54,7 @@ return [
         [
             'title' => 'Options',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/option',
             'root' => true,
             'new-tab' => false,
         ],
