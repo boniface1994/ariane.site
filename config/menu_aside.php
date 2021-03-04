@@ -15,7 +15,7 @@ return [
             'title' => 'Demande de contact',
             'root' => true,
             'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
-            'page' => '/',
+            'page' => 'admin/request',
             'new-tab' => false,
         ],
         [
