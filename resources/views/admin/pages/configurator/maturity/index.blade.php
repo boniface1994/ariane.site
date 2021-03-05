@@ -64,7 +64,7 @@
             </div>
         </form>
   
-        <div class="col-lg-12 @if(count($maturities) > 0) d-none @endif" id="btn-maturity-add">
+        <div class="col-lg-12 @if(count($maturities) < 0) d-none @endif" id="btn-maturity-add">
             <button type="submit" class="validate-maturity btn btn-success font-weight-bold mr-2">
                 <i class="la la-check"></i> {{ __('Validate') }}
             </button>
