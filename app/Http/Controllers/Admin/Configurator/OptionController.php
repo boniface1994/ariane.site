@@ -37,7 +37,42 @@ class OptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $errors = array();
+        if(!$request->name) $errors[] = trans('Name is required');
+        if(!$request->cubesat && !$request->smallsat) $errors[] = trans('Type is required');
+
+        if(count($errors) == 0) {
+            $object = Option::updateOrCreate(
+                [
+                    'id' => $request->id
+                ],
+                [
+                    'name' => $request->name,
+                    'explication' => $request->explication,
+                    'cubsat' => $request->cubesat,
+                    'smallsat' => $request->smallsat,
+                    'position' => $request->position,
+                    'cost' => $request->cost,
+                    'weight_dependent' => $request->weight_dependent,
+                    'dashboard_available' => $request->dashboard_available
+                ]
+            );
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'id' => $object->id,
+                    'name' => $request->name,
+                    'delete_url' => route('scinterface.destroy', $object->id)
+                ]
+            );
+        }
+        else {
+            return response()->json([
+                'error' => true,
+                'errors' => $errors
+            ]);
+        }
     }
 
     /**
@@ -82,6 +117,33 @@ class OptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Option::destroy($id);
+
+        return response()->json(
+            [
+                'success' => true,
+                'id' => $id
+            ]
+        );
+    }
+
+    public function updatePosition(Request $request) {
+        foreach ($request->data as $position => $id) {
+            if($id) {
+                $option = Option::find($id);
+                $option->update(
+                    [
+                        'id' => $id,
+                        'position' => $position
+                    ]
+                );
+            }
+        }
+
+        return response()->json(
+            [
+                'success' => true
+            ]
+        );
     }
 }

@@ -22,7 +22,7 @@ class CreateOptionsTable extends Migration
             $table->boolean('weight_dependent');
             $table->float('cost')->nullable();
             $table->boolean('dashboard_available');
-            $table->integer('position');
+            $table->integer('position')->nullable();
             $table->timestamps();
         });
     }
