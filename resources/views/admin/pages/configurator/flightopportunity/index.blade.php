@@ -279,8 +279,8 @@
             var local_time = form.find('.local_time').val().split(':');
             var local_hour = local_time[0];
             var local_minute = local_time[1];
-            var ltan = $('.ltan').is(':checked') ? 1 : 0;
-            var ltdn = $('.ltdn').is(':checked') ? 1 : 0;
+            var ltan = $('.ltan').is(':checked') ? 1 : null;
+            var ltdn = $('.ltdn').is(':checked') ? 1 : null;
             
             $.ajax({
                 url: url,

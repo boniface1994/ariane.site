@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Configurator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Configurator\ScInterface;
 
 class ScInterfaceController extends Controller
@@ -27,11 +28,13 @@ class ScInterfaceController extends Controller
      */
     public function store(Request $request)
     {
-        $errors = array();
-        if(!$request->name) $errors[] = trans('Name is required');
-        if(!$request->sicubesat && !$request->sismallsat) $errors[] = trans('Si type is required');
+        $validator = Validator::make($request->all(), [   
+            'name'          => 'required',
+            'sicubesat'     => 'required_without_all:sismallsat',
+            'sismallsat'    => 'required_without_all:sicubesat'
+        ]);
 
-        if(count($errors) == 0) {
+        if($validator->passes()) {
             $object = ScInterface::updateOrCreate(
                 [
                     'id' => $request->id
@@ -57,7 +60,7 @@ class ScInterfaceController extends Controller
         else {
             return response()->json([
                 'error' => true,
-                'errors' => $errors
+                'errors' => $validator->errors()
             ]);
         }
     }

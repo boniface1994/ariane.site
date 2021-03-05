@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\SiteInternet;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\SiteInternet\Faq;
 
 class FaqController extends Controller
@@ -27,11 +28,16 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        $errors = array();
-        if(!$request->question) $errors[] = trans('Question is required');
-        if(!$request->answer) $errors[] = trans('Answer is required');
+        // $errors = array();
+        // if(!$request->question) $errors[] = trans('Question is required');
+        // if(!$request->answer) $errors[] = trans('Answer is required');
 
-        if(count($errors) == 0) {
+        $validator = Validator::make($request->all(), [   
+            'question' => 'required', 
+            'answer' => 'required'
+        ]);
+
+        if($validator->passes()) {
             try{
 
                 $object = Faq::updateOrCreate(
@@ -64,7 +70,7 @@ class FaqController extends Controller
         else {
             return response()->json([
                 'error' => true,
-                'errors' => $errors
+                'errors' => $validator->errors()
             ]);
         }
     }

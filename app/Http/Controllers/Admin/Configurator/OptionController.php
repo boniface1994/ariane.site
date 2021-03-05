@@ -38,11 +38,10 @@ class OptionController extends Controller
      */
     public function store(Request $request)
     {
-        $errors = array();
         $validator = Validator::make($request->all(), [   
             'name' => 'required', 
-            'cubsat' => 'required_without_all:smallsat',
-            'smallsat' => 'required_without_all:cubsat',
+            'cubesat' => 'required_without_all:smallsat',
+            'smallsat' => 'required_without_all:cubesat',
             'weight_dependent' => 'required'
         ]);
 

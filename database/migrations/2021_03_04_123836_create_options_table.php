@@ -17,8 +17,8 @@ class CreateOptionsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('explication')->nullable();
-            $table->boolean('cubsat');
-            $table->boolean('smallsat');
+            $table->boolean('cubsat')->nullable();
+            $table->boolean('smallsat')->nullable();
             $table->boolean('weight_dependent');
             $table->float('cost')->nullable();
             $table->boolean('dashboard_available');

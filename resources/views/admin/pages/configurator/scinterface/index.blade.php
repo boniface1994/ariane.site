@@ -212,7 +212,7 @@
             var explication = form.find('.explication').val();
             var type = [];
             form.find('.type').each(function(i, el){
-                type[i] = $(el).is(':checked') ? 1 : 0;
+                type[i] = $(el).is(':checked') ? 1 : null;
             });
             
             $.ajax({

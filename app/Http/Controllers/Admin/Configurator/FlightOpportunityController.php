@@ -35,7 +35,8 @@ class FlightOpportunityController extends Controller
             'year'      => 'required',
             'name'      => 'required',
             'altitude'  => 'required|numeric',
-            'inclination' => 'required|numeric'
+            'inclination' => 'required|numeric',
+            'orbit_type_id' => 'required'
         ]);
 
         if($validator->passes()) {
@@ -70,7 +71,7 @@ class FlightOpportunityController extends Controller
         else {
             return response()->json([
                 'error' => true,
-                'erros' => $validator->errors()
+                'errors' => $validator->errors()
             ]);
         }
 
