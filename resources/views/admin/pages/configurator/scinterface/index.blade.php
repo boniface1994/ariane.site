@@ -265,7 +265,7 @@
                     item.slideUp("normal", function() {
                         item.remove();
                     });
-                    toastr.success("{{ __('Success!') }}", "{{ __('Data removed') }}")
+                    toastr.success("{{ __('Data removed') }}", "{{ __('Success!') }}")
                 }
             })
         })
@@ -305,7 +305,7 @@
                             data: {'_token': '{{ csrf_token() }}', 'data': data},
                             type: 'POST',
                             success: function(response) {
-                               toastr.success("{{ __('Success!') }}", "{{ __('Position changed') }}");
+                               toastr.success("{{ __('Position changed') }}", "{{ __('Success!') }}");
                             }
                         }) 
                     }, 0)

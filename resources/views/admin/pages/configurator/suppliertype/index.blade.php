@@ -3,102 +3,79 @@
 @section('content')
 
 <h3 class="card-title">
-    {{ __('Management of options') }}
+    {{ __('Supplier types management (SC Interface)') }}
 </h3>
 
 <div class="container" id="repeater">
-    <button data-repeater-create class="btn btn-success font-weight-bold mb-4" id="">
+    <button data-repeater-create class="btn btn-success font-weight-bold mb-4">
         <i class="la la-plus font-size-h1"></i>
-        {{ __('Add new Option') }}
+        {{ __('Add new supplier type') }}
     </button> 
 
     <div class="row">
         <div data-repeater-list="group-a" class="col-lg-12 d-flex flex-wrap draggable-zone">
-            @foreach ($options as $option)
-            <!--begin::Card-->
-            <div class="col-lg-12 card card-custom gutter-b draggable option-draggable-item card-collapsed">
+
+            @foreach($suppliertypes as $suppliertype)
+            <div class="col-lg-12 card card-custom gutter-b draggable suppliertype-draggable-item card-collapsed">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">{{ $option['name'] }}</h3>
+                        <h3 class="card-label">{{ $suppliertype['name'] }}</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="#" class="option-collapse btn btn-icon btn-light-warning btn-sm mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="{{ __('Collapse or expand Card') }}">
+                        <a href="#" class="suppliertype-collapse btn btn-icon btn-light-warning btn-sm mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="{{ __('Collapse or expand Card') }}">
                             <i class="ki ki-arrow-down icon-nm"></i>
                         </a>
-                        <a href="#" class="btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
+                        <a href="#" class="btn btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
                             <i class="ki ki-menu "></i>
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form class="form option-form" data-action-create="{{ route('option.store') }}" data-action-remove="{{ route('option.destroy', $option['id']) }}">
+                    <form class="form interface-form" data-action-store="{{ route('suppliertype.store') }}" data-action-remove="{{ route('suppliertype.destroy', $suppliertype['id']) }}">
                         @csrf
-                        <input type="text" class="index form-control form-control-solid d-none" name="id" value="{{ $option['id'] }}">
+                        <input type="text" class="index form-control form-control-solid d-none" name="id" value="">
                         <div class="form-group">
-                            <label>{{ __('Option') }} <span class="text-danger">*</span></label>
+                            <label>{{ __('Supplier type') }} <span class="text-danger">*</span></label>
                             <div></div>
-                            <input type="text" class="name form-control form-control-solid" name="name" placeholder="{{ __('Name') }}" value="{{ $option['name'] }}">
+                            <input type="text" class="name form-control form-control-solid" name="name" placeholder="{{ __('Name') }}" value="{{ $suppliertype['name'] }}">
                         </div>
                         <div class="form-group">
                             <label>{{ __('Explanation') }}</label>
                             <div></div>
-                            <textarea class="explication form-control form-control-solid" name="explication" rows="3">{{ $option['explication'] }}</textarea>
+                            <textarea class="explication form-control form-control-solid" name="explication" rows="3">{{ $suppliertype['explication'] }}</textarea>
                         </div>
                         <div class="form-group">
-                            <h5 class="mb-4">{{ __('Condition of option availability') }}</h5>
                             <div class="checkbox-inline">
                                 <label class="checkbox checkbox-success">
-                                    <input class="type" type="checkbox" name="type" @if($option['cubesat']) checked @endif>
+                                    <input class="type" type="checkbox" name="type" @if($suppliertype['sicubesat']) checked @endif>
                                     <span></span>{{ __('Si Cubesat') }}
                                 </label>
                                 <label class="checkbox checkbox-success">
-                                    <input class="type" type="checkbox" name="type" @if($option['smallsat']) checked @endif>
+                                    <input class="type" type="checkbox" name="type" @if($suppliertype['sismallsat']) checked @endif>
                                     <span></span>{{ __('Si Smallsat') }}
                                 </label>
-                            </div><br>
-                            <h5 class="mb-4">{{ __('Option cost') }}</h5>
-                            <div class="radio-list">
-                                <label class="radio radio-success">
-                                    <input type="radio" @if(!$option['weight_dependent']) checked @endif name="weight_dependent" value="0"/>
-                                    <span></span>
-                                    {{ __('Cost depending on mass') }}
-                                </label>
-                                <div class="input-group">  
-                                    <label class="radio radio-success mr-3">
-                                        <input type="radio" @if($option['weight_dependent']) checked @endif name="weight_dependent" value="1"/>
-                                        <span></span>
-                                        {{ __('Fixed cost') }}
-                                    </label>
-                                    <input type="text" class="form-control mr-2" name="cost" value="{{ $option['cost'] ? $option['cost'] : '' }}"><h1 class="col-form-label">€</h1>
-                                </div>
-                            </div><br>
-                            <label class="checkbox checkbox-success">
-                                <input class="type" type="checkbox" name="dashboard_available" @if($option['dashboard_available']) checked @endif>
-                                <span class="mr-3"></span>{{ __('Available only in the dashboard') }}
-                            </label>
+                            </div>
                             <!-- <div class="invalid-feedback">Success! You've done it.</div> -->
                         </div>
-                        <button type="submit" class="validate-option btn btn-success font-weight-bold mr-2">
+                        <button type="submit" class="validate-suppliertype btn btn-success font-weight-bold mr-2">
                             <i class="la la-check"></i> {{ __('Validate') }}
                         </button>
 
-                        <a class="confirm-remove-option btn btn-outline-danger font-weight-bold mr-2">
+                        <a class="confirm-remove-suppliertype btn btn-outline-danger font-weight-bold mr-2">
                             <i class="la la-trash-o"></i> {{ __('Delete') }}
                         </a>
                     </form>
                 </div>
             </div>
-            <!--end::Card-->
             @endforeach
 
-            <!--begin::Card-->
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable option-draggable-item first-event">
+            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable suppliertype-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">{{ __('Option name') }}</h3>
+                        <h3 class="card-label">{{ __('Supplier type name') }}</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="#" class="appended option-collapse btn btn-icon btn-light-warning btn-sm mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="{{ __('Collapse or expand Card') }}">
+                        <a href="#" class="appended suppliertype-collapse btn btn-icon btn-light-warning btn-sm mr-1" data-card-tool="toggle" data-toggle="tooltip" data-placement="top" title="{{ __('Collapse or expand Card') }}">
                             <i class="ki ki-arrow-down icon-nm"></i>
                         </a>
                         <a href="#" class="appended btn btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
@@ -107,11 +84,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form class="form option-form" data-action-create="{{ route('option.store') }}">
+                    <form class="form interface-form" data-action-store="{{ route('suppliertype.store') }}">
                         @csrf
                         <input type="text" class="index form-control form-control-solid d-none" name="id" value="">
                         <div class="form-group">
-                            <label>{{ __('Option') }} <span class="text-danger">*</span></label>
+                            <label>{{ __('Supplier type') }} <span class="text-danger">*</span></label>
                             <div></div>
                             <input type="text" class="name form-control form-control-solid" name="name" placeholder="{{ __('Name') }}">
                         </div>
@@ -120,7 +97,6 @@
                             <div></div>
                             <textarea class="explication form-control form-control-solid" name="explication" rows="3"></textarea>
                         </div>
-                        <h5 class="mb-4">{{ __('Condition of option availability') }}</h5>
                         <div class="form-group">
                             <div class="checkbox-inline">
                                 <label class="checkbox checkbox-success">
@@ -131,40 +107,20 @@
                                     <input class="type" type="checkbox" name="type">
                                     <span></span>{{ __('Si Smallsat') }}
                                 </label>
-                            </div><br>
-                            <h5 class="mb-4">{{ __('Option cost') }}</h5>
-                            <div class="radio-list">
-                                <label class="radio radio-success">
-                                    <input  class="weight_dependent" type="radio"  name="weight_dependent" value="0"/>
-                                    <span></span>
-                                    {{ __('Cost depending on mass') }}
-                                </label>
-                                <div class="input-group">  
-                                    <label class="radio radio-success mr-3">
-                                        <input class="weight_dependent" type="radio" name="weight_dependent" value="1"/>
-                                        <span></span>
-                                        {{ __('Fixed cost') }}
-                                    </label>
-                                    <input type="text" class="form-control col-md-2 mr-2 cost" name="cost" value=""><h1 class="col-form-label">€</h1>
-                                </div>
-                            </div><br>
-                            <label class="checkbox checkbox-success">
-                                <input class="dashboard_available" type="checkbox" name="dashboard_available">
-                                <span class="mr-3"></span>{{ __('Available only in the dashboard') }}
-                            </label>
+                            </div>
                             <!-- <div class="invalid-feedback">Success! You've done it.</div> -->
                         </div>
-                        <button type="submit" class="validate-option btn btn-success font-weight-bold mr-2">
+                        <button type="submit" class="validate-suppliertype btn btn-success font-weight-bold mr-2">
                             <i class="la la-check"></i> {{ __('Validate') }}
                         </button>
 
-                        <a data-repeater-delete class="confirm-remove-option btn btn-outline-danger font-weight-bold mr-2">
+                        <a data-repeater-delete class="confirm-remove-suppliertype btn btn-outline-danger font-weight-bold mr-2">
                             <i class="la la-trash-o"></i> {{ __('Delete') }}
                         </a>
                     </form>
                 </div>
             </div>
-            <!--end::Card-->
+
         </div>
     </div> 
  
@@ -181,7 +137,7 @@
                 <button type="button" class="btn btn-outline-secondary text-uppercase mr-2" data-dismiss="modal">
                     <i class="la la-undo"></i> {{ __('Cancel') }}
                 </button>
-                <button type="button" class="action-remove-option btn btn-outline-danger font-weight-bold">
+                <button type="button" class="action-remove-suppliertype btn btn-outline-danger font-weight-bold">
                     <i class="la la-trash-o"></i> {{ __('Delete') }}
                 </button>
             </div>
@@ -201,19 +157,19 @@
         KTCardDraggable.init();
 
         //ToolTips
-        // $('#repeater').on('mouseenter', '.appended.option-collapse, .appended.draggable-handle', function(event) {
+        // $('#repeater').on('mouseenter', '.appended.suppliertype-collapse, .appended.draggable-handle', function(event) {
         //     $(this).tooltip('show');
         // })
 
         //Collapse Expand card
-        $('.option-draggable-item').each(function(i, element) {
+        $('.suppliertype-draggable-item').each(function(i, element) {
             var id = randstr('card_');
             $(element).attr('id', id);
             var card = new KTCard(id);
         })
 
-        $('#repeater').on('click', '.appended.option-collapse', function() {
-            var item = $(this).closest('.option-draggable-item');
+        $('#repeater').on('click', '.appended.suppliertype-collapse', function() {
+            var item = $(this).closest('.suppliertype-draggable-item');
             var body = item.find('.card-body');
             var id = randstr('card_');
 
@@ -242,41 +198,32 @@
             isFirstItemUndeletable: true
         })
 
-        $('#repeater').on('click', '.validate-option', function(event) {
+        $('#repeater').on('click', '.validate-suppliertype', function(event) {
             event.preventDefault();
             
             var form = $(this).closest('form');
-            var position = $(this).closest('.option-draggable-item').index();
+            var position = $(this).closest('.suppliertype-draggable-item').index();
             
-            var url = form.data('action-create');
+            var url = form.data('action-store');
             var id = form.find('.index').val();
             var name = form.find('.name').val();
             var explication = form.find('.explication').val();
-            var cost = form.find('.cost').val(); 
-            var dashboard_available = form.find('.dashboard_available').is(':checked') ? 1 : 0;
             var type = [];
-            var weight_dependent='';
             form.find('.type').each(function(i, el){
                 type[i] = $(el).is(':checked') ? 1 : 0;
             });
             
-            form.find('.weight_dependent').each(function(i,el){
-                if($(el).is(':checked')){
-                    weight_dependent = $(el).val();
-                }
-            });
-            
             $.ajax({
                 url: url,
-                data: {'_token': '{{ csrf_token() }}', 'id': id, 'name': name, 'explication': explication, 'cubesat': type[0], 'smallsat': type[1], 'position': position,'weight_dependent':weight_dependent,'cost':cost,'dashboard_available':dashboard_available},
+                data: {'_token': '{{ csrf_token() }}', 'id': id, 'name': name, 'explication': explication, 'sicubesat': type[0], 'sismallsat': type[1], 'position': position},
                 type: 'POST',
                 success: function(response) {
                     if(response.success) {
                         toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
                         
                         form.find('.index').val(response.id);
-                        form.closest('.option-draggable-item').find('.card-title h3').text(response.name);
-                        form.find('.confirm-remove-option').removeAttr('data-repeater-delete');
+                        form.closest('.suppliertype-draggable-item').find('.card-title h3').text(response.name);
+                        form.find('.confirm-remove-suppliertype').removeAttr('data-repeater-delete');
                         form.attr("data-action-remove", response.delete_url);
                     }
                     else if(response.error) {
@@ -292,7 +239,7 @@
             
         })
 
-        $('#repeater').on('click', '.confirm-remove-option', function(event) {
+        $('#repeater').on('click', '.confirm-remove-suppliertype', function(event) {
             event.preventDefault();
 
             $('#confirmation-delete').modal('show')
@@ -300,7 +247,7 @@
             form_button = event.target;
         })
 
-        $('.action-remove-option').on('click', function() {
+        $('.action-remove-suppliertype').on('click', function() {
             let form = form_button.closest('form');            
             let url = $(form).attr('data-action-remove');
             let id = $(form).find('.index').val();
@@ -312,11 +259,11 @@
                 success: function (response) {
                     $('#confirmation-delete').modal('hide');
 
-                    let item = $(form).closest('.option-draggable-item');
+                    let item = $(form).closest('.suppliertype-draggable-item');
                     item.slideUp("normal", function() {
                         item.remove();
                     });
-                    toastr.success("{{ __('Success!') }}", "{{ __('Data removed') }}")
+                    toastr.success("{{ __('Data removed') }}", "{{ __('Success!') }}")
                 }
             })
         })
@@ -344,7 +291,7 @@
                 swappable.on('sortable:stop', function(sortableEvent) {
                     setTimeout(() => {
                         var data = [];
-                        $('.option-draggable-item').each(function(i, el) {
+                        $('.suppliertype-draggable-item').each(function(i, el) {
                             var id = $(el).find('.index').val();
                             //i=position
                             data[i] = id;
@@ -352,11 +299,11 @@
                         })
                         
                         $.ajax({
-                            url: "{{ route('option.position') }}",
+                            url: "{{ route('suppliertype.position') }}",
                             data: {'_token': '{{ csrf_token() }}', 'data': data},
                             type: 'POST',
                             success: function(response) {
-                               toastr.success("{{ __('Success!') }}", "{{ __('Position changed') }}");
+                               toastr.success("{{ __('Position changed') }}", "{{ __('Success!') }}");
                             }
                         }) 
                     }, 0)

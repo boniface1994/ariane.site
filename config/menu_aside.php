@@ -89,7 +89,7 @@ return [
         [
             'title' => 'Types fournisseur',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/suppliertype',
             'root' => true,
             'new-tab' => false,
         ],
