@@ -11,6 +11,6 @@ class Text extends Model
 
     protected $table = "text";
     protected $fillable = [
-        'description','contenue'
+        'description','contenue','slug'
     ];
 }

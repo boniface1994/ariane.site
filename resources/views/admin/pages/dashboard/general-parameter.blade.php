@@ -63,7 +63,12 @@
                         </div>
                     </div>
 
-                    <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
+                    <!--<div class="form-group">
+                        <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
+                    </div>-->
+                    <button type="submit" class="validate-option btn btn-success font-weight-bold mr-2">
+                        <i class="la la-check"></i> {{ __('Validate') }}
+                    </button>
                 </form>
             </div>
             <div class="tab-pane fade" id="extension" role="tabpanel" aria-labelledby="extension">
@@ -109,9 +114,12 @@
                         </div>
                     </div>
                     
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
-                    </div>
+                    </div>-->
+                    <button type="submit" class="validate-option btn btn-success font-weight-bold mr-2">
+                        <i class="la la-check"></i> {{ __('Validate') }}
+                    </button>
                 </form>
             </div>
             <div class="tab-pane fade" id="smallsat" role="tabpanel" aria-labelledby="smallsat">
@@ -173,9 +181,12 @@
                         
                     </div>
                     
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
-                    </div>
+                    </div>-->
+                    <button type="submit" class="validate-option btn btn-success font-weight-bold mr-2">
+                        <i class="la la-check"></i> {{ __('Validate') }}
+                    </button>>
                 </form>
             </div>
             <div class="tab-pane fade" id="condition" role="tabpanel" aria-labelledby="condition">
@@ -199,9 +210,12 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
-                    </div>
+                    </div>-->
+                    <button type="submit" class="validate-option btn btn-success font-weight-bold mr-2">
+                        <i class="la la-check"></i> {{ __('Validate') }}
+                    </button>
                 </form>
             </div>
         </div>
