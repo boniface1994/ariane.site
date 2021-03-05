@@ -15,17 +15,21 @@ class CreateFlightOpportunitiesTable extends Migration
     {
         Schema::create('flight_opportunities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('month');
+            $table->integer('month');
             $table->integer('year');
-            $table->foreignId('orbite_type_id')->references('id')->on('orbite_types')
-                  ->unsigned()
-                  ->nullable()
-                  ->onDelete('cascade');
+            $table->string('name');
+            $table->unsignedBigInteger('orbit_type_id');
+            $table->foreign('orbit_type_id')
+                ->references('id')
+                ->on('orbit_types')
+                ->onDelete('cascade');
             $table->float('altitude');
-            $table->float('inclinaison');
-            $table->boolean('ltan');
-            $table->boolean('ltdn');
+            $table->float('inclination');
+            $table->integer('local_hour')->nullable();
+            $table->integer('local_minute')->nullable();
+            $table->boolean('ltan')->nullable();
+            $table->boolean('ltdn')->nullable();
+            $table->integer('position');
             $table->timestamps();
         });
     }

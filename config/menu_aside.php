@@ -96,7 +96,7 @@ return [
         [
             'title' => 'Opportunités de vol',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/flightopportunity',
             'root' => true,
             'new-tab' => false,
         ],

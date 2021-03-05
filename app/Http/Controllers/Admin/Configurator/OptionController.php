@@ -43,7 +43,7 @@ class OptionController extends Controller
             'name' => 'required', 
             'cubsat' => 'required_without_all:smallsat',
             'smallsat' => 'required_without_all:cubsat',
-            'cost' => 'required'
+            'weight_dependent' => 'required'
         ]);
 
         if($validator->passes()) {
