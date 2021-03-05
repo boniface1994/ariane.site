@@ -47,9 +47,9 @@
                             <input type="text" class="form-control" name="year" value="{{ $quarterAvailable ? $quarterAvailable->year : '' }}">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-success font-weight-bold" value="{{ __('Validate') }}">
-                    </div>
+                    <button type="submit" class="validate-option btn btn-success font-weight-bold mr-2">
+                        <i class="la la-check"></i> {{ __('Validate') }}
+                    </button>
                 </div>
             </form>
         </div>
@@ -63,7 +63,7 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        $('.form input[type="submit"]').on('click',function(e){
+        $('.form button[type="submit"]').on('click',function(e){
             e.preventDefault();
             let form = $(this).closest('form');
             let url = form.attr('action');

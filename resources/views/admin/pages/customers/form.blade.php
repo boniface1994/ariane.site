@@ -60,9 +60,9 @@
                         </div>
                     </div>
 
-                    <div class="form-group row ml-1">
-                        <input type="submit" class="btn btn-light-success font-weight-bold" value="{{ __('Validate') }}">
-                    </div>
+                    <button type="submit" class="validate-option btn btn-success font-weight-bold mr-2">
+                        <i class="la la-check"></i> {{ __('Validate') }}
+                    </button>
                 </form>
             </div>
         </div>
