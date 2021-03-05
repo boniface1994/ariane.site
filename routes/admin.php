@@ -22,6 +22,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::resource('/sateliteposition','SatelitePositionController');
         Route::resource('/option','OptionController');
         Route::post('/option/position', 'OptionController@updatePosition')->name('option.position');
+        Route::resource('/option-cost','OptionCostController');
     });
 
     Route::resource('customer','Customers\CustomerController');

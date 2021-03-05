@@ -61,7 +61,7 @@ return [
         [
             'title' => 'Coûts des options',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/option-cost',
             'root' => true,
             'new-tab' => false,
         ],
