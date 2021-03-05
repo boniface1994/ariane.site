@@ -11,6 +11,6 @@ class Option extends Model
 
     protected $table = "options";
     protected $fillable = [
-        'name','explication','cubsat','smallsat','weight_dependent','cost','dashboard_available'
+        'name','explication','cubsat','smallsat','weight_dependent','cost','dashboard_available','position'
     ];
 }
