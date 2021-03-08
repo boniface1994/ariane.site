@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Configurator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Configurator\Option;
 
 class OptionController extends Controller
@@ -38,10 +39,14 @@ class OptionController extends Controller
     public function store(Request $request)
     {
         $errors = array();
-        if(!$request->name) $errors[] = trans('Name is required');
-        if(!$request->cubesat && !$request->smallsat) $errors[] = trans('Type is required');
+        $validator = Validator::make($request->all(), [   
+            'name' => 'required', 
+            'cubsat' => 'required_without_all:smallsat',
+            'smallsat' => 'required_without_all:cubsat',
+            'weight_dependent' => 'required'
+        ]);
 
-        if(count($errors) == 0) {
+        if($validator->passes()) {
             $object = Option::updateOrCreate(
                 [
                     'id' => $request->id
@@ -70,7 +75,7 @@ class OptionController extends Controller
         else {
             return response()->json([
                 'error' => true,
-                'errors' => $errors
+                'errors' => $validator->errors()
             ]);
         }
     }

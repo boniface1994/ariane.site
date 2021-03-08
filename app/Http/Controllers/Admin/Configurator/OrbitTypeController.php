@@ -61,7 +61,7 @@ class OrbitTypeController extends Controller
                     if ($option_validator->fails()) {
                        return response()->json([
                             'error' => true,
-                            'errors' => [trans('Please fill all fields')]
+                            'errors' => [trans('Please fill all required fields')]
                         ]); 
                     }
                 }
@@ -70,7 +70,7 @@ class OrbitTypeController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'error' => true,
-                    'errors' => [trans('Please fill all fields')]
+                    'errors' => [trans('Please fill all required fields')]
                 ]);
             }else{
                 try{

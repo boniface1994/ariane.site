@@ -89,14 +89,14 @@ return [
         [
             'title' => 'Types fournisseur',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/suppliertype',
             'root' => true,
             'new-tab' => false,
         ],
         [
             'title' => 'Opportunités de vol',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/flightopportunity',
             'root' => true,
             'new-tab' => false,
         ],
