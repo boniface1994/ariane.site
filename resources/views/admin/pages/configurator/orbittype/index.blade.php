@@ -308,7 +308,7 @@
                         </div>
                     </div>
 
-                    <a data-repeater-delete class="confirm-remove-orbittype btn btn-outline-danger font-weight-bold mr-2">
+                    <a data-repeater-delete class="confirm-remove-orbittype to-validate btn btn-outline-danger font-weight-bold mr-2">
                         <i class="la la-trash-o"></i> {{ __('Delete') }}
                     </a>
                     
@@ -316,7 +316,7 @@
             </div>
         </form>
 
-        <div class="col-lg-12 " id="btn-orbittype-add">
+        <div class="col-lg-12 @if(count($orbittypes) == 0) d-none @endif" id="btn-orbittype-add">
             <button type="submit" class="validate-orbittype btn btn-success font-weight-bold mr-2">
                 <i class="la la-check"></i> {{ __('Validate') }}
             </button>
@@ -385,9 +385,12 @@
             initEmpty: true,
             show: function () {
                 $(this).slideDown();
+                if($('#btn-orbittype-add').hasClass('d-none')) $('#btn-orbittype-add').removeClass('d-none');
             },
             hide: function () {
                 $(this).slideUp();
+                if($('.orbittype-draggable-item').length == 1) 
+                        $('#btn-orbittype-add').addClass('d-none');
             },
             ready: function (setIndexes) {
                 var id = randstr('card_');
@@ -448,9 +451,6 @@
                 success: function(response) {
                     if(response.success) {
                         $.each(response.response_data, function( index, data ) {
-                            console.log(data.orbittype_id, ' orbittype_id')
-                            console.log(data.id_option_altitude, ' id_option_altitude')
-                            console.log(data.id_option_inclination, ' id_option_inclination')
 
                             toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
                             let item = $('.orbittype-draggable-item').eq(data.position);
@@ -498,6 +498,9 @@
                 type: 'DELETE',
                 success: function (response) {
                     $('#confirmation-delete').modal('hide');
+
+                    if($('.orbittype-draggable-item').length == 1) 
+                        $('#btn-orbittype-add').addClass('d-none');
 
                     let item = $(parent).closest('.orbittype-draggable-item');
                     item.slideUp("normal", function() {

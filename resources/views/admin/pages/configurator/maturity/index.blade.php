@@ -47,7 +47,7 @@
                         <label>{{ __('Technical maturity') }} <span class="text-danger">*</span></label>
                     </div>
                     <div class="card-toolbar">
-                        <a data-repeater-delete class="confirm-remove-maturity btn btn-outline-danger font-weight-bold mr-2">
+                        <a data-repeater-delete class="confirm-remove-maturity to-validate btn btn-outline-danger font-weight-bold mr-2">
                             <i class="la la-trash-o"></i> {{ __('Delete') }}
                         </a>
                         <a href="#" class="btn btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </form>
-  
+        
         <div class="col-lg-12 @if(count($maturities) == 0) d-none @endif" id="btn-maturity-add">
             <button type="submit" class="validate-maturity btn btn-success font-weight-bold mr-2">
                 <i class="la la-check"></i> {{ __('Validate') }}
@@ -114,13 +114,12 @@
             initEmpty: true,
             show: function () {
                 $(this).slideDown();
+                if($('#btn-maturity-add').hasClass('d-none')) $('#btn-maturity-add').removeClass('d-none');
             },
             hide: function () {
                 $(this).slideUp();
-                if($('.maturity-draggable-item').length == 0) $('#btn-maturity-add').addClass('d-none');
-            },
-            ready: function (setIndexes) {
-                if($('#btn-maturity-add').hasClass('d-none')) $('#btn-maturity-add').removeClass('d-none');
+                if($('.orbittype-draggable-item').length == 1) 
+                        $('#btn-orbittype-add').addClass('d-none');
             },
             isFirstItemUndeletable: true
         })
@@ -186,6 +185,9 @@
                 type: 'DELETE',
                 success: function (response) {
                     $('#confirmation-delete').modal('hide');
+
+                    if($('.maturity-draggable-item').length == 1) 
+                        $('#btn-maturity-add').addClass('d-none');
 
                     let item = $(form_button).closest('.maturity-draggable-item');
                     item.slideUp("normal", function() {
