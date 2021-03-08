@@ -109,28 +109,61 @@
                     @csrf
                     <div class="form-group">
                         <table class="table table-bordered">
-                        <thead>
-                                <tr>
-                                    <th scope="col">{{ __('Mass bearings') }}</th>
-                                    <th scope="col">{{ __('P1') }}</th>
-                                    <th scope="col">{{ __('P2') }}</th>
-                                    <th scope="col">{{ __('P3') }}</th>
-                                    <th scope="col">{{ __('P4') }}</th>
-                                    <th scope="col">{{ __('P5') }}</th>
-                                    <th scope="col">{{ __('P6') }}</th>
-                                    <th scope="col">{{ __('P7') }}</th>
-                                    <th scope="col">{{ __('P8') }}</th>
-                                    <th scope="col">{{ __('P9') }}</th>
-                                    <th scope="col">{{ __('P10') }}</th>
-                                    <th scope="col">{{ __('P11') }}</th>
-                                    <th scope="col">{{ __('P12') }}</th>
-                                    <th scope="col">{{ __('P13') }}</th>
-                                    <th scope="col">{{ __('P14') }}</th>
-                                    <th scope="col">{{ __('P15') }}</th>
-                                    <th scope="col">{{ __('P16') }}</th>
-                                </tr>
+                            <thead>
+                                
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>{{ __('Mass bearings') }}</td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p1" value="{{ isset($pricelists['p1']) ? $pricelists['p1'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p2" value="{{ isset($pricelists['p2']) ? $pricelists['p2'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p3" value="{{ isset($pricelists['p3']) ? $pricelists['p3'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p4" value="{{ isset($pricelists['p4']) ? $pricelists['p4'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="leo_p5" value="{{ isset($pricelists['p5']) ? $pricelists['p5'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p6" value="{{ isset($pricelists['p6']) ? $pricelists['p6'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p7" value="{{ isset($pricelists['p7']) ? $pricelists['p7'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p8" value="{{ isset($pricelists['p8']) ? $pricelists['p8'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p9" value="{{ isset($pricelists['p9']) ? $pricelists['p9'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p10" value="{{ isset($pricelists['p10']) ? $pricelists['p10'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p11" value="{{ isset($pricelists['p11']) ? $pricelists['p11'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p12" value="{{ isset($pricelists['p12']) ? $pricelists['p12'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p13" value="{{ isset($pricelists['p13']) ? $pricelists['p13'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p14" value="{{ isset($pricelists['p14']) ? $pricelists['p14'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p15" value="{{ isset($pricelists['p15']) ? $pricelists['p15'] : '' }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="p16" value="{{ isset($pricelists['p16']) ? $pricelists['p16'] : '' }}">
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>{{ __('Price per kg LEO') }}</td>
                                     <td>

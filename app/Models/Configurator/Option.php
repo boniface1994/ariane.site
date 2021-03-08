@@ -13,4 +13,8 @@ class Option extends Model
     protected $fillable = [
         'name','explication','cubsat','smallsat','weight_dependent','cost','dashboard_available','position'
     ];
+
+    public function costOptions(){
+        return $this->belongsToMany(OptionCost::class,'option_cost_options');
+    }
 }

@@ -200,10 +200,6 @@
         //draggable
         KTCardDraggable.init();
 
-        //ToolTips
-        // $('#repeater').on('mouseenter', '.appended.option-collapse, .appended.draggable-handle', function(event) {
-        //     $(this).tooltip('show');
-        // })
 
         //Collapse Expand card
         $('.option-draggable-item').each(function(i, element) {
