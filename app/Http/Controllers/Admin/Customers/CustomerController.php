@@ -106,19 +106,29 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $customer = Customer::find($id);
-        $customer->name = $request->name;
-        $customer->company = $request->company;
-        $customer->email = $request->email;
-        $customer->phone = $request->phone;
-        $customer->phone_company = $request->phone_company;
-        $customer->street = $request->street;
-        $customer->postal_code = $request->postal_code;
-        $customer->function = $request->function;
-        $customer->state = $request->state;
-        $customer->city = $request->city;
-        $customer->country = $request->country;
-        $customer->update();
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|mail',
+            'company' => 'required',
+            'city' =>  'required'
+        ]);
+        if ($validator->fails()) {
+            return \Redirect::back()->withInput()->withErrors($validator);
+        }else{
+            $customer = Customer::find($id);
+            $customer->name = $request->name;
+            $customer->company = $request->company;
+            $customer->email = $request->email;
+            $customer->phone = $request->phone;
+            $customer->phone_company = $request->phone_company;
+            $customer->street = $request->street;
+            $customer->postal_code = $request->postal_code;
+            $customer->function = $request->function;
+            $customer->state = $request->state;
+            $customer->city = $request->city;
+            $customer->country = $request->country;
+            $customer->update();
+        }
 
         return redirect('admin/customer');
     }

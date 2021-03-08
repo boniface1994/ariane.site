@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin\Configurator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Configurator\ScInterface;
+use App\Models\Configurator\SupplierType;
 
-class ScInterfaceController extends Controller
+class SupplierTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ScInterfaceController extends Controller
      */
     public function index()
     {
-        $interfaces = ScInterface::orderBy('position')->get();
-        return view('admin.pages.configurator.scinterface.index', compact('interfaces'));
+        $suppliertypes = SupplierType::orderBy('position')->get();
+        return view('admin.pages.configurator.suppliertype.index', compact('suppliertypes'));
     }
 
     /**
@@ -29,13 +29,13 @@ class ScInterfaceController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [   
-            'name'          => 'required',
-            'sicubesat'     => 'required_without_all:sismallsat',
-            'sismallsat'    => 'required_without_all:sicubesat'
+            'name' => 'required', 
+            'sicubesat' => 'required_without_all:sismallsat',
+            'sismallsat' => 'required_without_all:sicubesat'
         ]);
 
         if($validator->passes()) {
-            $object = ScInterface::updateOrCreate(
+            $object = SupplierType::updateOrCreate(
                 [
                     'id' => $request->id
                 ],
@@ -53,7 +53,7 @@ class ScInterfaceController extends Controller
                     'success' => true,
                     'id' => $object->id,
                     'name' => $request->name,
-                    'delete_url' => route('scinterface.destroy', $object->id)
+                    'delete_url' => route('suppliertype.destroy', $object->id)
                 ]
             );
         }
@@ -73,7 +73,7 @@ class ScInterfaceController extends Controller
      */
     public function destroy($id)
     {
-        ScInterface::destroy($id);
+        SupplierType::destroy($id);
 
         return response()->json(
             [
@@ -86,7 +86,7 @@ class ScInterfaceController extends Controller
     public function updatePosition(Request $request) {
         foreach ($request->data as $position => $id) {
             if($id) {
-                $scinterface = ScInterface::find($id);
+                $scinterface = SupplierType::find($id);
                 $scinterface->update(
                     [
                         'id' => $id,

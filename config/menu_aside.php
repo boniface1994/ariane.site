@@ -15,7 +15,7 @@ return [
             'title' => 'Demande de contact',
             'root' => true,
             'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
-            'page' => '/',
+            'page' => 'admin/request',
             'new-tab' => false,
         ],
         [
@@ -40,21 +40,21 @@ return [
         [
             'title' => 'Types d\'orbite',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/orbittype',
             'root' => true,
             'new-tab' => false,
         ],
         [
             'title' => 'Maturité technique',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => 'admin/technical',
+            'page' => 'admin/configurator/technical',
             'root' => true,
             'new-tab' => false,
         ],
         [
             'title' => 'Options',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/option',
             'root' => true,
             'new-tab' => false,
         ],
@@ -73,6 +73,13 @@ return [
             'new-tab' => false,
         ],
         [
+            'title' => 'Position du satéllite',
+            'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
+            'page' => '/admin/configurator/sateliteposition',
+            'root' => true,
+            'new-tab' => false,
+        ],
+        [
             'title' => 'SC Interface',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
             'page' => '/admin/configurator/scinterface',
@@ -82,14 +89,14 @@ return [
         [
             'title' => 'Types fournisseur',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/suppliertype',
             'root' => true,
             'new-tab' => false,
         ],
         [
             'title' => 'Opportunités de vol',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/configurator/flightopportunity',
             'root' => true,
             'new-tab' => false,
         ],
@@ -100,21 +107,21 @@ return [
             'root' => true,
             'new-tab' => false,
         ],
-        // Configurateur
+        // Site internet
         [
             'section' => 'Site internet',
         ],
         [
             'title' => 'Textes',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/site-internet/text',
             'root' => true,
             'new-tab' => false,
         ],
         [
             'title' => 'FAQ',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/',
+            'page' => 'admin/site-internet/faq',
             'root' => true,
             'new-tab' => false,
         ],

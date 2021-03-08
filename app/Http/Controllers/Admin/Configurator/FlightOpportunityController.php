@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin\Configurator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Configurator\ScInterface;
+use App\Models\Configurator\FlightOpportunity;
+use App\Models\Configurator\OrbitType;
 
-class ScInterfaceController extends Controller
+class FlightOpportunityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,9 @@ class ScInterfaceController extends Controller
      */
     public function index()
     {
-        $interfaces = ScInterface::orderBy('position')->get();
-        return view('admin.pages.configurator.scinterface.index', compact('interfaces'));
+        $orbittypes = OrbitType::orderBy('name')->get();
+        $flightopportunities = FlightOpportunity::orderBy('position')->get();
+        return view('admin.pages.configurator.flightopportunity.index', compact(['orbittypes', 'flightopportunities']));
     }
 
     /**
@@ -29,31 +31,40 @@ class ScInterfaceController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [   
-            'name'          => 'required',
-            'sicubesat'     => 'required_without_all:sismallsat',
-            'sismallsat'    => 'required_without_all:sicubesat'
+            'month'     => 'required',
+            'year'      => 'required',
+            'name'      => 'required',
+            'altitude'  => 'required|numeric',
+            'inclination' => 'required|numeric',
+            'orbit_type_id' => 'required'
         ]);
 
         if($validator->passes()) {
-            $object = ScInterface::updateOrCreate(
+            $flightopportunity = FlightOpportunity::updateOrCreate(
                 [
-                    'id' => $request->id
+                    'id'            => $request->id
                 ],
                 [
-                    'name' => $request->name,
-                    'explication' => $request->explication,
-                    'sicubesat' => $request->sicubesat,
-                    'sismallsat' => $request->sismallsat,
-                    'position' => $request->position,
+                    'month'         => $request->month,
+                    'year'          => $request->year,
+                    'name'          => $request->name,                
+                    'altitude'      => $request->altitude,
+                    'inclination'   => $request->inclination,
+                    'local_hour'    => $request->local_hour,
+                    'local_minute'  => $request->local_minute,
+                    'ltan'          => $request->ltan,
+                    'ltdn'          => $request->ltdn,
+                    'position'      => $request->position,
+                    'orbit_type_id' => $request->orbit_type_id
                 ]
             );
 
             return response()->json(
                 [
                     'success' => true,
-                    'id' => $object->id,
+                    'id' => $flightopportunity->id,
                     'name' => $request->name,
-                    'delete_url' => route('scinterface.destroy', $object->id)
+                    'delete_url' => route('flightopportunity.destroy', $flightopportunity->id)
                 ]
             );
         }
@@ -63,6 +74,7 @@ class ScInterfaceController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
+
     }
 
     /**
@@ -73,7 +85,7 @@ class ScInterfaceController extends Controller
      */
     public function destroy($id)
     {
-        ScInterface::destroy($id);
+        FlightOpportunity::destroy($id);
 
         return response()->json(
             [
@@ -86,7 +98,7 @@ class ScInterfaceController extends Controller
     public function updatePosition(Request $request) {
         foreach ($request->data as $position => $id) {
             if($id) {
-                $scinterface = ScInterface::find($id);
+                $scinterface = FlightOpportunity::find($id);
                 $scinterface->update(
                     [
                         'id' => $id,

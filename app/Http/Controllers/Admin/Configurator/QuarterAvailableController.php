@@ -87,23 +87,23 @@ class QuarterAvailableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'month' => 'required',
-        //     'year' => 'required',
-        //     'quarter' => 'required'
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'month' => 'required',
+            'year' => 'required',
+            'quarter' => 'required'
+        ]);
         
-        // if ($validator->passes()) {
-        //     return response()->json(['success'=>'Added new records.']);
-        // }
-        // return response()->json(['error'=>$validator->errors()]);
-        $quarterAvailable = QuarterAvailable::find($id);
-        $quarterAvailable->year = $request->year;
-        $quarterAvailable->month = $request->month;
-        $quarterAvailable->user_id = \Auth::user()->id;
-        $quarterAvailable->quarter_id = $request->quarter;
-        $quarterAvailable->save();
-        return response()->json($quarterAvailable);
+        if ($validator->passes()) {
+            $quarterAvailable = QuarterAvailable::find($id);
+            $quarterAvailable->year = $request->year;
+            $quarterAvailable->month = $request->month;
+            $quarterAvailable->user_id = \Auth::user()->id;
+            $quarterAvailable->quarter_id = $request->quarter;
+            $quarterAvailable->save();
+            return response()->json($quarterAvailable);
+        }
+        return response()->json(['error'=>$validator->errors()]);
+        
     }
 
     /**

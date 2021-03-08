@@ -62,7 +62,7 @@
             });
             $(document).ready(function(){
                 $('.general_parameter').find('form').each(function(index,element){
-                    $(element).find('input[type="submit"]').on('click',function(event){
+                    $(element).find('button[type="submit"]').on('click',function(event){
                         if(!$(this).closest('form').attr('enctype')){
                             event.preventDefault();
                             let url = $(this).closest('form').attr('action');

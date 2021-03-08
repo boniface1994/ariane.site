@@ -16,11 +16,13 @@ class TechnicalMaturity extends Model
      */
     protected $table = "technical_maturity";
     protected $fillable = [
-        'title','position','user_id'
+        'title',
+        'position',
+        'user_id'
     ];
     
     public function user(){
-        return $this->haseOne(User::class,'id','user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
 }

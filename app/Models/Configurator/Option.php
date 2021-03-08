@@ -5,16 +5,12 @@ namespace App\Models\Configurator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ScInterface extends Model
+class Option extends Model
 {
     use HasFactory;
 
-    protected $table = "sc_interfaces";
+    protected $table = "options";
     protected $fillable = [
-        'name',
-        'explication',
-        'sicubesat',
-        'sismallsat',
-        'position'
+        'name','explication','cubsat','smallsat','weight_dependent','cost','dashboard_available','position'
     ];
 }

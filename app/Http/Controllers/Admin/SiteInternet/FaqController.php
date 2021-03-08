@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Configurator;
+namespace App\Http\Controllers\Admin\SiteInternet;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Configurator\ScInterface;
+use App\Models\SiteInternet\Faq;
 
-class ScInterfaceController extends Controller
+class FaqController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ScInterfaceController extends Controller
      */
     public function index()
     {
-        $interfaces = ScInterface::orderBy('position')->get();
-        return view('admin.pages.configurator.scinterface.index', compact('interfaces'));
+        $faqs = Faq::orderBy('position')->get();
+        return view('admin.pages.siteinternet.faq.index', compact('faqs'));
     }
 
     /**
@@ -28,34 +28,44 @@ class ScInterfaceController extends Controller
      */
     public function store(Request $request)
     {
+        // $errors = array();
+        // if(!$request->question) $errors[] = trans('Question is required');
+        // if(!$request->answer) $errors[] = trans('Answer is required');
+
         $validator = Validator::make($request->all(), [   
-            'name'          => 'required',
-            'sicubesat'     => 'required_without_all:sismallsat',
-            'sismallsat'    => 'required_without_all:sicubesat'
+            'question' => 'required', 
+            'answer' => 'required'
         ]);
 
         if($validator->passes()) {
-            $object = ScInterface::updateOrCreate(
-                [
-                    'id' => $request->id
-                ],
-                [
-                    'name' => $request->name,
-                    'explication' => $request->explication,
-                    'sicubesat' => $request->sicubesat,
-                    'sismallsat' => $request->sismallsat,
-                    'position' => $request->position,
-                ]
-            );
+            try{
 
-            return response()->json(
-                [
-                    'success' => true,
-                    'id' => $object->id,
-                    'name' => $request->name,
-                    'delete_url' => route('scinterface.destroy', $object->id)
-                ]
-            );
+                $object = Faq::updateOrCreate(
+                    [
+                        'id' => $request->id
+                    ],
+                    [
+                        'question' => $request->question,
+                        'answer' => $request->answer,
+                        'position' => $request->position
+                    ]
+                );
+
+                return response()->json(
+                    [
+                        'success' => true,
+                        'id' => $object->id,
+                        'question' => $request->question,
+                        'delete_url' => route('technical.destroy', $object->id)
+                    ]
+                );
+
+            }catch(\Exception $e){
+                return response()->json([
+                    'error' => true,
+                    'errors' => [$e->getMessage()]
+                ]);
+            }
         }
         else {
             return response()->json([
@@ -73,7 +83,7 @@ class ScInterfaceController extends Controller
      */
     public function destroy($id)
     {
-        ScInterface::destroy($id);
+        Faq::destroy($id);
 
         return response()->json(
             [
@@ -86,7 +96,7 @@ class ScInterfaceController extends Controller
     public function updatePosition(Request $request) {
         foreach ($request->data as $position => $id) {
             if($id) {
-                $scinterface = ScInterface::find($id);
+                $scinterface = Faq::find($id);
                 $scinterface->update(
                     [
                         'id' => $id,
