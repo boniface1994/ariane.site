@@ -94,6 +94,13 @@ return [
             'new-tab' => false,
         ],
         [
+            'title' => 'Types d\'ergol',
+            'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
+            'page' => 'admin/configurator/propellanttype',
+            'root' => true,
+            'new-tab' => false,
+        ],
+        [
             'title' => 'Opportunités de vol',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
             'page' => 'admin/configurator/flightopportunity',

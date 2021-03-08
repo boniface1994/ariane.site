@@ -27,6 +27,8 @@ Route::group(['middleware' => 'admin'], function(){
         Route::post('/suppliertype/position','SupplierTypeController@updatePosition')->name('suppliertype.position');
         Route::resource('/flightopportunity', 'FlightOpportunityController');
         Route::post('/flightopportunity/position','FlightOpportunityController@updatePosition')->name('flightopportunity.position');
+        Route::resource('/propellanttype', 'PropellantTypeController');
+        Route::post('/propellanttype/position','PropellantTypeController@updatePosition')->name('propellanttype.position');
     });
 
     Route::resource('customer','Customers\CustomerController');

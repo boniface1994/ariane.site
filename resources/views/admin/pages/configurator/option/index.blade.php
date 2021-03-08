@@ -59,13 +59,13 @@
                             <h5 class="mb-4">{{ __('Option cost') }}</h5>
                             <div class="radio-list">
                                 <label class="radio radio-success">
-                                    <input type="radio" @if(!$option['weight_dependent']) checked @endif name="weight_dependent" value="0"/>
+                                    <input class="weight_dependent" type="radio" @if(!$option['weight_dependent']) checked @endif name="weight_dependent" value="0"/>
                                     <span></span>
                                     {{ __('Cost depending on mass') }}
                                 </label>
                                 <div class="input-group">  
                                     <label class="radio radio-success mr-3">
-                                        <input type="radio" @if($option['weight_dependent']) checked @endif name="weight_dependent" value="1"/>
+                                        <input class="weight_dependent" type="radio" @if($option['weight_dependent']) checked @endif name="weight_dependent" value="1"/>
                                         <span></span>
                                         {{ __('Fixed cost') }}
                                     </label>
@@ -251,12 +251,12 @@
             var cost = form.find('.cost').val(); 
             var dashboard_available = form.find('.dashboard_available').is(':checked') ? 1 : 0;
             var type = [];
-            var weight_dependent='';
             form.find('.type').each(function(i, el){
-                type[i] = $(el).is(':checked') ? 1 : 0;
+                type[i] = $(el).is(':checked') ? 1 : null;
             });
             
-            form.find('.weight_dependent').each(function(i,el){
+            var weight_dependent = null;
+            form.find('.weight_dependent').each(function(i, el){
                 if($(el).is(':checked')){
                     weight_dependent = $(el).val();
                 }

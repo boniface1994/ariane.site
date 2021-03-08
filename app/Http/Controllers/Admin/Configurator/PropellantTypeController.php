@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin\Configurator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Configurator\ScInterface;
+use App\Models\Configurator\PropellantType;
 
-class ScInterfaceController extends Controller
+class PropellantTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ScInterfaceController extends Controller
      */
     public function index()
     {
-        $interfaces = ScInterface::orderBy('position')->get();
-        return view('admin.pages.configurator.scinterface.index', compact('interfaces'));
+        $propellanttypes = PropellantType::orderBy('position')->get();
+        return view('admin.pages.configurator.propellanttype.index', compact('propellanttypes'));
     }
 
     /**
@@ -29,21 +29,17 @@ class ScInterfaceController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [   
-            'name'          => 'required',
-            'sicubesat'     => 'required_without_all:sismallsat',
-            'sismallsat'    => 'required_without_all:sicubesat'
+            'name' => 'required'
         ]);
 
         if($validator->passes()) {
-            $object = ScInterface::updateOrCreate(
+            $object = PropellantType::updateOrCreate(
                 [
                     'id' => $request->id
                 ],
                 [
                     'name' => $request->name,
                     'explication' => $request->explication,
-                    'sicubesat' => $request->sicubesat,
-                    'sismallsat' => $request->sismallsat,
                     'position' => $request->position,
                 ]
             );
@@ -53,7 +49,7 @@ class ScInterfaceController extends Controller
                     'success' => true,
                     'id' => $object->id,
                     'name' => $request->name,
-                    'delete_url' => route('scinterface.destroy', $object->id)
+                    'delete_url' => route('propellanttype.destroy', $object->id)
                 ]
             );
         }
@@ -73,7 +69,7 @@ class ScInterfaceController extends Controller
      */
     public function destroy($id)
     {
-        ScInterface::destroy($id);
+        PropellantType::destroy($id);
 
         return response()->json(
             [
@@ -86,7 +82,7 @@ class ScInterfaceController extends Controller
     public function updatePosition(Request $request) {
         foreach ($request->data as $position => $id) {
             if($id) {
-                $scinterface = ScInterface::find($id);
+                $scinterface = PropellantType::find($id);
                 $scinterface->update(
                     [
                         'id' => $id,

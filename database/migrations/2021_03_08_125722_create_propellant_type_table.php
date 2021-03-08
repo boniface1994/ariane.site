@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOptionsTable extends Migration
+class CreatePropellantTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('options', function (Blueprint $table) {
+        Schema::create('propellant_type', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('explication')->nullable();
-            $table->boolean('cubsat')->nullable();
-            $table->boolean('smallsat')->nullable();
-            $table->boolean('weight_dependent');
-            $table->float('cost')->nullable();
-            $table->boolean('dashboard_available');
-            $table->integer('position')->nullable();
+            $table->integer('position');
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ class CreateOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('options');
+        Schema::dropIfExists('propellant_type');
     }
 }
