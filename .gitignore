@@ -13,5 +13,5 @@ npm-debug.log
 yarn-error.log
 
 /mysql/
-accel.log
+access.log
 error.log
