@@ -63,7 +63,7 @@
             </div>
             @endforeach
 
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item first-event">
+            <div data-repeater-item class="d-none col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
                         
@@ -112,7 +112,7 @@
             </div>
         </form>
   
-        <div class="col-lg-12 @if(count($optionCosts) < 0) d-none @endif" id="btn-option-cost-add">
+        <div class="col-lg-12 @if(count($optionCosts) == 0) d-none @endif" id="btn-option-cost-add">
             <button type="submit" class="validate-option-cost btn btn-success font-weight-bold mr-2">
                 <i class="la la-check"></i> {{ __('Validate') }}
             </button>
@@ -153,14 +153,14 @@
         $('#repeater').repeater({
             initEmpty: true,
             show: function () {
+                $(this).removeClass('d-none');
                 $(this).slideDown();
+                if($('#btn-option-cost-add').hasClass('d-none')) $('#btn-option-cost-add').removeClass('d-none');
             },
             hide: function () {
                 $(this).slideUp();
-                if($('.option-cost-draggable-item').length == 0) $('#btn-option-cost-add').addClass('d-none');
-            },
-            ready: function (setIndexes) {
-                if($('#btn-option-cost-add').hasClass('d-none')) $('#btn-option-cost-add').removeClass('d-none');
+                if($('.option-cost-draggable-item').length == 1) 
+                        $('#btn-option-cost-add').addClass('d-none');
             },
             isFirstItemUndeletable: true
         })
@@ -240,6 +240,8 @@
                     item.slideUp("normal", function() {
                         item.remove();
                     });
+                    if($('.option-cost-draggable-item').length == 1) 
+                        $('#btn-option-cost-add').addClass('d-none');
                     toastr.success("{{ __('Success!') }}", "{{ __('Data removed') }}")
                 }
             })

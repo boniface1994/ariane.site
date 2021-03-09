@@ -55,7 +55,7 @@
             </div>
             @endforeach
             
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable faq-draggable-item first-event">
+            <div data-repeater-item class="d-none col-lg-12 card card-custom gutter-b draggable faq-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
                         <h3 class="card-label">{{ __('New question / answer') }}</h3>
@@ -157,6 +157,7 @@
         $('#repeater').repeater({
             initEmpty: true,
             show: function () {
+                $(this).removeClass('d-none');
                 $(this).slideDown();
             },
             hide: function () {

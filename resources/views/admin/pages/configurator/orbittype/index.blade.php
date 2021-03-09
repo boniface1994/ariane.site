@@ -171,7 +171,7 @@
             </div>
             @endforeach
             
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable orbittype-draggable-item first-event">
+            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable orbittype-draggable-item first-event d-none">
                 <div class="card-header">
                     <div class="card-title">
                         <h3 class="card-label">{{ __('Orbit type name') }}</h3>
@@ -384,6 +384,7 @@
         $('#repeater').repeater({
             initEmpty: true,
             show: function () {
+                $(this).removeClass('d-none');
                 $(this).slideDown();
                 if($('#btn-orbittype-add').hasClass('d-none')) $('#btn-orbittype-add').removeClass('d-none');
             },

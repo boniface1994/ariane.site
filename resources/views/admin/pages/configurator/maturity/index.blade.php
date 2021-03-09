@@ -41,7 +41,7 @@
             </div>
             @endforeach
 
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable maturity-draggable-item first-event">
+            <div data-repeater-item class="d-none col-lg-12 card card-custom gutter-b draggable maturity-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
                         <label>{{ __('Technical maturity') }} <span class="text-danger">*</span></label>
@@ -113,6 +113,7 @@
         $('#repeater').repeater({
             initEmpty: true,
             show: function () {
+                $(this).removeClass('d-none');
                 $(this).slideDown();
                 if($('#btn-maturity-add').hasClass('d-none')) $('#btn-maturity-add').removeClass('d-none');
             },
