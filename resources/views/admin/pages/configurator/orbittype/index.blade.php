@@ -73,7 +73,7 @@
                         </div>
                     </div>
 
-                     @foreach($orbittype['parameters'] as $option)
+                    @foreach($orbittype['parameters'] as $option)
                         @php $option_altitude = null; @endphp
                         @php $option_inclination = null; @endphp
 
@@ -248,19 +248,19 @@
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Start value') }} <span class="text-danger">*</span> </label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="start form-control" placeholder="Start" name="start['altitude']" />
+                                                    <input type="text" class="start form-control" placeholder="Start" name="start['altitude']" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('End value') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="end form-control" placeholder="End" name="end['altitude']" />
+                                                    <input type="text" class="end form-control" placeholder="End" name="end['altitude']" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Jump') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="jump form-control" placeholder="Jump" name="jump['altitude']" />
+                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['altitude']" />
                                                 </div>
                                             </div>
                                         </div>
@@ -286,19 +286,19 @@
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Start value') }} <span class="text-danger">*</span> </label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="start form-control" placeholder="Start" name="start['inclination']" />
+                                                    <input type="text" class="start form-control" placeholder="Start" name="start['inclination']" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('End value') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="end form-control" placeholder="End" name="end['inclination']" />
+                                                    <input type="text" class="end form-control" placeholder="End" name="end['inclination']" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Jump') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="jump form-control" placeholder="Jump" name="jump['inclination']" />
+                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['inclination']" />
                                                 </div>
                                             </div>
                                         </div>

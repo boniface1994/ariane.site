@@ -73,9 +73,9 @@ return [
             'new-tab' => false,
         ],
         [
-            'title' => 'Position du satéllite',
+            'title' => 'Position du satellite',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
-            'page' => '/admin/configurator/sateliteposition',
+            'page' => '/admin/configurator/satelliteposition',
             'root' => true,
             'new-tab' => false,
         ],

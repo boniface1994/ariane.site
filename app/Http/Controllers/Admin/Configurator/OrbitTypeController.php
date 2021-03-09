@@ -43,37 +43,37 @@ class OrbitTypeController extends Controller
             );
             $validator = Validator::make($item, $rules);
 
-            if(!isset($item['parameters'])) {
-                return response()->json([
-                    'error' => true,
-                    'errors' => [trans('1 setting is required')]
-                ]);
-            }else {
-                foreach ($item['parameters'] as $i => $option) {
-                    $option_rules = array(    
-                        'type' => 'required',
-                        'start' => 'required',
-                        'end' => 'required',
-                        'jump' => 'required',
-                    );
-
-                    $option_validator = Validator::make($option, $option_rules);
-                    if ($option_validator->fails()) {
-                       return response()->json([
-                            'error' => true,
-                            'errors' => [trans('Please fill all required fields')]
-                        ]); 
-                    }
-                }
-            }
-
             if ($validator->fails()) {
                 return response()->json([
                     'error' => true,
-                    'errors' => [trans('Please fill all required fields')]
+                    'errors' => $validator->errors()
                 ]);
             }else{
                 try{
+
+                    if(!isset($item['parameters'])) {
+                        return response()->json([
+                            'error' => true,
+                            'errors' => [trans('Altitude or inclination setting is required')]
+                        ]);
+                    }else {
+                        foreach ($item['parameters'] as $i => $option) {
+                            $option_rules = array(    
+                                'type' => 'required',
+                                'start' => 'required|numeric',
+                                'end' => 'required|numeric',
+                                'jump' => 'required|numeric',
+                            );
+
+                            $option_validator = Validator::make($option, $option_rules);
+                            if ($option_validator->fails()) {
+                               return response()->json([
+                                    'error' => true,
+                                    'errors' => $option_validator->errors()
+                                ]); 
+                            }
+                        }
+                    }
 
                     $orbittype = OrbitType::updateOrCreate(
                         [
