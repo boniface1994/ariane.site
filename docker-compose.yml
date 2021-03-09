@@ -5,6 +5,7 @@ services:
     image: mariadb:10.1
     ports:
       - 3307:3306
+    command: ['--collation-server=utf8mb4_unicode_ci', '--character-set-server=utf8mb4']
     volumes:
       - "./mysql:/var/lib/mysql"
     environment:
