@@ -171,7 +171,7 @@
             </div>
             @endforeach
             
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable orbittype-draggable-item first-event d-none">
+            <div data-repeater-item class="d-none col-lg-12 card card-custom gutter-b draggable orbittype-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
                         <h3 class="card-label">{{ __('Orbit type name') }}</h3>
@@ -308,7 +308,7 @@
                         </div>
                     </div>
 
-                    <a data-repeater-delete class="confirm-remove-orbittype to-validate btn btn-outline-danger font-weight-bold mr-2">
+                    <a data-repeater-delete class="confirm-remove-orbittype btn btn-outline-danger font-weight-bold mr-2">
                         <i class="la la-trash-o"></i> {{ __('Delete') }}
                     </a>
                     
@@ -442,8 +442,6 @@
                     position: i+1 
                 });
             });
-
-            console.log(data)
             
             $.ajax({
                 url: url,
@@ -482,8 +480,10 @@
 
         $('#repeater').on('click', '.confirm-remove-orbittype', function(event) {
             event.preventDefault();
-
-            $('#confirmation-delete').modal('show')
+            
+            let attr = $(this).attr('data-repeater-delete');
+            if (typeof attr == typeof undefined)
+                $('#confirmation-delete').modal('show');
 
             form_button = event.target;
         })

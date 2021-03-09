@@ -31,9 +31,9 @@ class OrbitTypeController extends Controller
     {
         $data = $request->data;
         $response_data = array();
-
+ 
         foreach ($data as $key => $item) {
-            //dd($item['parameters']);
+            
             $rules = array(    
                 'name' => 'required', 
                 'orbit_leo' => 'required_without_all:orbit_sso',

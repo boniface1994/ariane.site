@@ -18,7 +18,7 @@
             <input class="user_id d-none" name="user_id" value="{{Auth::user()->id}}">
             
             @foreach ($optionCosts as $optionCost)
-            <div class="col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item first-event">
+            <div class="col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item card-collapsed">
                 <div class="card-header">
                     <div class="card-title">
                     </div>
@@ -186,8 +186,6 @@
 
                 data.push({ id: id, mass_min: mass_min, mass_max: mass_max, data_cost: data_cost });
             });
-
-            console.log('data',data);
             
             $.ajax({
                 url: url,
@@ -217,17 +215,15 @@
         $('#repeater').on('click', '.confirm-remove-option-cost', function(event) {
             event.preventDefault();
 
-            $('#confirmation-delete').modal('show');
+            let attr = $(this).attr('data-repeater-delete');
+            if (typeof attr == typeof undefined)
+                $('#confirmation-delete').modal('show');
 
             form_button = event.target;
         });
 
         $('.action-remove-option-cost').on('click', function() {         
             let url = $(form_button).attr('data-action-remove');
-            //var id = $(form).find('.index').val();
-            console.log(url)
-
-            //console.log(id)
                        
             $.ajax({
                 url: url,

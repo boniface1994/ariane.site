@@ -47,7 +47,7 @@
                         <label>{{ __('Technical maturity') }} <span class="text-danger">*</span></label>
                     </div>
                     <div class="card-toolbar">
-                        <a data-repeater-delete class="confirm-remove-maturity to-validate btn btn-outline-danger font-weight-bold mr-2">
+                        <a data-repeater-delete class="confirm-remove-maturity btn btn-outline-danger font-weight-bold mr-2">
                             <i class="la la-trash-o"></i> {{ __('Delete') }}
                         </a>
                         <a href="#" class="btn btn btn-icon btn-light-success btn-sm draggable-handle" data-toggle="tooltip" data-placement="top" title="{{ __('Change order by drag and drop') }}">
@@ -168,17 +168,15 @@
         $('#repeater').on('click', '.confirm-remove-maturity', function(event) {
             event.preventDefault();
 
-            $('#confirmation-delete').modal('show');
+            let attr = $(this).attr('data-repeater-delete');
+            if (typeof attr == typeof undefined)
+                $('#confirmation-delete').modal('show');
 
             form_button = event.target;
         })
 
         $('.action-remove-maturity').on('click', function() {         
             let url = $(form_button).attr('data-action-remove');
-            //var id = $(form).find('.index').val();
-            console.log(url)
-
-            //console.log(id)
                        
             $.ajax({
                 url: url,

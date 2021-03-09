@@ -213,7 +213,9 @@
         $('#repeater').on('click', '.confirm-remove-propellanttype', function(event) {
             event.preventDefault();
 
-            $('#confirmation-delete').modal('show')
+            let attr = $(this).attr('data-repeater-delete');
+            if (typeof attr == typeof undefined)
+                $('#confirmation-delete').modal('show');
 
             form_button = event.target;
         })
