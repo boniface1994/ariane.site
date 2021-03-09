@@ -119,8 +119,8 @@
             },
             hide: function () {
                 $(this).slideUp();
-                if($('.orbittype-draggable-item').length == 1) 
-                        $('#btn-orbittype-add').addClass('d-none');
+                if($('.maturity-draggable-item').length == 1) 
+                        $('#btn-maturity-add').addClass('d-none');
             },
             isFirstItemUndeletable: true
         })
