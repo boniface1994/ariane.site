@@ -18,7 +18,7 @@
             <input class="user_id d-none" name="user_id" value="{{Auth::user()->id}}">
             
             @foreach ($optionCosts as $optionCost)
-            <div class="col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item first-event">
+            <div class="col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item card-collapsed">
                 <div class="card-header">
                     <div class="card-title">
                     </div>
@@ -63,7 +63,7 @@
             </div>
             @endforeach
 
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item first-event">
+            <div data-repeater-item class="d-none col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
                         
@@ -112,7 +112,7 @@
             </div>
         </form>
   
-        <div class="col-lg-12 @if(count($optionCosts) < 0) d-none @endif" id="btn-option-cost-add">
+        <div class="col-lg-12 @if(count($optionCosts) == 0) d-none @endif" id="btn-option-cost-add">
             <button type="submit" class="validate-option-cost btn btn-success font-weight-bold mr-2">
                 <i class="la la-check"></i> {{ __('Validate') }}
             </button>
@@ -153,14 +153,14 @@
         $('#repeater').repeater({
             initEmpty: true,
             show: function () {
+                $(this).removeClass('d-none');
                 $(this).slideDown();
+                if($('#btn-option-cost-add').hasClass('d-none')) $('#btn-option-cost-add').removeClass('d-none');
             },
             hide: function () {
                 $(this).slideUp();
-                if($('.option-cost-draggable-item').length == 0) $('#btn-option-cost-add').addClass('d-none');
-            },
-            ready: function (setIndexes) {
-                if($('#btn-option-cost-add').hasClass('d-none')) $('#btn-option-cost-add').removeClass('d-none');
+                if($('.option-cost-draggable-item').length == 1) 
+                        $('#btn-option-cost-add').addClass('d-none');
             },
             isFirstItemUndeletable: true
         })
@@ -186,8 +186,6 @@
 
                 data.push({ id: id, mass_min: mass_min, mass_max: mass_max, data_cost: data_cost });
             });
-
-            console.log('data',data);
             
             $.ajax({
                 url: url,
@@ -217,17 +215,15 @@
         $('#repeater').on('click', '.confirm-remove-option-cost', function(event) {
             event.preventDefault();
 
-            $('#confirmation-delete').modal('show');
+            let attr = $(this).attr('data-repeater-delete');
+            if (typeof attr == typeof undefined)
+                $('#confirmation-delete').modal('show');
 
             form_button = event.target;
         });
 
         $('.action-remove-option-cost').on('click', function() {         
             let url = $(form_button).attr('data-action-remove');
-            //var id = $(form).find('.index').val();
-            console.log(url)
-
-            //console.log(id)
                        
             $.ajax({
                 url: url,
@@ -240,6 +236,8 @@
                     item.slideUp("normal", function() {
                         item.remove();
                     });
+                    if($('.option-cost-draggable-item').length == 1) 
+                        $('#btn-option-cost-add').addClass('d-none');
                     toastr.success("{{ __('Success!') }}", "{{ __('Data removed') }}")
                 }
             })

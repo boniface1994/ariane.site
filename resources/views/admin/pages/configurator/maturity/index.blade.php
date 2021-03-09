@@ -41,7 +41,7 @@
             </div>
             @endforeach
 
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable maturity-draggable-item first-event">
+            <div data-repeater-item class="d-none col-lg-12 card card-custom gutter-b draggable maturity-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
                         <label>{{ __('Technical maturity') }} <span class="text-danger">*</span></label>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </form>
-  
+        
         <div class="col-lg-12 @if(count($maturities) == 0) d-none @endif" id="btn-maturity-add">
             <button type="submit" class="validate-maturity btn btn-success font-weight-bold mr-2">
                 <i class="la la-check"></i> {{ __('Validate') }}
@@ -113,14 +113,14 @@
         $('#repeater').repeater({
             initEmpty: true,
             show: function () {
+                $(this).removeClass('d-none');
                 $(this).slideDown();
+                if($('#btn-maturity-add').hasClass('d-none')) $('#btn-maturity-add').removeClass('d-none');
             },
             hide: function () {
                 $(this).slideUp();
-                if($('.maturity-draggable-item').length == 0) $('#btn-maturity-add').addClass('d-none');
-            },
-            ready: function (setIndexes) {
-                if($('#btn-maturity-add').hasClass('d-none')) $('#btn-maturity-add').removeClass('d-none');
+                if($('.maturity-draggable-item').length == 1) 
+                        $('#btn-maturity-add').addClass('d-none');
             },
             isFirstItemUndeletable: true
         })
@@ -168,17 +168,15 @@
         $('#repeater').on('click', '.confirm-remove-maturity', function(event) {
             event.preventDefault();
 
-            $('#confirmation-delete').modal('show');
+            let attr = $(this).attr('data-repeater-delete');
+            if (typeof attr == typeof undefined)
+                $('#confirmation-delete').modal('show');
 
             form_button = event.target;
         })
 
         $('.action-remove-maturity').on('click', function() {         
             let url = $(form_button).attr('data-action-remove');
-            //var id = $(form).find('.index').val();
-            console.log(url)
-
-            //console.log(id)
                        
             $.ajax({
                 url: url,
@@ -186,6 +184,9 @@
                 type: 'DELETE',
                 success: function (response) {
                     $('#confirmation-delete').modal('hide');
+
+                    if($('.maturity-draggable-item').length == 1) 
+                        $('#btn-maturity-add').addClass('d-none');
 
                     let item = $(form_button).closest('.maturity-draggable-item');
                     item.slideUp("normal", function() {

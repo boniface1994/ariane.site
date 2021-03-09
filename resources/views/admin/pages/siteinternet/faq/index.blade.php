@@ -15,7 +15,7 @@
     <div class="row">
         <div data-repeater-list="group-a" class="col-lg-12 d-flex flex-wrap draggable-zone">
             @foreach ($faqs as $faq)
-            <div class="col-lg-12 card card-custom gutter-b draggable card-collapsed faq-draggable-item first-event">
+            <div class="col-lg-12 card card-custom gutter-b draggable card-collapsed faq-draggable-item">
                 <div class="card-header">
                     <div class="card-title">
                         <h3 class="card-label">{{ $faq['question'] }}</h3>
@@ -55,7 +55,7 @@
             </div>
             @endforeach
             
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable faq-draggable-item first-event">
+            <div data-repeater-item class="d-none col-lg-12 card card-custom gutter-b draggable faq-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
                         <h3 class="card-label">{{ __('New question / answer') }}</h3>
@@ -157,6 +157,7 @@
         $('#repeater').repeater({
             initEmpty: true,
             show: function () {
+                $(this).removeClass('d-none');
                 $(this).slideDown();
             },
             hide: function () {
@@ -211,7 +212,9 @@
         $('#repeater').on('click', '.confirm-remove-faq', function(event) {
             event.preventDefault();
 
-            $('#confirmation-delete').modal('show')
+            let attr = $(this).attr('data-repeater-delete');
+            if (typeof attr == typeof undefined)
+                $('#confirmation-delete').modal('show');
 
             form_button = event.target;
         })

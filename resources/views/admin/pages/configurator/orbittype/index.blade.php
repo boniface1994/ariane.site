@@ -73,7 +73,7 @@
                         </div>
                     </div>
 
-                     @foreach($orbittype['parameters'] as $option)
+                    @foreach($orbittype['parameters'] as $option)
                         @php $option_altitude = null; @endphp
                         @php $option_inclination = null; @endphp
 
@@ -171,7 +171,7 @@
             </div>
             @endforeach
             
-            <div data-repeater-item class="col-lg-12 card card-custom gutter-b draggable orbittype-draggable-item first-event">
+            <div data-repeater-item class="d-none col-lg-12 card card-custom gutter-b draggable orbittype-draggable-item first-event">
                 <div class="card-header">
                     <div class="card-title">
                         <h3 class="card-label">{{ __('Orbit type name') }}</h3>
@@ -248,19 +248,19 @@
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Start value') }} <span class="text-danger">*</span> </label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="start form-control" placeholder="Start" name="start['altitude']" />
+                                                    <input type="text" class="start form-control" placeholder="Start" name="start['altitude']" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('End value') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="end form-control" placeholder="End" name="end['altitude']" />
+                                                    <input type="text" class="end form-control" placeholder="End" name="end['altitude']" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Jump') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="jump form-control" placeholder="Jump" name="jump['altitude']" />
+                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['altitude']" />
                                                 </div>
                                             </div>
                                         </div>
@@ -286,19 +286,19 @@
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Start value') }} <span class="text-danger">*</span> </label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="start form-control" placeholder="Start" name="start['inclination']" />
+                                                    <input type="text" class="start form-control" placeholder="Start" name="start['inclination']" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('End value') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="end form-control" placeholder="End" name="end['inclination']" />
+                                                    <input type="text" class="end form-control" placeholder="End" name="end['inclination']" />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Jump') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="jump form-control" placeholder="Jump" name="jump['inclination']" />
+                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['inclination']" />
                                                 </div>
                                             </div>
                                         </div>
@@ -316,7 +316,7 @@
             </div>
         </form>
 
-        <div class="col-lg-12 " id="btn-orbittype-add">
+        <div class="col-lg-12 @if(count($orbittypes) == 0) d-none @endif" id="btn-orbittype-add">
             <button type="submit" class="validate-orbittype btn btn-success font-weight-bold mr-2">
                 <i class="la la-check"></i> {{ __('Validate') }}
             </button>
@@ -384,10 +384,14 @@
         $('#repeater').repeater({
             initEmpty: true,
             show: function () {
+                $(this).removeClass('d-none');
                 $(this).slideDown();
+                if($('#btn-orbittype-add').hasClass('d-none')) $('#btn-orbittype-add').removeClass('d-none');
             },
             hide: function () {
                 $(this).slideUp();
+                if($('.orbittype-draggable-item').length == 1) 
+                        $('#btn-orbittype-add').addClass('d-none');
             },
             ready: function (setIndexes) {
                 var id = randstr('card_');
@@ -438,8 +442,6 @@
                     position: i+1 
                 });
             });
-
-            console.log(data)
             
             $.ajax({
                 url: url,
@@ -448,9 +450,6 @@
                 success: function(response) {
                     if(response.success) {
                         $.each(response.response_data, function( index, data ) {
-                            console.log(data.orbittype_id, ' orbittype_id')
-                            console.log(data.id_option_altitude, ' id_option_altitude')
-                            console.log(data.id_option_inclination, ' id_option_inclination')
 
                             toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
                             let item = $('.orbittype-draggable-item').eq(data.position);
@@ -481,8 +480,10 @@
 
         $('#repeater').on('click', '.confirm-remove-orbittype', function(event) {
             event.preventDefault();
-
-            $('#confirmation-delete').modal('show')
+            
+            let attr = $(this).attr('data-repeater-delete');
+            if (typeof attr == typeof undefined)
+                $('#confirmation-delete').modal('show');
 
             form_button = event.target;
         })
@@ -498,6 +499,9 @@
                 type: 'DELETE',
                 success: function (response) {
                     $('#confirmation-delete').modal('hide');
+
+                    if($('.orbittype-draggable-item').length == 1) 
+                        $('#btn-orbittype-add').addClass('d-none');
 
                     let item = $(parent).closest('.orbittype-draggable-item');
                     item.slideUp("normal", function() {

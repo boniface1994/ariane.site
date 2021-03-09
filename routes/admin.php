@@ -19,7 +19,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::resource('/pricelist','PriceListController');
         Route::resource('/orbittype','OrbitTypeController');
         Route::post('/orbittype/position','OrbitTypeController@updatePosition')->name('orbittype.position');
-        Route::resource('/sateliteposition','SatelitePositionController');
+        Route::resource('/satelliteposition','SatellitePositionController');
         Route::resource('/option','OptionController');
         Route::post('/option/position', 'OptionController@updatePosition')->name('option.position');
         Route::resource('/option-cost','OptionCostController');
