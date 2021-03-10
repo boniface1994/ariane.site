@@ -25,6 +25,13 @@ return [
             'page' => 'admin/customer',
             'new-tab' => false,
         ],
+        [
+            'title' => 'Projets',
+            'root' => true,
+            'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
+            'page' => 'admin/project',
+            'new-tab' => false,
+        ],
 
         // Configurateur
         [

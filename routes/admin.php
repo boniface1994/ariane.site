@@ -35,6 +35,10 @@ Route::group(['middleware' => 'admin'], function(){
     Route::resource('customer','Customers\CustomerController');
     Route::post('customer/search','Customers\CustomerController@search')->name('customer_search');
     Route::get('reset_search','Customers\CustomerController@resetSearch')->name('reset_search');
+    Route::group(['prefix' =>'project','namespace' => 'Project'],function(){
+        Route::get('/document','DocumentController@index')->name('document');
+        Route::resource('/','ProjectController');
+    });    
     Route::resource('parameter','GeneralParameterController');
     Route::get('download/{name}','GeneralParameterController@downloadPdf')->name('download');
     Route::resource('request','ContactRequestController');
