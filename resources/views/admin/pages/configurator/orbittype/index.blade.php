@@ -449,10 +449,11 @@
                 type: 'POST',
                 success: function(response) {
                     if(response.success) {
-                        $.each(response.response_data, function( index, data ) {
+                        toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
 
-                            toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
-                            let item = $('.orbittype-draggable-item').eq(data.position);
+                        $.each(response.response_data, function( index, data ) {
+                            
+                            let item = $('.orbittype-draggable-item').eq(data.position - 1);
                             item.attr("data-action-remove", data.delete_url);
                             item.find('.orbittype_index').val(data.orbittype_id);
                             item.find('.card-title h3').text(data.name);

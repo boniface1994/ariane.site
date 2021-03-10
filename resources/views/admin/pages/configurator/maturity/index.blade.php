@@ -146,9 +146,11 @@
                 type: 'POST',
                 success: function(response) {
                     if(response.success) {
+                        toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
+
                         $.each(response.response_data, function( index, data ) {
-                            toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
-                            let item = $('.maturity-draggable-item').eq(data.position);
+                            
+                            let item = $('.maturity-draggable-item').eq(data.position - 1);
                             let delete_button = item.find('.confirm-remove-maturity');
 
                             item.find('.index').val(data.id);
