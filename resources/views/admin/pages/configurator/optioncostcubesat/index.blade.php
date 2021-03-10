@@ -46,31 +46,31 @@
                         @switch($i)
                             @case(1)
                                 <h3 class="form-label">{{ __('1U') }}</h3>
-                                <input type="hidden" class="cost-name 1U" name="name[]" value="1U">
+                                <input type="text" class="cost-name 1U d-none" name="name[]" value="1U">
                                 @break
                             @case(2)
                                 <h3 class="form-label">{{ __('2U') }}</h3>
-                                <input type="hidden" class="cost-name 2U" name="name[]" value="2U">
+                                <input type="hidden" class="cost-name 2U d-none" name="name[]" value="2U">
                                 @break
                             @case(3)
                                 <h3 class="form-label">{{ __('3U') }}</h3>
-                                <input type="hidden" class="cost-name 3U" name="name[]" value="3U">
+                                <input type="text" class="cost-name 3U d-none" name="name[]" value="3U">
                                 @break
                             @case(4)
                                 <h3 class="form-label">{{ __('6U') }}</h3>
-                                <input type="hidden" class="cost-name 6U" name="name[]" value="6U">
+                                <input type="text" class="cost-name 6U d-none" name="name[]" value="6U">
                                 @break
                             @case(5)
                                 <h3 class="form-label">{{ __('12U') }}</h3>
-                                <input type="hidden" class="cost-name 12U" name="name[]" value="12U">
+                                <input type="text" class="cost-name 12U d-none" name="name[]" value="12U">
                                 @break
                             @case(6)
                                 <h3 class="form-label">{{ __('16U') }}</h3>
-                                <input type="hidden" class="cost-name 16U" name="name[]" value="16U">
+                                <input type="text" class="cost-name 16U d-none" name="name[]" value="16U">
                                 @break
                             @case(7)
                                 <h3 class="form-label">{{ __('24U') }}</h3>
-                                <input type="hidden" class="cost-name 24U" name="name[]" value="24U">
+                                <input type="text" class="cost-name 24U d-none" name="name[]" value="24U">
                                 @break
                         @endswitch
                         <div class="input-group">
@@ -105,7 +105,7 @@
 @endsection
 
 @section('scripts')
-
+<script src="{{ asset('plugins/custom/draggable/draggable.bundle.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function () {
         var form_button = '';
@@ -130,10 +130,8 @@
                     data_cost.push({option_id: option_id, cost: cost, id: option_cost_id});
                 });
 
-                data.push({ id: id, name: name, data_cost: data_cost });
+                data.push({ id: id, name: name, position:i+1, data_cost: data_cost });
             });
-
-            console.log('data',data);
             
             $.ajax({
                 url: url,
@@ -141,14 +139,13 @@
                 type: 'POST',
                 success: function(response) {
                     if(response.success) {
+                        toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
                         $.each(response.response_data, function( index, data ) {
-                            toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
-                            let item = $('.option-cost-draggable-item').find('.'+data.name);
-
+                            let item = $('#repeater').find('.'+data.name);
                             item.siblings('.index').val(data.id);
-                            $.each(data.option_cost_cubesats,function(i,resp){
-                                item.siblings('.input-group').find('.option'+resp.option_id).data('option_cost_id')=resp.option_cost_id;
-                            });
+                            $.each(data.option_cost_cubesats,function(i,el){
+                                item.siblings('.input-group').find('.option'+el.option_id).data('option_cost_id',el.option_cost_id);
+                            })
                             
                         });
                     }

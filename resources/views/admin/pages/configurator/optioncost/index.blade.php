@@ -18,7 +18,7 @@
             <input class="user_id d-none" name="user_id" value="{{Auth::user()->id}}">
             
             @foreach ($optionCosts as $optionCost)
-            <div class="col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item card-collapsed">
+            <div class="col-lg-12 card card-custom gutter-b draggable option-cost-draggable-item">
                 <div class="card-header">
                     <div class="card-title">
                     </div>
@@ -44,11 +44,11 @@
                     </div><br>
                     
                     <h3 class="form-label">{{ __('Options costs') }}</h3>
-                    <div class="input-group">
+                    <div class="input-group cost">
                         @foreach($optionCost->options as $option)
                             <div class="form-group cost-option">
                                 <label class="col-form-label">{{ $option->option->name }} <span class="text-danger">*</span></label>
-                                <input type="hidden" class="option-cost-id" data-option_cost_id="{{ $option->id }}">
+                                <input type="hidden" class="option-cost-id option{{$option->option->id}}" data-option_cost_id="{{ $option->id }}">
                                 <input type="hidden" class="option-id" data-option_id="{{ $option->option->id}}">
                                 <div class="input-group">
                                     <input type="text" class="cost form-control form-control-solid col-md-6" name="cost[]" value="{{ $option->cost }}">
@@ -90,12 +90,12 @@
                     </div><br>
                     <div class="form-group">
                         <h3 class="form-label">{{ __('Options costs') }}</h3>
-                        <div class="input-group">
+                        <div class="input-group cost">
                             @if($options)
                                 @foreach($options as $option)
                                     <div class="form-group cost-option">
                                         <label class="col-form-label">{{ $option->name }} <span class="text-danger">*</span></label>
-                                        <input type="hidden" class="option-cost-id" data-option_cost_id="">
+                                        <input type="hidden" class="option-cost-id option{{$option->id}}" data-option_cost_id="">
                                         <input type="hidden" class="option-id" data-option_id="{{ $option->id }}" name="option_id[]" value="{{ $option->id }}">
                                         <div class="input-group">
                                             <input type="text" class="cost form-control form-control-solid col-md-6" name="cost[]">
@@ -184,7 +184,7 @@
                     data_cost.push({option_id: option_id, cost: cost, id: option_cost_id});
                 });
 
-                data.push({ id: id, mass_min: mass_min, mass_max: mass_max, data_cost: data_cost });
+                data.push({ id: id, mass_min: mass_min, mass_max: mass_max, position: i+1, data_cost: data_cost });
             });
             
             $.ajax({
@@ -195,10 +195,13 @@
                     if(response.success) {
                         $.each(response.response_data, function( index, data ) {
                             toastr.success("{{ __('Action completed with success') }}", "{{ __('Success!') }}" );
-                            let item = $('.option-cost-draggable-item').eq(data.position);
+                            let item = $('.option-cost-draggable-item').eq(data.position-1);
                             let delete_button = item.find('.confirm-remove-option-cost');
 
                             item.find('.index').val(data.id);
+                            $.each(data.option_cost_option,function(i,el){
+                                item.find('.cost').find('.option'+el.option_id).data('option_cost_id',el.option_cost_option_id);
+                            });
                             delete_button.removeAttr('data-repeater-delete');
                             delete_button.attr("data-action-remove", data.delete_url);
                         });

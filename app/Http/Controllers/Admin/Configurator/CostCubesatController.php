@@ -91,6 +91,7 @@ class CostCubesatController extends Controller
 
                     $response_data[] = [
                         'id' => $object->id,
+                        'position' => $item['position'],
                         'name'=>$object->name,
                         'option_cost_cubesats' => $data_option_cost
                     ]; 

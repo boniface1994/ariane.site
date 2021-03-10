@@ -96,11 +96,15 @@ class OptionCostController extends Controller
                                 'cost' => $data_cost['cost']
                             ]
                         );
-                        $data_option_cost[] = $object_cost->id;
+                        $data_option_cost[] =  [ 
+                            'option_cost_option_id' => $object_cost->id,
+                            'option_id' => $object_cost->option_id
+                        ];
                     }
 
                     $response_data[] = [
                         'id' => $object->id,
+                        'position' => $item['position'],
                         'option_cost_option' => $data_option_cost,
                         'delete_url' => route('option-cost.destroy', $object->id)
                     ]; 
