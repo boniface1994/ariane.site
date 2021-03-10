@@ -51,7 +51,7 @@
                                 <input type="hidden" class="option-cost-id" data-option_cost_id="{{ $option->id }}">
                                 <input type="hidden" class="option-id" data-option_id="{{ $option->option->id}}">
                                 <div class="input-group">
-                                    <input type="text" class="cost form-control form-control-solid col-md-3" name="cost[]" value="{{ $option->cost }}">
+                                    <input type="text" class="cost form-control form-control-solid col-md-6" name="cost[]" value="{{ $option->cost }}">
                                     <div class="input-group-prepend ">
                                         <button class="btn btn-secondary" type="button">{{ __('€') }}</button>
                                     </div>
@@ -98,7 +98,7 @@
                                         <input type="hidden" class="option-cost-id" data-option_cost_id="">
                                         <input type="hidden" class="option-id" data-option_id="{{ $option->id }}" name="option_id[]" value="{{ $option->id }}">
                                         <div class="input-group">
-                                            <input type="text" class="cost form-control form-control-solid col-md-3" name="cost[]">
+                                            <input type="text" class="cost form-control form-control-solid col-md-6" name="cost[]">
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-secondary" type="button">{{ __('€') }}</button>
                                             </div>

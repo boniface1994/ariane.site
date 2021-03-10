@@ -59,9 +59,16 @@ return [
             'new-tab' => false,
         ],
         [
-            'title' => 'Coûts des options',
+            'title' => 'Coûts des options smallsat',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
             'page' => 'admin/configurator/option-cost',
+            'root' => true,
+            'new-tab' => false,
+        ],
+        [
+            'title' => 'Coûts des options cubesat',
+            'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
+            'page' => 'admin/configurator/option-cost-cubesat',
             'root' => true,
             'new-tab' => false,
         ],
