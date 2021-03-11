@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::paginate(10);
+        
         if(session('company')  || session('name')){
             $customers = Customer::where([
                 [function($query){
@@ -27,6 +27,8 @@ class CustomerController extends Controller
                     }
                 }]
             ])->paginate(10);
+        }else{
+            $customers = Customer::paginate(10);
         }
         return view('admin.pages.customers.index',compact('customers'));
     }
@@ -51,7 +53,7 @@ class CustomerController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|mail',
+            'email' => 'required|email',
             'company' => 'required'
         ]);
         if ($validator->fails()) {

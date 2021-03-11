@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Project;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin\Project\Document;
 
 class DocumentController extends Controller
 {
@@ -12,9 +13,10 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($project_id)
     {
-        return view('admin.pages.project.document');
+        $documents = Document::where('project_id','=',$project_id)->get();
+        return view('admin.pages.project.document',compact('documents','project_id'));
     }
 
     /**
@@ -35,7 +37,24 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'document' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return \Redirect::back()->withInput()->withErrors($validator);
+        }else{
+            $ext = $request->file('document')->guessExtension();
+            $document['ext'] = $ext;
+            $document['type'] = $request->type;
+            $document['name'] = $request->name.'.'.$ext;
+            $document['project_id'] = $request->project_id;
+            $name = $request->name.'.'.$ext;
+            $request->file('document')->storeAs("upload",$name,'public');
+            Document::create($document);
+            $documents = Document::where('project_id','=',$request->project_id)->get();
+            return \Redirect::route('document',$request->project_id)->with(['documents' => $documents]);
+         }
     }
 
     /**
@@ -80,6 +99,10 @@ class DocumentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $document = Document::find($id);
+        $project_id = $document->project_id;
+        $document->delete();
+        $documents = Document::where('project_id','=',$project_id)->get();
+        return \Redirect::route('document',$project_id)->with(['documents' => $documents]);
     }
 }

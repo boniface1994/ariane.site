@@ -15,7 +15,7 @@ class ContactRequestController extends Controller
      */
     public function index()
     {
-        $requests = ContactRequest::paginate(10);
+        
         if(session('status')){
             $requests = ContactRequest::where([
                 [function($query){
@@ -35,6 +35,8 @@ class ContactRequestController extends Controller
                     }
                 }]
             ])->paginate(10);
+        }else{
+           $requests = ContactRequest::paginate(10); 
         }
         return view('admin.pages.contactrequest.index',compact('requests'));
     }

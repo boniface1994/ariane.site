@@ -10,10 +10,10 @@
                 <div class="card-title">
                     <label >{{ __('Projects list') }}</label>
                 </div>
-                <!-- <div><a href="{{ route('document') }}">Document</a></div> -->
+                <div><a >Document</a></div>
             </div>
             <div class="card-body">
-                <form  class="form" data-url="" action="{{ route('customer_search') }}" method="POST">
+                <form  class="form" data-url="" action="{{ route('project_search') }}" method="POST">
                     @csrf
                     <h4 class="form-label">{{ __('Search / Filter') }}</h4><br>
                     <div class="form-group row ml-14">
@@ -22,7 +22,7 @@
                             <select class="form-control" name="customer">
                                 <option>{{ __('Choose one customer') }}</option>
                                 @foreach($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                    <option value="{{$customer->id}}" {{ (session('customer') == $customer->id) ? 'selected' : '' }}>{{$customer->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -31,27 +31,27 @@
                         <div class="col-9 col-form-label">
                             <div class="radio-inline">
                                 <label class="radio radio-success">
-                                    <input type="radio" name="radios5"/>
+                                    <input type="radio" name="step" {{ (session('step') == 5 ) ? 'checked' : ''}} value="5" />
                                     <span></span>
                                     {{ __('All') }}
                                 </label>
                                 <label class="radio radio-success">
-                                    <input type="radio" name="radios5"/>
+                                    <input type="radio" name="step" {{ (session('step') == 1 ) ? 'checked' : ''}} value="1" />
                                     <span></span>
                                     {{ __('Step 1') }}
                                 </label>
                                 <label class="radio radio-success">
-                                    <input type="radio" name="radios5"/>
+                                    <input type="radio" name="step" {{ (session('step') == 2 ) ? 'checked' : ''}} value="2" />
                                     <span></span>
                                     {{ __('Step 2') }}
                                 </label>
                                 <label class="radio radio-success">
-                                    <input type="radio" name="radios5" />
+                                    <input type="radio" name="step" {{ (session('step') == 3 ) ? 'checked' : ''}} value="3" />
                                     <span></span>
                                     {{ __('Step 3') }}
                                 </label>
                                 <label class="radio radio-success">
-                                    <input type="radio" name="radios5" />
+                                    <input type="radio" name="step" {{ (session('step') == 4 ) ? 'checked' : ''}} value="4" />
                                     <span></span>
                                     {{ __('Step 4') }}
                                 </label>
@@ -62,12 +62,12 @@
                         <div class="col-9 col-form-label">
                             <div class="checkbox-inline">
                                 <label class="checkbox checkbox-success">
-                                    <input type="checkbox" name="Checkboxes5"/>
+                                    <input type="checkbox" name="received" {{ (session('received')) ? 'checked' : '' }}/>
                                     <span></span>
                                     {{ __('NDA received') }}
                                 </label>
                                 <label class="checkbox checkbox-success">
-                                    <input type="checkbox" name="Checkboxes5"/>
+                                    <input type="checkbox" name="valid" {{ (session('valid')) ? 'checked' : '' }}/>
                                     <span></span>
                                     {{ __('NDA validated by Arianespace') }}
                                 </label>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-light-danger" href="{{ route('reset_search') }}"> {{ __('Reset search') }}</a>
+                        <a class="btn btn-light-danger" href="{{ route('reset_project') }}"> {{ __('Reset search') }}</a>
                         <input type="submit" class="btn btn-light-primary font-weight-bold" value="{{ __('Search') }}">
                     </div>
                 </form>
@@ -94,14 +94,19 @@
                         @if($projects)
                             @foreach($projects as $project)
                                 <tr>
-                                    <td>{{ $project->company }}</td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="form-label">{{ $project->customer->company }}</label><br>
+                                            <label class="form-label">{{ $project->customer->name }}</label>
+                                        </div>
+                                    </td>
                                     <td>{{$project->received ? __('NDA received') : ''}} {{($project->received && $project->valid) ? '/' : ''}} {{$project->valid ? __('NDA validated') : ''}}</td>
                                     <td>{{ $project->name }}</td>
-                                    <td></td>
+                                    <td>[{{date ("d/m/Y", strtotime($project->created_at))}}]</td>
                                     <td class="datatable-cell">
                                         <span style="overflow: visible; position: relative;">
                                             <a class="btn btn-sm btn-light-primary btn-icon mr-2" href="{{ route('project.edit',['project' => $project->id]) }}"> <i class="fa fa-pen"></i> </a>
-                                            <a class="btn btn-sm btn-light-primary btn-icon mr-2" href="{{ route('project/document') }}"> <i class="icon-xl far fa-file-alt"></i> </a>
+                                            <a class="btn btn-sm btn-light-primary btn-icon mr-2" href="{{ route('document',['project_id' => $project->id]) }}"> <i class="icon-xl far fa-file-alt"></i> </a>
                                             <a class="btn btn-sm btn-light-danger btn-icon" data-toggle="modal" data-target="#modal{{$project->id}}" data-href="{{ route('project.destroy',['project' => $project->id]) }}"> <i class="fa fa-trash"></i> </a>
                                             <div class="modal fade" id="modal{{$customer->id}}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">

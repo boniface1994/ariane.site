@@ -4,7 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Admin\Customers\Customer;
+use App\Models\Customers\Customer;
 use App\Models\Admin\Project\Document;
 
 class Project extends Model

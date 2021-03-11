@@ -34,11 +34,15 @@ Route::group(['middleware' => 'admin'], function(){
 
     Route::resource('customer','Customers\CustomerController');
     Route::post('customer/search','Customers\CustomerController@search')->name('customer_search');
-    Route::get('reset_search','Customers\CustomerController@resetSearch')->name('reset_search');
-    Route::group(['prefix' =>'project','namespace' => 'Project'],function(){
-        Route::get('/document','DocumentController@index')->name('document');
-        Route::resource('/','ProjectController');
-    });    
+    Route::get('customer/reset-search','Customers\CustomerController@resetSearch')->name('reset_search');
+     
+    Route::resource('project','Project\ProjectController'); 
+    Route::post('project/search','Project\ProjectController@projectSearch')->name('project_search');
+    Route::get('project/reset-search','Project\ProjectController@resetSearch')->name('reset_project');
+    Route::get('project/document/{project_id}','Project\DocumentController@index')->name('document');
+    Route::post('project/document/add','Project\DocumentController@store')->name('document_create');
+    Route::get('project/document/delete/{document_id}','Project\DocumentController@destroy')->name('document.destroy');
+
     Route::resource('parameter','GeneralParameterController');
     Route::get('download/{name}','GeneralParameterController@downloadPdf')->name('download');
     Route::resource('request','ContactRequestController');
