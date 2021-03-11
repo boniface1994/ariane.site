@@ -10,7 +10,6 @@
                 <div class="card-title">
                     <label >{{ __('Projects list') }}</label>
                 </div>
-                <div><a >Document</a></div>
             </div>
             <div class="card-body">
                 <form  class="form" data-url="" action="{{ route('project_search') }}" method="POST">
