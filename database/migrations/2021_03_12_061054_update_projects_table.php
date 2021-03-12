@@ -14,7 +14,9 @@ class UpdateProjectsTable extends Migration
     public function up()
     {
         Schema::table('projects',function(Blueprint $table){
-            $table->string('local_time')->nullable();
+            $table->string('local_minute')->nullable();
+            $table->string('local_seconde')->nullable();
+            $table->integer('step')->nullable();
             $table->boolean('ltan');
             $table->boolean('ltdn');
             $table->text('constraint')->nullable();

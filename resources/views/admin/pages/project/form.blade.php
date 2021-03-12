@@ -49,28 +49,18 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-9 col-form-label">
-                        <div class="checkbox-inline">
-                            <label class="checkbox checkbox-success">
-                                <input type="checkbox" name="step_1" {{ $project->step_1 ? 'checked' : '' }}/>
-                                <span></span>
-                                {{ __('Step 1') }}
-                            </label>
-                            <label class="checkbox checkbox-success">
-                                <input type="checkbox" name="step_2" {{ $project->step_2 ? 'checked' : '' }}/>
-                                <span></span>
-                                {{ __('Step 2') }}
-                            </label>
-                            <label class="checkbox checkbox-success">
-                                <input type="checkbox" name="step_3" {{ $project->step_3 ? 'checked' : '' }}/>
-                                <span></span>
-                                {{ __('Step 3') }}
-                            </label>
-                            <label class="checkbox checkbox-success">
-                                <input type="checkbox" name="step_4" {{ $project->step_4 ? 'checked' : '' }}/>
-                                <span></span>
-                                {{ __('Step 4') }}
-                            </label>
-                        </div>
+                        <label>{{ __('Step') }}</label>
+                        <select class="form-control selectpicker" name="step">
+                        <option >{{ __('Choose steps') }}</option>
+                        <option {{ ($project->step == 1) ? 'selected' : '' }}>{{ __('Welcom package') }}</option>
+                        <option value="2" {{ ($project->step == 2) ? 'selected' : '' }}> {{ __('Get your contact') }}</option>
+                        <optgroup label="{{ __('Fasability analitics') }}">
+                            <option {{ ($project->step == 31) ? 'selected' : '' }}>{{ __('You provide additional information on your Satellite, including a model') }}</option>
+                            <option value="32" {{ ($project->step == 32) ? 'selected' : '' }}>{{ __('We perform accommodation studies and flight loads predictions') }}</option>
+                            <option value="33" {{ ($project->step == 33) ? 'selected' : '' }}>{{ __('We assess together your flight qualification logic') }}</option>
+                        </optgroup>
+                        <option value="4" {{ ($project->step == 4) ? 'selected' : '' }}>{{ __('Qualifications status') }}</option>
+                    </select>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -81,7 +71,7 @@
                     <select class="form-control">
                         <option>{{ __('Choose one orbit type') }}</option>
                         @foreach($orbitTypes as $orbit)
-                            <option>{{ $orbit->name }}</option>
+                            <option {{ ($orbit->id == $project->orbit_type_id) ? 'selected' : '' }}>{{ $orbit->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -115,16 +105,20 @@
                     <label class="col-form-label mr-3 mt-2">{{ __('Local time') }}</label>
                     <div class="col-9 col-form-label d-flex flex-wrap row">
                         <div class="col-lg-3 col-md-9 col-sm-12 mr-6 row">
-                            <input type="time" class="local_time form-control form-control-solid" name="local_time" value="" />
+                            @php 
+                                $local_time = null;
+                                $local_time = sprintf( "%02d", $project['local_minute']).':'.sprintf( "%02d", $project['local_seconde']); 
+                            @endphp
+                            <input type="time" class="local_time form-control form-control-solid" name="local_time" value="{{ $local_time }}" />
                         </div>
                         <div class="checkbox-inline">
                             <label class="checkbox checkbox-success">
-                                <input class="local_time_type ltan" type="checkbox" name="time" />
+                                <input class="local_time_type ltan" type="checkbox" name="time" {{ ($project->ltan) ? 'checked' : '' }}/>
                                 <span></span>
                                 {{ __('LTAN') }}
                             </label>
                             <label class="checkbox checkbox-success">
-                                <input class="local_time_type ltdn" type="checkbox" name="time" />
+                                <input class="local_time_type ltdn" type="checkbox" name="time" {{ ($project->ltdn) ? 'checked' : '' }}/>
                                 <span></span>
                                 {{ __('LTDN') }}
                             </label>
@@ -141,7 +135,7 @@
                     <select class="form-control">
                         <option>{{ __('Choose SC Interface') }}</option>
                         @foreach($scInterfaces as $scint)
-                            <option>{{ $scint->name }}</option>
+                            <option {{ ($scint->id == $project->sc_interface_id) ? 'selected' : '' }}>{{ $scint->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -149,7 +143,7 @@
                     <select class="form-control">
                         <option>{{ __('Choose type of supplier') }}</option>
                         @foreach($supplierTypes as $supplier)
-                            <option>{{ $supplier->name }}</option>
+                            <option {{ ($supplier->id == $project->supplier_type_id) ? 'selected' : '' }}>{{ $supplier->name }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -61,7 +61,11 @@
                                     <td>{{ $customer->company }}</td>
                                     <td></td>
                                     <td>{{ $customer->name }}</td>
-                                    <td></td>
+                                    <td>
+                                        @foreach($customer->projects as $project)
+                                            <label>{{ $project->name }}</label><br>
+                                        @endforeach
+                                    </td>
                                     <td class="datatable-cell">
                                         <span style="overflow: visible; position: relative;">
                                             <a class="btn btn-sm btn-light-primary btn-icon mr-2" href="{{ route('customer.edit',['customer' => $customer->id]) }}"> <i class="fa fa-pen"></i> </a>

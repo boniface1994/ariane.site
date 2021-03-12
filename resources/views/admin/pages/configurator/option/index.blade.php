@@ -48,7 +48,7 @@
                             <h5 class="mb-4">{{ __('Condition of option availability') }}</h5>
                             <div class="checkbox-inline">
                                 <label class="checkbox checkbox-success">
-                                    <input class="type" type="checkbox" name="type" @if($option['cubesat']) checked @endif>
+                                    <input class="type" type="checkbox" name="type" @if($option['cubsat']) checked @endif>
                                     <span></span>{{ __('Si Cubesat') }}
                                 </label>
                                 <label class="checkbox checkbox-success">
@@ -69,7 +69,10 @@
                                         <span></span>
                                         {{ __('Fixed cost') }}
                                     </label>
-                                    <input type="text" class="form-control mr-2" name="cost" value="{{ $option['cost'] ? $option['cost'] : '' }}"><h1 class="col-form-label">€</h1>
+                                    <input type="text" class="form-control col-md-2 cost" name="cost" value="{{ $option['cost'] ? $option['cost'] : '' }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button">€</button>
+                                    </div>
                                 </div>
                             </div><br>
                             <label class="checkbox checkbox-success">
@@ -145,7 +148,10 @@
                                         <span></span>
                                         {{ __('Fixed cost') }}
                                     </label>
-                                    <input type="text" class="form-control col-md-2 mr-2 cost" name="cost" value=""><h1 class="col-form-label">€</h1>
+                                    <input type="text" class="form-control col-md-2 cost" name="cost" value="">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button">€</button>
+                                    </div>
                                 </div>
                             </div><br>
                             <label class="checkbox checkbox-success">
@@ -253,7 +259,7 @@
             var dashboard_available = form.find('.dashboard_available').is(':checked') ? 1 : 0;
             var type = [];
             form.find('.type').each(function(i, el){
-                type[i] = $(el).is(':checked') ? 1 : null;
+                type[i] = $(el).is(':checked') ? 1 : 0;
             });
             
             var weight_dependent = null;

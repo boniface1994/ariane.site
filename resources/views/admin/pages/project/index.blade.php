@@ -19,42 +19,27 @@
                         <div class="input-group col-lg-4">
                             <label class="col-form-label mr-2">{{ __('Customer') }}</label>
                             <select class="form-control" name="customer">
-                                <option>{{ __('Choose one customer') }}</option>
+                                <option>{{ __('Choose customers') }}</option>
                                 @foreach($customers as $customer)
                                     <option value="{{$customer->id}}" {{ (session('customer') == $customer->id) ? 'selected' : '' }}>{{$customer->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row row ml-14">
-                        <div class="col-9 col-form-label">
-                            <div class="radio-inline">
-                                <label class="radio radio-success">
-                                    <input type="radio" name="step" {{ (session('step') == 5 ) ? 'checked' : ''}} value="5" />
-                                    <span></span>
-                                    {{ __('All') }}
-                                </label>
-                                <label class="radio radio-success">
-                                    <input type="radio" name="step" {{ (session('step') == 1 ) ? 'checked' : ''}} value="1" />
-                                    <span></span>
-                                    {{ __('Step 1') }}
-                                </label>
-                                <label class="radio radio-success">
-                                    <input type="radio" name="step" {{ (session('step') == 2 ) ? 'checked' : ''}} value="2" />
-                                    <span></span>
-                                    {{ __('Step 2') }}
-                                </label>
-                                <label class="radio radio-success">
-                                    <input type="radio" name="step" {{ (session('step') == 3 ) ? 'checked' : ''}} value="3" />
-                                    <span></span>
-                                    {{ __('Step 3') }}
-                                </label>
-                                <label class="radio radio-success">
-                                    <input type="radio" name="step" {{ (session('step') == 4 ) ? 'checked' : ''}} value="4" />
-                                    <span></span>
-                                    {{ __('Step 4') }}
-                                </label>
-                            </div>
+                    <div class="form-group row ml-14">
+                        <div class="input-group col-lg-4">
+                            <label class="col-form-label mr-2">{{ __('Step') }}</label>
+                            <select class="form-control selectpicker" name="step">
+                                <option value="5">{{ __('Choose steps') }}</option>
+                                <option value="1" {{ (session('step') == 1) ? 'selected' : '' }}>{{ __('Welcom package') }}</option>
+                                <option value="2" {{ (session('step') == 2) ? 'selected' : '' }}> {{ __('Get your contact') }}</option>
+                                <optgroup label="{{ __('Fasability analitics') }}">
+                                    <option value="31" {{ (session('step') == 31) ? 'selected' : '' }}>{{ __('You provide additional information on your Satellite, including a model') }}</option>
+                                    <option value="32" {{ (session('step') == 32) ? 'selected' : '' }}>{{ __('We perform accommodation studies and flight loads predictions') }}</option>
+                                    <option value="33" {{ (session('step') == 33) ? 'selected' : '' }}>{{ __('We assess together your flight qualification logic') }}</option>
+                                </optgroup>
+                                <option value="4" {{ (session('step') == 4) ? 'selected' : '' }}>{{ __('Qualifications status') }}</option>
+                            </select>
                         </div>
                     </div>
                     <div class=" form-group row row ml-14">

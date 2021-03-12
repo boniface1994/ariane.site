@@ -26,41 +26,42 @@ class ProjectController extends Controller
                 [function($query){
                     switch (session('step')) {
                         case 1:
-                            $query->orWhere('step_1','=',1)->get();
+                            $query->where('step','=',1)->get();
                             break;
                         
                         case 2:
-                            $query->orWhere('step_2','=',1)->get();
+                            $query->where('step','=',2)->get();
                             break;
 
-                        case 3:
-                            $query->orWhere('step_3','=',1)->get();
+                        case 31:
+                            $query->where('step','=',31)->get();
+                            break;
+
+                        case 32:
+                            $query->where('step','=',32)->get();
+                            break;
+
+                        case 33:
+                            $query->where('step','=',33)->get();
                             break;
 
                         case 4:
-                            $query->orWhere('step_4','=',1)->get();
-                            break;
-                        
-                        case 5:
-                            $query->orWhere('step_1','=',1)->get();
-                            $query->orWhere('step_2','=',1)->get();
-                            $query->orWhere('step_3','=',1)->get();
-                            $query->orWhere('step_4','=',1)->get();
+                            $query->where('step','=',4)->get();
                             break;
                     }
                     if(($received = session('received'))){
-                        $query->orWhere('received','=',1)->get();
+                        $query->where('received','=',1)->get();
                     }
                     if(($valid = session('valid'))){
-                        $query->orWhere('valid','=',1)->get();
+                        $query->where('valid','=',1)->get();
                     }
                     if(($customer = session('customer'))){
-                        $query->orWhere('customer_id','=',$customer)->get();
+                        $query->where('customer_id','=',$customer)->get();
                     }
                 }]
-            ])->paginate(10);
+            ])->orderBy('name')->paginate(10);
         }else{
-            $projects = Project::paginate();
+            $projects = Project::orderBy('name')->paginate(10);
         }
         return view('admin.pages.project.index',compact('projects','customers'));
     }
@@ -153,50 +154,52 @@ class ProjectController extends Controller
             [function($query) use ($request){
                 switch ($request->step) {
                     case 1:
-                        $query->orWhere('step_1','=',1)->get();
+                        $query->where('step','=',1)->get();
                         break;
                     
                     case 2:
-                        $query->orWhere('step_2','=',1)->get();
+                        $query->where('step','=',2)->get();
                         break;
 
-                    case 3:
-                        $query->orWhere('step_3','=',1)->get();
+                    case 31:
+                        $query->where('step','=',31)->get();
+                        break;
+
+                    case 32:
+                        $query->where('step','=',32)->get();
+                        break;
+
+                    case 33:
+                        $query->where('step','=',33)->get();
                         break;
 
                     case 4:
-                        $query->orWhere('step_4','=',1)->get();
+                        $query->where('step','=',4)->get();
                         break;
                     
-                    case 5:
-                        $query->orWhere('step_1','=',1)->get();
-                        $query->orWhere('step_2','=',1)->get();
-                        $query->orWhere('step_3','=',1)->get();
-                        $query->orWhere('step_4','=',1)->get();
-                        break;
                 }
                 if(($received = $request->received)){
-                    $query->orWhere('received','=',1)->get();
+                    $query->where('received','=',1)->get();
                 }
                 if(($valid = $request->valid)){
-                    $query->orWhere('valid','=',1)->get();
+                    $query->where('valid','=',1)->get();
                 }
                 if(($customer = $request->customer)){
-                    $query->orWhere('customer_id','=',$customer)->get();
+                    $query->where('customer_id','=',$customer)->get();
                 }
             }]
-        ])->paginate(10);
+        ])->orderBy('name')->paginate(10);
         $customers = Customer::all();
 
         return view('admin.pages.project.index',compact('projects','customers'));
     }
 
-    public function resetSearch(){
+    public function reset(){
+        var_dump('expression');die();
         \Session::forget('step');
         \Session::forget('customer');
         \Session::forget('valid');
         \Session::forget('received');
-        var_dump('expression');
         return redirect('admin/project');
     }
 }
