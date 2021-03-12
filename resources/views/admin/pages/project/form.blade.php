@@ -71,7 +71,7 @@
                     <select class="form-control">
                         <option>{{ __('Choose one orbit type') }}</option>
                         @foreach($orbitTypes as $orbit)
-                            <option>{{ $orbit->name }}</option>
+                            <option {{ ($orbit->id == $project->orbit_type_id) ? 'selected' : '' }}>{{ $orbit->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -105,7 +105,11 @@
                     <label class="col-form-label mr-3 mt-2">{{ __('Local time') }}</label>
                     <div class="col-9 col-form-label d-flex flex-wrap row">
                         <div class="col-lg-3 col-md-9 col-sm-12 mr-6 row">
-                            <input type="time" class="local_time form-control form-control-solid" name="local_time" value="" />
+                            @php 
+                                $local_time = null;
+                                $local_time = sprintf( "%02d", $project['local_minute']).':'.sprintf( "%02d", $project['local_seconde']); 
+                            @endphp
+                            <input type="time" class="local_time form-control form-control-solid" name="local_time" value="{{ $local_time }}" />
                         </div>
                         <div class="checkbox-inline">
                             <label class="checkbox checkbox-success">
