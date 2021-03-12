@@ -79,8 +79,10 @@
                 <div class="form-group row">
                     <h3 class="form-label">{{ __('Obtite type') }} <span class="text-danger">*</span></h3>
                     <select class="form-control">
-                        <option>Orb 1</option>
-                        <option>Orb 2</option>
+                        <option>{{ __('Choose one orbit type') }}</option>
+                        @foreach($orbitTypes as $orbit)
+                            <option>{{ $orbit->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group row">
@@ -138,13 +140,17 @@
                     <h3 class="form-label">{{ __('SC Interfaces') }} <span class="text-danger">*</span></h3>
                     <select class="form-control">
                         <option>{{ __('Choose SC Interface') }}</option>
-                        <option>Orb 2</option>
+                        @foreach($scInterfaces as $scint)
+                            <option>{{ $scint->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group row">
                     <select class="form-control">
                         <option>{{ __('Choose type of supplier') }}</option>
-                        <option>Orb 2</option>
+                        @foreach($supplierTypes as $supplier)
+                            <option>{{ $supplier->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

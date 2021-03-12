@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Project;
 use App\Models\Customers\Customer;
+use App\Models\Configurator\ScInterface;
+use App\Models\Configurator\OrbitType;
+use App\Models\Configurator\PropellantType;
+use App\Models\Configurator\SupplierType;
 
 class ProjectController extends Controller
 {
@@ -102,7 +106,11 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
-        return view('admin.pages.project.form',compact('project'));
+        $scInterfaces = ScInterface::all();
+        $orbitTypes = OrbitType::all();
+        $supplierTypes = SupplierType::all();
+        $propellantTypes = PropellantType::all();
+        return view('admin.pages.project.form',compact('project','scInterfaces','orbitTypes','supplierTypes','propellantTypes'));
     }
 
     /**
