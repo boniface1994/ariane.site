@@ -26,27 +26,27 @@ class ProjectController extends Controller
                 [function($query){
                     switch (session('step')) {
                         case 1:
-                            $query->where('step_1','=',1)->get();
+                            $query->where('step','=',1)->get();
                             break;
                         
                         case 2:
-                            $query->where('step_2','=',1)->get();
+                            $query->where('step','=',2)->get();
                             break;
 
                         case 31:
-                            $query->where('step_3','=',1)->get();
+                            $query->where('step','=',31)->get();
                             break;
 
                         case 32:
-                            $query->where('step_3','=',1)->get();
+                            $query->where('step','=',32)->get();
                             break;
 
                         case 33:
-                            $query->where('step_3','=',1)->get();
+                            $query->where('step','=',33)->get();
                             break;
 
                         case 4:
-                            $query->where('step_4','=',1)->get();
+                            $query->where('step','=',4)->get();
                             break;
                     }
                     if(($received = session('received'))){
@@ -154,27 +154,27 @@ class ProjectController extends Controller
             [function($query) use ($request){
                 switch ($request->step) {
                     case 1:
-                        $query->where('step_1','=',1)->get();
+                        $query->where('step','=',1)->get();
                         break;
                     
                     case 2:
-                        $query->where('step_2','=',1)->get();
+                        $query->where('step','=',2)->get();
                         break;
 
                     case 31:
-                        $query->where('step_3','=',1)->get();
+                        $query->where('step','=',31)->get();
                         break;
 
                     case 32:
-                        $query->where('step_3','=',1)->get();
+                        $query->where('step','=',32)->get();
                         break;
 
                     case 33:
-                        $query->where('step_3','=',1)->get();
+                        $query->where('step','=',33)->get();
                         break;
 
                     case 4:
-                        $query->where('step_4','=',1)->get();
+                        $query->where('step','=',4)->get();
                         break;
                     
                 }
