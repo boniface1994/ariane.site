@@ -26,9 +26,9 @@ class CustomerController extends Controller
                         $query->orWhere('company','like','%'.$company)->get();
                     }
                 }]
-            ])->paginate(10);
+            ])->orderBy('company')->paginate(10);
         }else{
-            $customers = Customer::paginate(10);
+            $customers = Customer::orderBy('company')->paginate(10);
         }
         return view('admin.pages.customers.index',compact('customers'));
     }
@@ -158,13 +158,13 @@ class CustomerController extends Controller
         $customers = Customer::where([
             [function($query) use ($request){
                 if(($name = $request->name)){
-                    $query->orWhere('name','like','%'.$name)->get();
+                    $query->where('name','like','%'.$name)->get();
                 }
                 if(($company = $request->company)){
-                    $query->orWhere('company','like','%'.$company)->get();
+                    $query->where('company','like','%'.$company)->get();
                 }
             }]
-        ])->paginate(10);
+        ])->orderBy('company')->paginate(10);
 
         return view('admin.pages.customers.index',compact('customers'));
     }

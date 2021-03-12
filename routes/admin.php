@@ -38,8 +38,8 @@ Route::group(['middleware' => 'admin'], function(){
      
     Route::resource('project','Project\ProjectController'); 
     Route::post('project/search','Project\ProjectController@projectSearch')->name('project_search');
-    Route::get('project/reset-search','Project\ProjectController@resetSearch')->name('reset_project');
     Route::get('project/document/{project_id}','Project\DocumentController@index')->name('document');
+    Route::post('project/resetsearch','Project\ProjectController@reset')->name('reset_project');
     Route::post('project/document/add','Project\DocumentController@store')->name('document_create');
     Route::get('project/document/delete/{document_id}','Project\DocumentController@destroy')->name('document.destroy');
 

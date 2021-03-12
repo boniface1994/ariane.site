@@ -4,7 +4,7 @@ namespace App\Models\Customers;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Admin\Project\Project;
+use App\Models\Admin\Project;
 
 class Customer extends Model
 {
