@@ -42,12 +42,13 @@ class QuarterAvailableController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'year' => 'required',
-            'quarter' => 'required'
+            'quarter' => 'required', 
+            'month' => 'required'
         ]);
         if ($validator->passes()) {
             $input['year'] = $request->year;
             $input['month'] = $request->month;
-            $input['quarter_id'] = $request->quarter;
+            $input['quart'] = $request->quarter;
             $input['user_id'] = \Auth::user()->id;
             $quarterAvailable = QuarterAvailable::create($input);
 
@@ -98,7 +99,7 @@ class QuarterAvailableController extends Controller
             $quarterAvailable->year = $request->year;
             $quarterAvailable->month = $request->month;
             $quarterAvailable->user_id = \Auth::user()->id;
-            $quarterAvailable->quarter_id = $request->quarter;
+            $quarterAvailable->quart = $request->quarter;
             $quarterAvailable->save();
             return response()->json($quarterAvailable);
         }

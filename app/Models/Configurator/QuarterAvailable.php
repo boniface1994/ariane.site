@@ -12,7 +12,7 @@ class QuarterAvailable extends Model
 
     protected $table = "quarter_availables";
     protected $fillable = [
-        'month','trimester','year','user_id','quarter_id'
+        'month','trimester','year','user_id','quarter_id','quart'
     ];
     public function user(){
         return $this->hasOne(User::class,'id','user_id');

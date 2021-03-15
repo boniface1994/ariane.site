@@ -21,10 +21,6 @@ class CreateQuarterDispoTable extends Migration
                   ->unsigned()
                   ->nullable()
                   ->onDelete('cascade');
-            $table->foreignId('quarter_id')->references('id')->on('quarters')
-                  ->unsigned()
-                  ->nullable()
-                  ->onDelete('cascade');
             $table->timestamps();
         });
     }
