@@ -18,6 +18,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::post('/technical/position','TechnicalMaturityController@updatePosition')->name('technical.position');
         Route::resource('/pricelist','PriceListController');
         Route::resource('/orbittype','OrbitTypeController');
+        Route::post('/orbittype/removeparameter','OrbitTypeController@removeParameter')->name('orbittype.removeparameter');
         Route::post('/orbittype/position','OrbitTypeController@updatePosition')->name('orbittype.position');
         Route::resource('/satelliteposition','SatellitePositionController');
         Route::resource('/option','OptionController');

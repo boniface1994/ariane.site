@@ -13,7 +13,7 @@
     </button> 
 
     <div class="row">
-        <form data-repeater-list="group-a" class="col-lg-12 d-flex flex-wrap draggable-zone" id="form-orbittype" data-action-store="{{route('orbittype.store')}}">
+        <form data-repeater-list="group-a" class="col-lg-12 d-flex flex-wrap draggable-zone" id="form-orbittype" data-action-store="{{route('orbittype.store')}}" data-action-parameter-remove="{{route('orbittype.removeparameter')}}">
             @csrf
 
             @foreach($orbittypes as $orbittype)
@@ -73,13 +73,14 @@
                         </div>
                     </div>
 
-                    @foreach($orbittype['parameters'] as $option)
-                        @php $option_altitude = null; @endphp
-                        @php $option_inclination = null; @endphp
+                    @php $option_altitude = null; @endphp
+                    @php $option_inclination = null; @endphp
 
-                        @if($option['type'] == 'altitude') @php $option_altitude = $option; @endphp 
-                        @elseif($option['type'] == 'inclination') @php $option_inclination = $option; @endphp 
-                        @endif 
+                    @foreach($orbittype['parameters'] as $option)
+
+                        @if($option['type'] == "altitude") @php $option_altitude = $option; @endphp @endif
+                        @if($option['type'] == "inclination") @php $option_inclination = $option; @endphp @endif 
+
                     @endforeach
 
                     <div class="form-group">
@@ -88,7 +89,7 @@
                                 <label class="option bg-success-o-20">
                                     <div class="option-control">
                                         <div class="checkbox checkbox-outline checkbox-success">
-                                            <input class="parameter_type" type="checkbox" name="parameter_type" value="altitude" @if(isset($option_altitude)) checked @endif/>
+                                            <input class="parameter_type" type="checkbox" name="parameter_type_altitude" value="altitude" @if(isset($option_altitude)) checked @endif/>
                                             <span></span>
                                         </div>
                                     </div>
@@ -103,19 +104,19 @@
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Start value') }} <span class="text-danger">*</span> </label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="start form-control" placeholder="Start" name="start['altitude']" @if(isset($option_altitude)) value="{{ $option_altitude['start'] }}" @endif />
+                                                    <input type="text" class="start form-control" placeholder="Start" name="start['altitude']" @if(isset($option_altitude)) value="{{ $option_altitude['start'] }}" @else disabled @endif />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('End value') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="end form-control" placeholder="End" name="end['altitude']" @if(isset($option_altitude)) value="{{ $option_altitude['end'] }}" @endif />
+                                                    <input type="text" class="end form-control" placeholder="End" name="end['altitude']" @if(isset($option_altitude)) value="{{ $option_altitude['end'] }}" @else disabled @endif />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Jump') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="jump form-control" placeholder="Jump" name="jump['altitude']" @if(isset($option_altitude)) value="{{ $option_altitude['jump'] }}" @endif />
+                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['altitude']" @if(isset($option_altitude)) value="{{ $option_altitude['jump'] }}" @else disabled @endif />
                                                 </div>
                                             </div>
                                         </div>
@@ -141,19 +142,19 @@
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Start value') }} <span class="text-danger">*</span> </label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="start form-control" placeholder="Start" name="start['inclination']" @if(isset($option_inclination)) value="{{ $option_inclination['start'] }}" @endif />
+                                                    <input type="text" class="start form-control" placeholder="Start" name="start['inclination']" @if(isset($option_inclination)) value="{{ $option_inclination['start'] }}" @else disabled @endif />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('End value') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="end form-control" placeholder="End" name="end['inclination']" @if(isset($option_inclination)) value="{{ $option_inclination['end'] }}" @endif />
+                                                    <input type="text" class="end form-control" placeholder="End" name="end['inclination']" @if(isset($option_inclination)) value="{{ $option_inclination['end'] }}" @else disabled @endif />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Jump') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="number" class="jump form-control" placeholder="Jump" name="jump['inclination']" @if(isset($option_inclination)) value="{{ $option_inclination['jump'] }}" @endif />
+                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['inclination']" @if(isset($option_inclination)) value="{{ $option_inclination['jump'] }}" @else disabled @endif />
                                                 </div>
                                             </div>
                                         </div>
@@ -248,19 +249,19 @@
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Start value') }} <span class="text-danger">*</span> </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="start form-control" placeholder="Start" name="start['altitude']" />
+                                                    <input type="text" class="start form-control" placeholder="Start" name="start['altitude']" disabled />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('End value') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="end form-control" placeholder="End" name="end['altitude']" />
+                                                    <input type="text" class="end form-control" placeholder="End" name="end['altitude']" disabled />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Jump') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['altitude']" />
+                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['altitude']" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -286,19 +287,19 @@
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Start value') }} <span class="text-danger">*</span> </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="start form-control" placeholder="Start" name="start['inclination']" />
+                                                    <input type="text" class="start form-control" placeholder="Start" name="start['inclination']" disabled />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('End value') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="end form-control" placeholder="End" name="end['inclination']" />
+                                                    <input type="text" class="end form-control" placeholder="End" name="end['inclination']" disabled />
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4 row">
                                                 <label class="col-lg-4 col-form-label text-right">{{ __('Jump') }} <span class="text-danger">*</span></label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['inclination']" />
+                                                    <input type="text" class="jump form-control" placeholder="Jump" name="jump['inclination']" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -512,6 +513,29 @@
                 }
             })
         })
+
+        $('#repeater').on('change', '.parameter_type', function() {
+            let parameter_option = $(this).closest( '.parameter-option');
+
+            if($(this).prop( 'checked')) {
+                parameter_option.find('input[type="text"]').val('').prop( 'disabled', false );
+            }
+            else {
+                let id = parameter_option.find('.option_index').val();
+                let url = $('#form-orbittype').data('action-parameter-remove');
+
+                //delete parameter
+                $.ajax({
+                    url: url,
+                    data: {'_token': '{{ csrf_token() }}', 'id': id},
+                    type: 'POST',
+                    success: function (response) {
+                        if(response.success) parameter_option.find('input[type="text"]').val('').prop( 'disabled', true );
+                    }
+                })
+            }
+        })
+
     });
 
     var KTCardDraggable = function () {

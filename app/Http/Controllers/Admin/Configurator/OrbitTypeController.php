@@ -18,6 +18,7 @@ class OrbitTypeController extends Controller
     public function index()
     {
         $orbittypes = OrbitType::with('parameters')->orderBy('position')->get();
+        //dd($orbittypes);
         return view('admin.pages.configurator.orbittype.index', compact('orbittypes'));
     }
 
@@ -175,5 +176,14 @@ class OrbitTypeController extends Controller
                 'success' => true
             ]
         );
+    }
+
+    public function removeParameter(Request $request)
+    {
+        OrbitTypeParameter::destroy($request->id);
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 }
