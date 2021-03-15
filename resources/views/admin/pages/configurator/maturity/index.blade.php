@@ -118,7 +118,9 @@
                 if($('#btn-maturity-add').hasClass('d-none')) $('#btn-maturity-add').removeClass('d-none');
             },
             hide: function () {
-                $(this).slideUp();
+                $(this).slideUp("normal", function() {
+                    $(this).remove();
+                });
                 if($('.maturity-draggable-item').length == 1) 
                         $('#btn-maturity-add').addClass('d-none');
             },

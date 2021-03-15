@@ -16,11 +16,11 @@ class CreateOrbitTypes extends Migration
         Schema::create('orbit_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('explication')->nullable();
-            $table->boolean('orbit_leo');
-            $table->boolean('orbit_sso');
-            $table->boolean('tarif_leo');
-            $table->boolean('tarif_gto');
+            $table->text('explication');
+            $table->boolean('orbit_leo')->nullable();
+            $table->boolean('orbit_sso')->nullable();
+            $table->boolean('tarif_leo')->nullable();
+            $table->boolean('tarif_gto')->nullable();
             $table->integer('position');
             $table->timestamps();
         });
@@ -47,6 +47,7 @@ class CreateOrbitTypes extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('orbit_type_parameter');
         Schema::dropIfExists('orbit_types');
     }
 }

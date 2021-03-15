@@ -161,7 +161,9 @@
                 $(this).slideDown();
             },
             hide: function () {
-                $(this).slideUp();
+                $(this).slideUp("normal", function() {
+                    $(this).remove();
+                });
             },
             ready: function (setIndexes) {
                 var id = randstr('card_');
