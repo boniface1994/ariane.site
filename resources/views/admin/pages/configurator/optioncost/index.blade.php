@@ -69,7 +69,7 @@
                         
                     </div>
                     <div class="card-toolbar">
-                        <a data-repeater-delete class="confirm-remove-option-cost btn btn-outline-danger font-weight-bold mr-2">
+                        <a data-repeater-delete class="confirm-remove-option-cost btn btn-outline-danger font-weight-bold mr-2" data-action-remove="">
                             <i class="la la-trash-o"></i> {{ __('Delete') }}
                         </a>
                     </div>

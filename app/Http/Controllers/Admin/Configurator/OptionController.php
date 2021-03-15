@@ -67,7 +67,7 @@ class OptionController extends Controller
                     'success' => true,
                     'id' => $object->id,
                     'name' => $request->name,
-                    'delete_url' => route('scinterface.destroy', $object->id)
+                    'delete_url' => route('option.destroy', $object->id)
                 ]
             );
         }
