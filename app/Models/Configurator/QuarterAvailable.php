@@ -18,7 +18,4 @@ class QuarterAvailable extends Model
         return $this->hasOne(User::class,'id','user_id');
     }
 
-    public function quarter(){
-        return $this->hasOne(Quarter::class,'id','quarter_id');
-    }
 }

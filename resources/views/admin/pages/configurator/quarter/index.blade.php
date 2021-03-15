@@ -34,10 +34,10 @@
                             <div class="dropdown bootstrap-select form-control dropup">
                                 <select class="form-control selectpicker" tabindex="null" name="quarter">
                                     <option value="">{{  __('Choose one quarter') }}</option>
-                                    <option value="q1" {{ ($quarterAvailable->quart == 'q1') ? 'selected' : '' }}>Q1</option>
-                                    <option value="q2" {{ ($quarterAvailable->quart == 'q2') ? 'selected' : '' }}>Q2</option>
-                                    <option value="q3" {{ ($quarterAvailable->quart == 'q3') ? 'selected' : '' }}>Q3</option>
-                                    <option value="q4" {{ ($quarterAvailable->quart == 'q4') ? 'selected' : '' }}>Q4</option>
+                                    <option value="q1" {{ (isset($quarterAvailable->quart) && $quarterAvailable->quart == 'q1') ? 'selected' : '' }}>Q1</option>
+                                    <option value="q2" {{ (isset($quarterAvailable->quart) && $quarterAvailable->quart == 'q2') ? 'selected' : '' }}>Q2</option>
+                                    <option value="q3" {{ (isset($quarterAvailable->quart) && $quarterAvailable->quart == 'q3') ? 'selected' : '' }}>Q3</option>
+                                    <option value="q4" {{ (isset($quarterAvailable->quart) && $quarterAvailable->quart == 'q4') ? 'selected' : '' }}>Q4</option>
                                     <!-- @if($quarters)
                                         @foreach($quarters as $quarter)
                                             <option value="{{$quarter->id}}" {{ ($quarterAvailable && $quarterAvailable->quarter_id == $quarter->id) ? 'selected' : '' }}>{{$quarter->name}}</option>
