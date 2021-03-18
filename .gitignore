@@ -15,3 +15,5 @@ yarn-error.log
 /mysql
 access.log
 error.log
+.devcontainer
+.docker-ariane
