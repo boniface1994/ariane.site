@@ -189,7 +189,9 @@
                 $(this).slideDown();
             },
             hide: function () {
-                $(this).slideUp();
+                $(this).slideUp("normal", function() {
+                    $(this).remove();
+                });
             },
             ready: function (setIndexes) {
                 var id = randstr('card_');
@@ -211,7 +213,7 @@
             var explication = form.find('.explication').val();
             var type = [];
             form.find('.type').each(function(i, el){
-                type[i] = $(el).is(':checked') ? 1 : 0;
+                type[i] = $(el).is(':checked') ? 1 : null;
             });
             
             $.ajax({

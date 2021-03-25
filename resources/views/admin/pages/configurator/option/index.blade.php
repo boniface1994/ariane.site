@@ -235,7 +235,9 @@
                 $(this).slideDown();
             },
             hide: function () {
-                $(this).slideUp();
+                $(this).slideUp("normal", function() {
+                    $(this).remove();
+                });
             },
             ready: function (setIndexes) {
                 var id = randstr('card_');
@@ -259,7 +261,7 @@
             var dashboard_available = form.find('.dashboard_available').is(':checked') ? 1 : 0;
             var type = [];
             form.find('.type').each(function(i, el){
-                type[i] = $(el).is(':checked') ? 1 : 0;
+                type[i] = $(el).is(':checked') ? 1 : null;
             });
             
             var weight_dependent = null;

@@ -390,7 +390,9 @@
                 if($('#btn-orbittype-add').hasClass('d-none')) $('#btn-orbittype-add').removeClass('d-none');
             },
             hide: function () {
-                $(this).slideUp();
+                $(this).slideUp("normal", function() {
+                    $(this).remove();
+                });
                 if($('.orbittype-draggable-item').length == 1) 
                         $('#btn-orbittype-add').addClass('d-none');
             },
@@ -413,10 +415,10 @@
                 let id          = $(el).find('.orbittype_index').val();
                 let name        = $(el).find('.name').val();
                 let explanation = $(el).find('.explanation').val();
-                let orbit_leo   = $(el).find('.orbit_leo').is(':checked') ? 1 : 0;
-                let orbit_sso   = $(el).find('.orbit_sso').is(':checked') ? 1 : 0;
-                let tarif_leo   = $(el).find('.tarif_leo').is(':checked') ? 1 : 0;
-                let tarif_gto   = $(el).find('.tarif_gto').is(':checked') ? 1 : 0;
+                let orbit_leo   = $(el).find('.orbit_leo').is(':checked') ? 1 : null;
+                let orbit_sso   = $(el).find('.orbit_sso').is(':checked') ? 1 : null;
+                let tarif_leo   = $(el).find('.tarif_leo').is(':checked') ? 1 : null;
+                let tarif_gto   = $(el).find('.tarif_gto').is(':checked') ? 1 : null;
 
                 let parameters = []; 
                 $(el).find('.parameter-option').each(function(k, option) {

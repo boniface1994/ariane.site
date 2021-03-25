@@ -36,11 +36,12 @@ class OrbitTypeController extends Controller
         foreach ($data as $key => $item) {
             
             $rules = array(    
-                'name' => 'required', 
-                'orbit_leo' => 'required_without_all:orbit_sso',
-                'orbit_sso' => 'required_without_all:orbit_leo',
-                'tarif_leo' => 'required_without_all:tarif_gto',
-                'tarif_gto' => 'required_without_all:tarif_leo',
+                'name' => 'required',
+                'explanation'   => 'required',
+                'orbit_leo'     => 'required_without_all:orbit_sso',
+                'orbit_sso'     => 'required_without_all:orbit_leo',
+                'tarif_leo'     => 'required_without_all:tarif_gto',
+                'tarif_gto'     => 'required_without_all:tarif_leo',
             );
             $validator = Validator::make($item, $rules);
 

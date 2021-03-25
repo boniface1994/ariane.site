@@ -158,7 +158,9 @@
                 if($('#btn-option-cost-add').hasClass('d-none')) $('#btn-option-cost-add').removeClass('d-none');
             },
             hide: function () {
-                $(this).slideUp();
+                $(this).slideUp("normal", function() {
+                    $(this).remove();
+                });
                 if($('.option-cost-draggable-item').length == 1) 
                         $('#btn-option-cost-add').addClass('d-none');
             },

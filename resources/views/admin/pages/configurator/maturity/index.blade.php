@@ -118,7 +118,9 @@
                 if($('#btn-maturity-add').hasClass('d-none')) $('#btn-maturity-add').removeClass('d-none');
             },
             hide: function () {
-                $(this).slideUp();
+                $(this).slideUp("normal", function() {
+                    $(this).remove();
+                });
                 if($('.maturity-draggable-item').length == 1) 
                         $('#btn-maturity-add').addClass('d-none');
             },
@@ -177,12 +179,14 @@
             form_button = event.target;
         })
 
-        $('.action-remove-maturity').on('click', function() {         
+        $('.action-remove-maturity').on('click', function() {
+            let form = form_button.closest('.maturity-draggable-item');         
             let url = $(form_button).attr('data-action-remove');
+            let id = $(form).find('.index').val();
                        
             $.ajax({
                 url: url,
-                data: {'_token': '{{ csrf_token() }}'},
+                data: {'_token': '{{ csrf_token() }}', 'id': id},
                 type: 'DELETE',
                 success: function (response) {
                     $('#confirmation-delete').modal('hide');
