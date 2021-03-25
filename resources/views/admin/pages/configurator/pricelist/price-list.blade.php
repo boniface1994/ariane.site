@@ -26,6 +26,8 @@
             <div class="tab-pane fade show active" id="cubsat" role="tabpanel" aria-labelledby="cubsat">
                 <form class="form" action="{{ route('pricelist.store') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="cubesat" value="1">
+                    <input type="hidden" name="smallsat" value="0">
                     <div class="form-group">
                         <table class="table table-bordered">
                             <thead>
@@ -107,6 +109,8 @@
             <div class="tab-pane fade" id="smallsat" role="tabpanel" aria-labelledby="smallsat">
                 <form class="form" action="{{ route('pricelist.store') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="cubesat" value="0">
+                    <input type="hidden" name="smallsat" value="1">
                     <div class="form-group">
                         <table class="table table-bordered">
                             <thead>
@@ -128,7 +132,7 @@
                                         <input type="text" class="form-control" name="p4" value="{{ isset($pricelists['p4']) ? $pricelists['p4'] : '' }}">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" name="leo_p5" value="{{ isset($pricelists['p5']) ? $pricelists['p5'] : '' }}">
+                                        <input type="text" class="form-control" name="p5" value="{{ isset($pricelists['p5']) ? $pricelists['p5'] : '' }}">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" name="p6" value="{{ isset($pricelists['p6']) ? $pricelists['p6'] : '' }}">

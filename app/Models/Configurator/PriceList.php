@@ -11,6 +11,6 @@ class PriceList extends Model
 
     protected $table = "price_list";
     protected $fillable =[
-        'name','value'
+        'name','value','cubesat','smallsat'
     ];
 }

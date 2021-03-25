@@ -50,16 +50,18 @@ class PriceListController extends Controller
                 $names[] = $value->name;
             }
         }
+        $input['smallsat'] = $request->request->get('smallsat');
+        $input['cubesat'] = $request->request->get('cubesat');
         if($names){
             foreach ($request->all() as $key => $value) {
                 if(in_array($key,$names)){
-                    if($key != "_token"){
+                    if($key != "_token" && $key != "cubesat" && $key != "smallsat"){
                         $pricelist = PriceList::where(['name' => $key])->first();
                         $pricelist->value = $value;
                         $pricelist->update();
                     }
                 }else{
-                    if($key != "_token"){
+                    if($key != "_token" && $key != "cubesat" && $key != "smallsat"){
                         $input['name'] = $key;
                         $input['value'] = $value;
                         PriceList::create($input);
@@ -68,7 +70,7 @@ class PriceListController extends Controller
             }
         }else{
             foreach ($request->all() as $key => $value) {
-                if($key != "_token"){
+                if($key != "_token" && $key != "cubesat" && $key != "smallsat"){
                     $input['name'] = $key;
                     $input['value'] = $value;
                     PriceList::create($input);
