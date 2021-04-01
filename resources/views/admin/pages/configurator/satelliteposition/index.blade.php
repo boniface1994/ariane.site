@@ -99,7 +99,37 @@
                                             <label class="checkbox checkbox-success d-flex justify-content-center">
                                                 <input type="checkbox" name="data[cubsat][position][]" value="4" @if(isset($satellitepositions['cubsat']['position'])) @if(in_array(4, $satellitepositions['cubsat']['position'])) checked @endif @endif/>
                                                 <span></span>
-                                                X
+                                                4
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[cubsat][position][]" value="5" @if(isset($satellitepositions['cubsat']['position'])) @if(in_array(5, $satellitepositions['cubsat']['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                5
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[cubsat][position][]" value="6" @if(isset($satellitepositions['cubsat']['position'])) @if(in_array(6, $satellitepositions['cubsat']['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                6
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[cubsat][position][]" value="7" @if(isset($satellitepositions['cubsat']['position'])) @if(in_array(7, $satellitepositions['cubsat']['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                7
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[cubsat][position][]" value="8" @if(isset($satellitepositions['cubsat']['position'])) @if(in_array(8, $satellitepositions['cubsat']['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                8
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[cubsat][position][]" value="9" @if(isset($satellitepositions['cubsat']['position'])) @if(in_array(9, $satellitepositions['cubsat']['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                9
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[cubsat][position][]" value="10" @if(isset($satellitepositions['cubsat']['position'])) @if(in_array(10, $satellitepositions['cubsat']['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                10
                                             </label>
                                         </div>
                                     </div>
@@ -126,7 +156,37 @@
                                             <label class="checkbox checkbox-success d-flex justify-content-center">
                                                 <input type="checkbox" name="data[smallsat_{{ $i }}][position][]" value="4" @if(isset($satellitepositions['smallsat_' . $i]['position'])) @if(in_array(4, $satellitepositions['smallsat_' . $i]['position'])) checked @endif @endif/>
                                                 <span></span>
-                                                X
+                                                4
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[smallsat_{{ $i }}][position][]" value="5" @if(isset($satellitepositions['smallsat_' . $i]['position'])) @if(in_array(4, $satellitepositions['smallsat_' . $i]['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                5
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[smallsat_{{ $i }}][position][]" value="6" @if(isset($satellitepositions['smallsat_' . $i]['position'])) @if(in_array(4, $satellitepositions['smallsat_' . $i]['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                6
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[smallsat_{{ $i }}][position][]" value="7" @if(isset($satellitepositions['smallsat_' . $i]['position'])) @if(in_array(4, $satellitepositions['smallsat_' . $i]['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                7
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[smallsat_{{ $i }}][position][]" value="8" @if(isset($satellitepositions['smallsat_' . $i]['position'])) @if(in_array(8, $satellitepositions['smallsat_' . $i]['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                8
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[smallsat_{{ $i }}][position][]" value="9" @if(isset($satellitepositions['smallsat_' . $i]['position'])) @if(in_array(9, $satellitepositions['smallsat_' . $i]['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                9
+                                            </label>
+                                            <label class="checkbox checkbox-success d-flex justify-content-center">
+                                                <input type="checkbox" name="data[smallsat_{{ $i }}][position][]" value="10" @if(isset($satellitepositions['smallsat_' . $i]['position'])) @if(in_array(10, $satellitepositions['smallsat_' . $i]['position'])) checked @endif @endif/>
+                                                <span></span>
+                                                10
                                             </label>
                                         </div>
                                     </div>
