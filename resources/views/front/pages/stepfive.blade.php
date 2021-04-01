@@ -32,7 +32,7 @@
                                             <div class="input-group">
                                                 <h4 class="form-label mr-2">{{$option->name}}</h4>
                                                 <label class="checkbox checkbox-primary" style="margin-top: -10px">
-                                                    <input type="checkbox" class="ml-3 checker" name="options[]" value="{{$option->id}}" />
+                                                    <input type="checkbox" class="ml-3 checker" data-session="{{$option->id}}" name="options[]" value="{{$option->id}}" />
                                                     <span></span>
                                                 </label>
                                             </div>
@@ -63,19 +63,33 @@
 @section('scripts')
 <script type="text/javascript">
     jQuery(document).ready(function () {
+        var all_data = [];
+        var data_session = [];
         $('#step_5').find('.card').each(function(i,el){
             $(el).on('click',function(){
                 if($(this).find('.checker').is(':checked')){
                     $(this).find('.checker').attr('checked',false);
                     $(this).css('background-color',"");
+                    for (var i = 0; i < all_data.length; i++) {
+                        if(all_data[i] == $(this).find('.checker').val()){
+                            all_data.splice(i,1);
+                        }
+                    }
                 }else{
                     $(this).find('.checker').attr('checked',true);
                     $(this).css('background-color',"#2176bd");
+                    all_data.push(parseInt($(this).find('.checker').val()));
+                    sessionStorage.setItem('options',JSON.stringify(all_data));
                 }
-                
             });
 
+            if(sessionStorage.getItem('options').includes(parseInt($(el).find('.checker').val()))){
+                // $(el).trigger('click');
+                $(el).find('.checker').attr('checked',true);
+                $(el).css('background-color',"#2176bd");
+            }
         })
+        console.log('icici',sessionStorage.getItem('options'))
     });
 </script>
 @endsection

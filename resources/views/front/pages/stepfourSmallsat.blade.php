@@ -56,7 +56,7 @@
                                             <label class="form-label">Mass (kg)</label>
                                             <input class="form-control" data-max="{{$parameters['smallsat']}}"  type="number" name="masse">
                                             <label class="form-label">Maturité technique</label>
-                                            <select class="form-control" name="maturity">
+                                            <select class="form-control maturity" name="maturity">
                                                 <option>{{ __('Choose maturity technical') }}</option>
                                                 @foreach($maturities as $maturity)
                                                     <option value="{{$maturity->id}}">{{$maturity->title}}</option>
@@ -88,16 +88,30 @@
 <script type="text/javascript">
     jQuery(document).ready(function () {
         $('#step_4').find('input').each(function(i,el){
-            $(el).on('change',function(){
+            $(el).on('keyup',function(){
                 let max = $(this).data('max');
                 let current = $(this).val();
+                console.log('name',$(this).attr('name'))
+                sessionStorage.setItem($(this).attr('name'),current);
                 if(current > max){
                     $('#step_4').find('.error-max').removeClass('d-none');
                 }else{
                     $('#step_4').find('.error-max').addClass('d-none');
                 }
-            })
+            });
+
+            if(sessionStorage.getItem($(el).attr('name'))){
+                $(el).val(sessionStorage.getItem($(el).attr('name')));
+            }
         })
+
+        $('.maturity').on('change',function(){
+            let current = $(this).val();
+            sessionStorage.setItem($(this).attr('name'),current);
+        });
+        if(sessionStorage.getItem('maturity')){
+            $('.maturity').val(sessionStorage.getItem('maturity'));
+        }
     });
 </script>
 @endsection

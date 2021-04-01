@@ -96,12 +96,12 @@
                                             </div>
                                             <div class="checkbox-inline">
                                                 <label class="checkbox checkbox-primary">
-                                                    <input class="local_time_type ltan" type="checkbox" name="time"/>
+                                                    <input class="local_time_type ltan" type="checkbox" name="ltan"/>
                                                     <span></span>
                                                     {{ __('LTAN') }}
                                                 </label>
                                                 <label class="checkbox checkbox-primary">
-                                                    <input class="local_time_type ltdn" type="checkbox" name="time"/>
+                                                    <input class="local_time_type ltdn" type="checkbox" name="ltdn"/>
                                                     <span></span>
                                                     {{ __('LTDN') }}
                                                 </label>
@@ -114,7 +114,7 @@
                                         <h3 class="form-label">{{ __('Your constraint') }} </h3>
                                     </div>
                                     <div class="form-group row">
-                                        <input class="form-control" type="text" name="constraint">
+                                        <input class="form-control constraint" type="text" name="constraint">
                                     </div>
                                 </div>
                                 <div class="input-group">
@@ -145,6 +145,11 @@
                     $('#orbite').find('.local-time').addClass('d-none');
                 }
                 sessionStorage.setItem('id',id);
+                $('#orbite').find('.constraint').val('');
+                $('#orbite').find('.ltdn').attr('checked',false);
+                $('#orbite').find('.ltan').attr('checked',false);
+                $('#orbite').find('.local_end').val('');
+                $('#orbite').find('.local_start').val('');
                 $.ajax({
                     url: url,
                     method: 'GET',
@@ -169,15 +174,17 @@
                             sessionStorage.setItem('min_inc','');
                             sessionStorage.setItem('max_inc','');
                             sessionStorage.setItem('step_inc','');
+                            sessionStorage.setItem('local_start','');
+                            sessionStorage.setItem('local_end','');
+                            sessionStorage.setItem('ltan','');
+                            sessionStorage.setItem('ltdn','');
+                            sessionStorage.setItem('constraint','');
                             for(var i=0;i<response.length;i++){
                                 if(response[i]['type'] == 'altitude'){
                                     altitudes.push(response[i]['type']);
                                     min_alt = response[i]['start'];
                                     max_alt = response[i]['end'];
                                     step_alt = response[i]['jump'];
-
-                                    sessionStorage.setItem('min_alt',min_alt);
-                                    sessionStorage.setItem('max_alt',max_alt);
                                     sessionStorage.setItem('step_alt',step_alt);
                                 }
                                 if(response[i]['type'] == 'inclination'){
@@ -186,8 +193,6 @@
                                     max_inc = response[i]['end'];
                                     step_inc = response[i]['jump'];
 
-                                    sessionStorage.setItem('min_inc',min_inc);
-                                    sessionStorage.setItem('max_inc',max_inc);
                                     sessionStorage.setItem('step_inc',step_inc);
                                 }
                                 if(altitudes.includes('altitude')){
@@ -229,15 +234,87 @@
                 $(el).css("background-color","#2176bd");
                 $(el).find('.radio').attr('checked',true);
                 $(el).closest('#orbite').find('.btn-primary').removeClass('disabled');
-                $(el).trigger('click');
+                $('#orbite').find('.orb-inclination').addClass('d-none');
+                $('#orbite').find('.orb-altitude').addClass('d-none');
+                if($(el).find('.orbite-type').val() == 1){
+                    $('#orbite').find('.local-time').removeClass('d-none');
+                }
+
+                if($(el).children().hasClass('altitude')){
+                    $('#orbite').find('.orb-altitude').removeClass('d-none');
+                    $('#orbite').find('#altitude').ionRangeSlider();
+                    sessionStorage.setItem('step_alt',$(el).find('.altitude .jump').val());
+                    let lat = $('#altitude').data('ionRangeSlider');
+                    lat.update({
+                        from: sessionStorage.getItem('min_alt'),
+                        to: sessionStorage.getItem('max_alt'),
+                        step: sessionStorage.getItem('step_alt')
+                    });
+                }
+                if($(el).children().hasClass('inclination')){
+                    $('#orbite').find('.orb-inclination').removeClass('d-none');
+                    $('#orbite').find('#inclination').ionRangeSlider();
+                    sessionStorage.setItem('step_inc',$(el).find('.inclination .jump').val());
+                    let inc = $('#inclination').data('ionRangeSlider');
+                    inc.update({
+                        from: sessionStorage.getItem('min_inc'),
+                        to: sessionStorage.getItem('max_inc'),
+                        step: sessionStorage.getItem('step_inc')
+                    })
+                }
             }
         });
         $('#orbite').find('#altitude').on('change',function(){
             console.log('altitude',$(this).data('to'));
+            sessionStorage.setItem('min_alt',$(this).data('from'));
+            sessionStorage.setItem('max_alt',$(this).data('to'));
         })
         $('#orbite').find('#inclination').on('change',function(){
             console.log('inclination',$(this).data('to'));
+            sessionStorage.setItem('min_inc',$(this).data('from'));
+            sessionStorage.setItem('max_inc',$(this).data('to'));
         })
+
+        $('#orbite').find('.local_start').on('change',function(){
+            sessionStorage.setItem('local_start',$(this).val());
+        })
+        $('#orbite').find('.local_end').on('change',function(){
+            sessionStorage.setItem('local_end',$(this).val());
+        })
+        if(sessionStorage.getItem('local_start')){
+            $('#orbite').find('.local_start').val(sessionStorage.getItem('local_start'));
+        }
+        if(sessionStorage.getItem('local_end')){
+            $('#orbite').find('.local_end').val(sessionStorage.getItem('local_end'));
+        }
+        $('#orbite').find('.ltan').on('click',function(){
+            if($(this).is(':checked')){
+                sessionStorage.setItem('ltan',1);
+            }else{
+                sessionStorage.setItem('ltan','');
+            }
+        })
+        $('#orbite').find('.ltdn').on('click',function(){
+            if($(this).is(':checked')){
+                sessionStorage.setItem('ltdn',1);
+            }else{
+                sessionStorage.setItem('ltdn','');
+            }
+        })
+
+        if(sessionStorage.getItem('ltan')){
+            $('#orbite').find('.ltan').attr('checked',true);
+        }
+        if(sessionStorage.getItem('ltdn')){
+            $('#orbite').find('.ltdn').attr('checked',true);
+        }
+
+        $('#orbite').find('.constraint').on('change',function(){
+            sessionStorage.setItem('constraint',$(this).val());
+        })
+        if(sessionStorage.getItem('constraint')){
+            $('#orbite').find('.constraint').val(sessionStorage.getItem('constraint'));
+        }
     });
 </script>
 @endsection

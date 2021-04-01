@@ -54,30 +54,6 @@
 @section('scripts')
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        // $('#step_3').find('.cubesat').on('click',function(){
-        //     $(this).find('.cubesat-type').attr('checked',true);
-        //     $(this).siblings('.smallsat').find('.smallsat-type').removeAttr('checked');
-        //     $(this).css("background-color","#2176bd");
-        //     // $(this).removeClass('disabled');
-        //     $(this).siblings('.smallsat').css("background-color","");
-        //     // $(this).siblings('.smallsat').addClass("disabled");
-        //     $('#step_3').find('.btn-primary').removeClass('disabled');
-        //     var url = $(this).data('next');
-        //     $('#step_3').find('.btn-primary').attr('href',url);
-        //     sessionStorage.setItem('space_type',$(this).find('input[type="radio"]'));
-        // })
-        // $('#step_3').find('.smallsat').on('click',function(){
-        //     $(this).find('.space-type').attr('checked',true);
-        //     $(this).siblings('.cubesat').find('.cubesat-type').attr('checked',false);
-        //     $(this).css("background-color","#2176bd");
-        //     // $(this).removeClass("disabled");
-        //     $(this).siblings('.cubesat').css("background-color","");
-        //     // $(this).siblings('.cubesat').addClass("disabled");
-        //     $('#step_3').find('.btn-primary').removeClass('disabled');
-        //     var url = $(this).data('next');
-        //     $('#step_3').find('.btn-primary').attr('href',url);
-        //     sessionStorage.setItem('space_type',$(this).find('input[type="radio"]'));
-        // })
         $('#step_3').find('.space').each(function(i,el){
             $(el).on('click',function(){
                 $(this).find('.space-type').attr('checked',true);
