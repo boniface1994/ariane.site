@@ -23,93 +23,38 @@
 
                         </div>
                         <div class="form-group col-lg-9"  id="step_4">
-                            <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
-                            <div class="form-group" style="margin-left: 20%">
-                                <h2>Choix de votre configuration <i class="icon-xl fa fa-info-circle"></i></h2>
-                            </div>
-                            <div class="form-group" style="margin-left: 30%">
-                                <img src="{{ asset('media/logos/logo-light.png') }}" class="mr-2" style="max-width: 120px" alt="" /><br>
-                            </div>
-                            <div class="input-group">
-                                @foreach($cubesats as $cubesat)
-                                <div class="card card-custom col-md-3 mr-2 mb-2 cubesat" data-id="{{$cubesat->id}}" >
-                                    <div class="card-body">
-                                        <div class="input-group">
-                                            <h3 class="mr-2">
-                                                {{$cubesat->name}}
-                                            </h3>
-                                            <input type="radio" name="cubesat" class="d-none" value="{{$cubesat->id}}">
-                                        </div>
-                                    </div>
+                            <form action="{{route('session_cubesat')}}" method="POST">
+                                @csrf
+                                <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
+                                <div class="form-group" style="margin-left: 20%">
+                                    <h2>Choix de votre configuration <i class="icon-xl fa fa-info-circle"></i></h2>
                                 </div>
-                                @endforeach
-                                <!-- <div class="card card-custom col-md-3 mr-2 mb-2 cubesat" >
-                                    <div class="card-body">
-                                        <div class="input-group">
-                                            <h3 class="mr-2">
-                                                2U
-                                            </h3>
-                                            <input type="radio" name="cubsat" class="d-none">
-                                        </div>
-                                    </div>
+                                <div class="form-group" style="margin-left: 30%">
+                                    <img src="{{ asset('media/logos/logo-light.png') }}" class="mr-2" style="max-width: 120px" alt="" /><br>
                                 </div>
-                                <div class="card card-custom col-md-3 mr-2 mb-2 cubesat" >
-                                    <div class="card-body">
-                                        <div class="input-group">
-                                            <h3 class="mr-2">
-                                                3U
-                                            </h3>
-                                            <input type="radio" name="cubsat" class="d-none">
+                                <div class="input-group">
+                                    @foreach($cubesats as $cubesat)
+                                    <div class="card card-custom col-md-3 mr-2 mb-2 cubesat" data-id="{{$cubesat->id}}" style="background-color: {{ (session('cubesat') == $cubesat->id) ? '#2176bd' : ''}}">
+                                        <div class="card-body">
+                                            <div class="input-group">
+                                                <h3 class="mr-2">
+                                                    {{$cubesat->name}}
+                                                </h3>
+                                                <input type="radio" class="d-none" value="{{$cubesat->id}}" {{ (session('cubesat') == $cubesat->id) ? 'checked' : ''}}>
+                                            </div>
                                         </div>
                                     </div>
+                                    @endforeach
+                                    <input type="hidden" class="cubesat-id" name="cubesat" value="{{session('cubesat') ? session('cubesat') : ''}}">
+                                </div><br><br>
+                                <div class="form-group">
+                                    <a href="{{route('step_three')}}" class="btn btn-default" ><< Prev</a>
                                 </div>
-                                <div class="card card-custom col-md-3 mr-2 mb-2 cubesat" >
-                                    <div class="card-body">
-                                        <div class="input-group">
-                                            <h3 class="mr-2">
-                                                6U
-                                            </h3>
-                                            <input type="radio" name="cubsat" class="d-none">
-                                        </div>
-                                    </div>
-                                </div><div class="card card-custom col-md-3 mr-2 mb-2 cubesat" >
-                                    <div class="card-body">
-                                        <div class="input-group">
-                                            <h3 class="mr-2">
-                                                12U
-                                            </h3>
-                                            <input type="radio" name="cubsat" class="d-none">
-                                        </div>
-                                    </div>
-                                </div><div class="card card-custom col-md-3 mr-2 mb-2 cubesat" >
-                                    <div class="card-body">
-                                        <div class="input-group">
-                                            <h3 class="mr-2">
-                                                16U
-                                            </h3>
-                                            <input type="radio" name="cubsat" class="d-none">
-                                        </div>
-                                    </div>
+                                <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
+                                    <button href="{{route('step_five',['type'=>'cubsat'])}}" class="btn btn-primary disabled" >Suivant >></button>
                                 </div>
-                                <div class="card card-custom col-md-3 mr-2 mb-2 cubesat" >
-                                    <div class="card-body">
-                                        <div class="input-group">
-                                            <h3 class="mr-2">
-                                                24U
-                                            </h3>
-                                            <input type="radio" name="cubsat" class="d-none">
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div><br>
-                            <div class="form-group">
-                                <a href="{{route('step_three')}}" class="btn btn-default" ><< Prev</a>
-                            </div>
-                            <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
-                                <a href="{{route('step_five',['type'=>'cubsat'])}}" class="btn btn-primary disabled" >Suivant >></a>
-                            </div>
+                            </form>
                         </div>
-                        <div id="pagination-container"></div>
                     </div>
                 </div>
             </div>
@@ -127,14 +72,9 @@
                 $(this).siblings().css('background-color','');
                 $(this).siblings().find('input[type="radio"]').attr('checked',false);
                 $('#step_4').find('.btn-primary').removeClass('disabled');
+                $('#step_4').find('.cubesat-id').val($(this).find('input[type="radio"]').val());
                 sessionStorage.setItem('cubesat',$(this).find('input[type="radio"]').val());
             })
-
-            if(sessionStorage.getItem('cubesat') == $(el).data('id')){
-                $(el).css('background-color','#2176bd');
-                $(el).find('input[type="radio"]').attr('checked',true);
-                $('#step_4').find('.btn-primary').removeClass('disabled');
-            }
         })
     });
 </script>

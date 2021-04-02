@@ -23,36 +23,39 @@
 
                         </div>
                         <div class="form-group col-lg-9"  id="quarter">
-                            <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
-                            <!-- <div class="card card-custom" id="quarter">
-                                <div class="card-body"> -->
-                                    <div class="input-group">
-                                        @foreach($datas as $data)
-                                        @if($data->annee <= $year)
-                                        <div class="card card-custom col-md-3 mr-2 mb-2 quarter" >
-                                            <div class="card-body">
-                                                <div class="input-group">
-                                                    <h3 class="mr-2">
-                                                        {{ $q }}.{{ $data->annee }}
-                                                    </h3>
-                                                    <input class="radio radio-success trimester" type="radio" name="quarter" value="{{$data->date}}">
+                            <form action="{{route('session_one')}}" method="POST">
+                                @csrf
+                                <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
+                                <!-- <div class="card card-custom" id="quarter">
+                                    <div class="card-body"> -->
+                                        <div class="input-group">
+                                            @foreach($datas as $data)
+                                            @if($data->annee <= $year)
+                                            <div class="card card-custom col-md-3 mr-2 mb-2 quarter" style="background-color: {{(session('quarter') == $data->date) ? '#2176bd' : ''}}" >
+                                                <div class="card-body">
+                                                    <div class="input-group">
+                                                        <h3 class="mr-2">
+                                                            {{ $q }}.{{ $data->annee }}
+                                                        </h3>
+                                                        <input class="radio radio-success trimester" type="radio" name="quarter" value="{{$data->date}}" {{(session('quarter') == $data->date) ? 'checked' : ''}}>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            @endif
+                                            @endforeach
                                         </div>
-                                        @endif
-                                        @endforeach
-                                    </div>
-                                <!-- </div> -->
-                                <!-- <div class="input-group">
-                                    <button class="col-md-2">Prev</button>
-                                    <button class="col-md-2">Next</button>
-                                </div> -->
-                                
-                            <!-- </div> --><br>
+                                    <!-- </div> -->
+                                    <!-- <div class="input-group">
+                                        <button class="col-md-2">Prev</button>
+                                        <button class="col-md-2">Next</button>
+                                    </div> -->
+                                    
+                                <!-- </div> --><br>
 
-                            <div class="form-group" style="float: right; margin-right: 175px">
-                                <a href="{{route('step_two')}}" class="btn btn-primary disabled" >Suivant >></a>
-                            </div>
+                                <div class="form-group" style="float: right; margin-right: 175px">
+                                    <button href="{{route('step_two')}}" class="btn btn-primary disabled" >Suivant >></button>
+                                </div>
+                            </form>
                         </div>
                         <div id="pagination-container"></div>
                     </div>
@@ -92,23 +95,23 @@
         //     }
         // });
         $('#quarter').find('.quarter').each(function(i,el){
-            $(el).find('.trimester').on('click',function(){
-                if($(this).is(':checked')){
-                    $(this).closest('.quarter').css("background-color","#2176bd");
-                    // $(this).closest('#quarter').find('.btn').removeAttr('disabled');
-                    $(el).closest('#quarter').find('.btn').removeClass('disabled');
-                    sessionStorage.setItem('quarter',$(this).val());
-                }
-                $(this).closest('.quarter').siblings().css("background-color","");
+            $(el).on('click',function(){
+                $(this).find('.trimester').attr('checked',true);
+                $(this).css("background-color","#2176bd");
+                // $(this).closest('#quarter').find('.btn').removeAttr('disabled');
+                $(el).closest('#quarter').find('.btn').removeClass('disabled');
+                sessionStorage.setItem('quarter',$(this).find('.trimester').val());
+                $(this).siblings().css("background-color","");
+                $(this).siblings().find(".trimester").attr('checked',false);
                 
             });
-            var data = $(el).find('.trimester').val();
-            if(sessionStorage.getItem("quarter") == data){
-                $(el).find('.trimester').attr('checked',true);
-                $(el).closest('.quarter').css("background-color","#2176bd");
-                // $(el).closest('#quarter').find('.btn').removeAttr('disabled');
-                $(el).closest('#quarter').find('.btn').removeClass('disabled');
-            }
+            // var data = $(el).find('.trimester').val();
+            // if(sessionStorage.getItem("quarter") == data){
+            //     // $(el).find('.trimester').attr('checked',true);
+            //     $(el).css("background-color","#2176bd");
+            //     // $(el).closest('#quarter').find('.btn').removeAttr('disabled');
+            //     $(el).closest('#quarter').find('.btn').removeClass('disabled');
+            // }
         })
     });
 </script>

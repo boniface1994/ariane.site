@@ -9,7 +9,10 @@ use App\Models\Configurator\OrbitTypeParameter;
 use App\Models\Configurator\CostCubesat;
 use App\Models\Configurator\TechnicalMaturity;
 use App\Models\Configurator\Option;
+use App\Models\Configurator\FlightOpportunity;
+use App\Models\Configurator\PriceList;
 use App\Models\GeneralParameter;
+use App\Models\Admin\Project\Document;
 
 class HomeController extends Controller
 {
@@ -60,17 +63,32 @@ class HomeController extends Controller
             $annee = $date_q->format('Y');
             $datas[] = (object) array('annee'=>$annee,'date'=>$quarter);
         }
-        // var_dump($datas);die();
         return view('front.pages.welcome',compact('q','datas','year'));
+    }
+
+    public function oneTwo(Request $request){
+        foreach ($request->all() as $key => $value) {
+            if($key != "_token"){
+                \Session::put($key,$value);
+            }
+        }
+
+        return redirect('step_2');
     }
 
     public function stepTwo(){
         $orbites = OrbitType::orderBy('position','ASC')->get();
-        // echo "<pre>";
-        // var_dump($orbites);
-        // echo "</pre>";
-        // die();
         return view('front.pages.steptwo',compact('orbites'));
+    }
+
+    public function twoThree(Request $request){
+        foreach ($request->all() as $key => $value) {
+            if($key != "_token"){
+                \Session::put($key,$value);
+            }
+        }
+
+        return redirect('step_3');
     }
 
     public function orbiteParameter($orbite_id){
@@ -82,9 +100,35 @@ class HomeController extends Controller
         return view('front.pages.stepthree');
     }
 
+    public function threeFour(Request $request){
+        foreach ($request->all() as $key => $value) {
+            if($key != "_token"){
+                \Session::put($key,$value);
+            }
+        }
+        if(session('space_type') == 'cubsat')
+            return redirect('/step_4_cubsat');
+        return redirect('/step_4_smallsat');
+    }
+
     public function stepCubesat(){
         $cubesats = CostCubesat::orderBy('id','asc')->get();
         return view('front.pages.stepfourCubesat',compact('cubesats'));
+    }
+
+    public function cubesatFive(Request $request){
+        foreach ($request->all() as $key => $value) {
+            if($key != "_token"){
+                \Session::put($key,$value);
+            }
+        }
+        $options = Option::where('dashboard_available','=',0)->where(session('space_type'),'=',1)->orderBy('position','asc')->get();
+        $sessions =array();
+        if(session('options')){
+            $sessions = (array) json_decode(session('alloptions'));
+        }
+        $type = session('space_type');
+        return \Redirect::route('step_five',['type'=>session('space_type')])->with(['options'=>$options,'type'=>$type,'sessions'=>$sessions]);
     }
 
     public function stepSmallsat(){
@@ -99,13 +143,59 @@ class HomeController extends Controller
         return view('front.pages.stepfourSmallsat',compact('maturities','parameters'));
     }
 
+    public function smallsatFive(Request $request){
+        foreach ($request->all() as $key => $value) {
+            if($key != "_token"){
+                \Session::put($key,$value);
+            }
+        }
+
+        $options = Option::where('dashboard_available','=',0)->where(session('space_type'),'=',1)->orderBy('position','asc')->get();
+        $sessions =array();
+        if(session('alloptions')){
+            $sessions = (array)json_decode(session('alloptions'));
+        }
+        if(is_object($sessions)){
+            $sessions = (array) $sessions;
+        }
+        $type = session('space_type');
+        return \Redirect::route('step_five',['type'=>session('space_type')])->with(['options'=>$options,'type'=>$type,'sessions'=>$sessions]);
+    }
+
     public function stepFive($type){
         $options = Option::where('dashboard_available','=',0)->where($type,'=',1)->orderBy('position','asc')->get();
+        $sessions =array();
+        if(session('alloptions')){
+            $sessions = (array) json_decode(session('alloptions'));
+        }
+        return view('front.pages.stepfive',compact('options','type','sessions'));
+    }
 
-        return view('front.pages.stepfive',compact('options','type'));
+    public function fiveSix(Request $request){
+        \Session::put('alloptions',json_encode((object)$request->request->get('alloptions')));
+        return redirect('/step_7');
     }
 
     public function stepSeven(){
-        return view('front.pages.stepseven');
+        $type = session('space_type');
+        $opportunities = FlightOpportunity::orderBy('position','asc')->get();
+        if($type == "cubsat"){
+            $type = 'cubesatt';
+        }else{
+            $type = 'smallsatt';
+        }
+        $all = GeneralParameter::all();
+        $document = null;
+        if($all){
+            foreach ($all as $parameter) {
+                if($type == $parameter->name)
+                    $document = $parameter->value; 
+            }
+        }
+        // $prices = PriceList::all();
+        // foreach ($prices as $price) {
+        //     # code...
+        // }
+        return view('front.pages.stepseven',compact('opportunities','document'));
     }
 }

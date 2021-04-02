@@ -23,27 +23,31 @@
 
                         </div>
                         <div class="form-group col-lg-9"  id="step_3">
-                            <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
-                            <div class="input-group">
-                                <div class="form-group space" data-type="cubesat" data-next="{{route('step_cubesat')}}">
-                                    <img src="{{ asset('media/logos/logo-light.png') }}" style="min-height: 200px;max-width: 300px">
-                                    <input type="radio" class="space-type" name="craft" value="cubesat"><br>
-                                    <label>CUBESAT</label>
+                            <form action="{{route('session_three')}}" method="POST">
+                                @csrf
+                                <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
+                                <div class="input-group">
+                                    <div class="form-group space" data-type="cubesat" data-next="{{route('step_cubesat')}}" style="background-color: {{ (session('space_type') == 'cubsat') ? '#2176bd' : '' }}">
+                                        <img src="{{ asset('media/logos/logo-light.png') }}" style="min-height: 200px;max-width: 300px">
+                                        <input type="radio" class="space-type" value="cubsat" {{ (session('space_type') == 'cubsat') ? 'checked' : '' }}>
+                                        <br>
+                                        <label>CUBESAT</label>
+                                    </div>
+                                    <input type="hidden" class="craft" name="space_type" value="{{session('space_type') ? session('space_type') : '' }}">
+                                    <div class="form-group space" data-type="smallsat" data-next="{{route('step_smallsat')}}" style="background-color: {{ (session('space_type') == 'smallsat') ? '#2176bd' : '' }}">
+                                        <img src="{{ asset('media/logos/logo-light.png') }}" style="min-height: 200px;max-width: 300px">
+                                        <input type="radio" class="space-type" value="smallsat" {{ (session('space_type') == 'smallsat') ? 'checked' : '' }}><br>
+                                        <label>SMALSAT</label>
+                                    </div>
+                                </div><br>
+                                <div class="form-group">
+                                    <a href="{{route('step_two')}}" class="btn btn-default" ><< Prev</a>
                                 </div>
-                                <div class="form-group space" data-type="smallsat" data-next="{{route('step_smallsat')}}">
-                                    <img src="{{ asset('media/logos/logo-light.png') }}" style="min-height: 200px;max-width: 300px">
-                                    <input type="radio" class="space-type" name="craft" value="smallsat"><br>
-                                    <label>SMALSAT</label>
+                                <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
+                                    <button class="btn btn-primary " disabled>Suivant >></button>
                                 </div>
-                            </div><br>
-                            <div class="form-group">
-                                <a href="{{route('step_two')}}" class="btn btn-default" ><< Prev</a>
-                            </div>
-                            <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
-                                <a class="btn btn-primary disabled" >Suivant >></a>
-                            </div>
+                            </form>
                         </div>
-                        <div id="pagination-container"></div>
                     </div>
                 </div>
             </div>
@@ -62,16 +66,17 @@
                 // $(this).removeClass("disabled");
                 $(this).siblings().css("background-color","");
                 // $(this).siblings('.cubesat').addClass("disabled");
-                $('#step_3').find('.btn-primary').removeClass('disabled');
+                $('#step_3').find('.btn-primary').removeAttr('disabled');
                 var url = $(this).data('next');
                 $('#step_3').find('.btn-primary').attr('href',url);
                 sessionStorage.setItem('space_type',$(this).find('input[type="radio"]').val());
+                $('#step_3').find('.craft').val($(this).find('.space-type').val());
             });
 
-            if($(el).data('type') == sessionStorage.getItem('space_type')){
-                $(el).trigger('click');
-            }
         })
+        if($('#step_3').find('.craft').val() != ""){
+            $('#step_3').find('.btn-primary').removeAttr('disabled');
+        }
     });
 </script>
 @endsection

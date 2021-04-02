@@ -24,4 +24,8 @@ class FlightOpportunity extends Model
         'position'
     ];
 
+    public function obitetype(){
+        return $this->hasOne(OrbitType::class);
+    }
+
 }

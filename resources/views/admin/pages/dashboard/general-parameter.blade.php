@@ -130,9 +130,9 @@
                             <i class="fa fa-weight-hanging icon-3x mt-6 mr-2"></i>
                             <h5 class="card-label mt-3 mr-4">{{ __('Max authorized mass') }}</h5>
                             @if($parameters)
-                                <input type="text" class="form-control col-lg-6" name="smallsat" value="{{ isset($parameters['smallsat']) ? $parameters['smallsat'] : '' }}">
+                                <input type="text" class="form-control col-lg-6" name="masse" value="{{ isset($parameters['masse']) ? $parameters['masse'] : '' }}">
                             @else
-                                <input type="text" class="form-control col-lg-6" name="smallsat">
+                                <input type="text" class="form-control col-lg-6" name="masse">
                             @endif
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="button">Kg</button>
