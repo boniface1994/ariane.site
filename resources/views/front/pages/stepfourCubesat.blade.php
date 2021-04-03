@@ -34,13 +34,15 @@
                                 </div>
                                 <div class="input-group">
                                     @foreach($cubesats as $cubesat)
-                                    <div class="card card-custom col-md-3 mr-2 mb-2 cubesat" data-id="{{$cubesat->id}}" style="background-color: {{ (session('cubesat') == $cubesat->id) ? '#2176bd' : ''}}">
-                                        <div class="card-body">
-                                            <div class="input-group">
-                                                <h3 class="mr-2">
-                                                    {{$cubesat->name}}
-                                                </h3>
-                                                <input type="radio" class="d-none" value="{{$cubesat->id}}" {{ (session('cubesat') == $cubesat->id) ? 'checked' : ''}}>
+                                    <div class="col-md-4">
+                                        <div class="card card-custom  cubesat" data-id="{{$cubesat->id}}" data-name="{{strtolower($cubesat->name)}}" style="background-color: {{ (session('cubesat') == strtolower($cubesat->name)) ? '#2176bd' : ''}}">
+                                            <div class="card-body">
+                                                <div class="input-group">
+                                                    <h3 class="mr-2">
+                                                        {{$cubesat->name}}
+                                                    </h3>
+                                                    <input type="radio" class="d-none" value="{{$cubesat->id}}" {{ (session('cubesat') == strtolower($cubesat->name)) ? 'checked' : ''}}>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -50,7 +52,7 @@
                                 <div class="form-group">
                                     <a href="{{route('step_three')}}" class="btn btn-default" ><< Prev</a>
                                 </div>
-                                <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
+                                <div class="form-group" style="float: right; margin-top: -70px">
                                     <button href="{{route('step_five',['type'=>'cubsat'])}}" class="btn btn-primary disabled" >Suivant >></button>
                                 </div>
                             </form>
@@ -72,7 +74,7 @@
                 $(this).siblings().css('background-color','');
                 $(this).siblings().find('input[type="radio"]').attr('checked',false);
                 $('#step_4').find('.btn-primary').removeClass('disabled');
-                $('#step_4').find('.cubesat-id').val($(this).find('input[type="radio"]').val());
+                $('#step_4').find('.cubesat-id').val($(this).data('name'));
                 sessionStorage.setItem('cubesat',$(this).find('input[type="radio"]').val());
             })
         })

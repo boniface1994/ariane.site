@@ -87,7 +87,6 @@ class HomeController extends Controller
                 \Session::put($key,$value);
             }
         }
-
         return redirect('step_3');
     }
 
@@ -192,10 +191,47 @@ class HomeController extends Controller
                     $document = $parameter->value; 
             }
         }
-        // $prices = PriceList::all();
-        // foreach ($prices as $price) {
-        //     # code...
-        // }
-        return view('front.pages.stepseven',compact('opportunities','document'));
+        $lists = PriceList::all();
+        $prices = array();
+        foreach ($lists as $list) {
+            $prices[$list->name] = $list->value;
+        }
+        $weight = null;
+        $tarifs = null;
+        if($type == 'smallsatt'){
+            for($i=1;$i<=16;$i++){
+                if(isset($prices['p'.$i]) && $prices['p'.$i] <= session('masse')){
+                    $weight = $prices['p'.$i];
+                    if(session('tarif') == 'tarif_leo'){
+                        $tarifs = $prices['leo_p'.$i];
+                    }
+                    if(session('tarif') == 'tarif_gto'){
+                        $tarifs = $prices['gto_p'.$i];
+                    }
+                    
+                }
+            }
+        }else{
+            if(session('cubesat')){
+                if(session('tarif') == 'tarif_leo'){
+                    $tarifs = $prices['leo_'.session('cubesat')];
+                }
+                if(session('tarif') == 'tarif_gto'){
+                    $tarifs = $prices['gto_'.session('cubesat')];
+                }
+            }
+        }
+        $sessions =array();
+        if(session('alloptions')){
+            $sessions = (array) json_decode(session('alloptions'));
+        }
+
+        $all_options = Option::where('dashboard_available','=',0)->where(session('space_type'),'=',1)->orderBy('position','asc')->get();
+        $options = array();
+        foreach ($all_options as $key => $value) {
+            if(in_array($value->id, $sessions))
+                $options[] = $value;
+        }
+        return view('front.pages.stepseven',compact('opportunities','document','tarifs','options'));
     }
 }

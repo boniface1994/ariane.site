@@ -28,18 +28,20 @@
                                 <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
                                 <div class="input-group">
                                     @foreach($options as $option)
-                                    <div class="card  col-md-4 mr-2 mb-2" style="background-color: {{(in_array($option->id,$sessions)) ? '#2176bd' : ''}}">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <h4 class="form-label mr-2">{{$option->name}}</h4>
-                                                    <label class="checkbox checkbox-primary" style="margin-top: -10px">
-                                                        <input type="checkbox" class="ml-3 checker" data-session="{{$option->id}}" name="alloptions[]" value="{{$option->id}}" {{($sessions && in_array($option->id,$sessions)) ? 'checked' : ''}}/>
-                                                        <span></span>
-                                                    </label>
+                                    <div class="col-md-4">
+                                        <div class="card" style="background-color: {{(in_array($option->id,$sessions)) ? '#2176bd' : ''}}">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <h4 class="form-label mr-2">{{$option->name}}</h4>
+                                                        <label class="checkbox checkbox-primary" style="margin-top: -10px">
+                                                            <input type="checkbox" class="ml-3 checker" data-session="{{$option->id}}" name="alloptions[]" value="{{$option->id}}" {{($sessions && in_array($option->id,$sessions)) ? 'checked' : ''}}/>
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <label class="form-label">{{$option->explication}}</label><br>
+                                                    <!-- <label class="form-label" style="font-size: 10px">{{$option->cost}}</label> -->
                                                 </div>
-                                                <label class="form-label">{{$option->explication}}</label><br>
-                                                <label class="form-label" style="font-size: 10px">{{$option->cost}}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -49,8 +51,8 @@
                                 <div class="form-group">
                                     <a href="{{($type == 'smallsat') ? route('step_smallsat') : route('step_cubesat') }}" class="btn btn-default" ><< Prev</a>
                                 </div>
-                                <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
-                                    <button href="{{route('step_seven')}}" class="btn btn-primary" >Suivant >></button>
+                                <div class="form-group" style="float: right; margin-top: -70px">
+                                    <button  class="btn btn-primary" >Suivant >></button>
                                 </div>
                             </form>
                         </div>

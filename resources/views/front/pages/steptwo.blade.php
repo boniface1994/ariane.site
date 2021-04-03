@@ -27,13 +27,12 @@
                                     <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
                                     <div class="input-group">
                                         @foreach($orbites as $orbite)
-                                        <div class="card card-custom col-md-3 mr-2 mb-2 orbite" data-id="{{$orbite->id}}" data-url="{{route('parameter',['orbite_id'=>$orbite->id])}}">
+                                        <div class="card card-custom col-md-3 mr-2 mb-2 orbite" data-id="{{$orbite->id}}" data-url="{{route('parameter',['orbite_id'=>$orbite->id])}}" data-leo="{{$orbite->tarif_leo}}" data-gto="{{$orbite->tarif_gto}}" data-orbitleo="{{$orbite->orbit_leo}}" data-orbitsso="{{$orbite->orbit_sso}}">
                                             <div class="card-body">
                                                 <div class="input-group">
                                                     <h4 class="">
                                                         {{ $orbite->name }}
                                                     </h4>
-                                                    <input class="orbite-type" type="hidden" name="orbite" value="{{$orbite->orbit_sso}}">
                                                 </div>
                                                 <i class="icon-xl fa fa-info-circle" data-container="body" data-offset="20px 20px" data-toggle="popover" data-placement="top" data-content="{{$orbite->explication}}"  style="margin-top: -40px;float: right;margin-right: -37px"></i>
                                                 <input type="radio" name="orbite_type" class="d-none radio">
@@ -56,6 +55,9 @@
                                             @endforeach
                                         </div>
                                         @endforeach
+                                        <input type="hidden" class="tarif" name="tarif" value="{{session('tarif') ? session('tarif') : ''}}">
+                                        <input type="hidden" class="sso" name="sso" value="{{session('sso') ? session('sso') : ''}}">
+                                        <input type="hidden" class="leo" name="leo" value="{{session('leo') ? session('leo') : ''}}">
                                     </div><br>
                                     <div class="orb-altitude ml-2 d-none">
                                         <div class="form-group row ">
@@ -144,6 +146,22 @@
                 let url = $(this).data('url');
                 let id = $(this).data('id');
                 var type = $(this).find('.orbite-type').val();
+                if($(this).data('leo')){
+                    $(this).siblings('.tarif').val('tarif_leo');
+                }
+                if($(this).data('gto')){
+                    $(this).siblings('.tarif').val('tarif_gto');
+                }
+                if($(this).data('orbitleo')){
+                    $(this).siblings('.leo').val('leo');
+                }else{
+                    $(this).siblings('.leo').val('');
+                }
+                if($(this).data('orbitsso')){
+                    $(this).siblings('.sso').val('sso');
+                }else{
+                    $(this).siblings('.sso').val('');
+                }
                 if(type == 1){
                     $('#orbite').find('.local-time').removeClass('d-none');
                 }else{

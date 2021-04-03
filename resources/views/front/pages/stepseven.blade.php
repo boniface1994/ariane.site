@@ -20,23 +20,27 @@
                                 <div class="form-group">
                                     <h3>{{ __('Estimate launch price') }} <span class="text-danger">*</span></h3>
                                     <label class="form-label">{{ __('With option') }}</label><br>
-                                    <a>875 000 €</a><br>
+                                    <a>{{$tarifs}} €</a><br>
                                     <label class="form-label">{{ __('Without option') }}</label><br>
-                                    <a>875 000 €</a>
+                                    <a>{{$tarifs}} €</a>
                                 </div>
+                                @if(count($options)>0)
+                                @foreach($options as $option)
                                 <div class="card mb-2">
                                     <div class="card-body">
                                         <div class="input-group">
-                                            <label class="form-label mr-2">{{ __('Launch due in') }}</label>
-                                            <label class="radio radio-primary">
-                                                <input type="radio" name="radios11" checked="checked" />
+                                            <h5 class="form-label mr-2">{{ $option->name }}</h5>
+                                            <label class="checkbox checkbox-primary">
+                                                <input type="checkbox" name="radios11" checked="checked" />
                                                 <span></span>
                                             </label>
                                         </div>
-                                        <label class="form-label">5000 €</label>
+                                        <label class="form-label">{{$option->cost}} €</label>
                                     </div>
                                 </div>
-                                <div class="card ">
+                                @endforeach
+                                @endif
+                                <!-- <div class="card ">
                                     <div class="card-body">
                                         <div class="input-group">
                                             <label class="form-label mr-2">{{ __('Launch due in') }}</label>
@@ -47,7 +51,7 @@
                                         </div>
                                         <label class="form-label">5000 €</label>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                         </div>
@@ -81,12 +85,12 @@
                                                         <div class="card">
                                                             <div class="card-body">
                                                                 <div class="input-group">
-                                                                    <h4 class="form-label mr-2"> [{{ $opportunity->name }}]</h4>
-                                                                    <h4 class="form-label">{{ __('Launch due in') }} [{{$opportunity->month.' / '.$opportunity->year}}]</h4>
+                                                                    <h5 class="form-label mr-2"> [{{ $opportunity->name }}]</h5>
+                                                                    <h5 class="form-label mr-2">{{ __('Launch due in') }}<br> [{{$opportunity->month.' / '.$opportunity->year}}]</h5>
                                                                     <div class="form-group">
-                                                                        <label class="form-label">Orbite : SSO</label>
-                                                                        <label class="form-label">altitude : {{$opportunity->altitude}} km</label>
-                                                                        <label class="form-label">inclination : {{$opportunity->inclination}} °</label>
+                                                                        <h5 class="form-label">Orbite : SSO</h5><br>
+                                                                        <h5 class="form-label">altitude : {{$opportunity->altitude}} km</h5><br>
+                                                                        <h5 class="form-label">inclination : {{$opportunity->inclination}} °</h5>
                                                                     </div>
                                                                 </div>
                                                             </div>

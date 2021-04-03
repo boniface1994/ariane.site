@@ -27,14 +27,14 @@
                                 @csrf
                                 <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
                                 <div class="input-group">
-                                    <div class="form-group space" data-type="cubesat" data-next="{{route('step_cubesat')}}" style="background-color: {{ (session('space_type') == 'cubsat') ? '#2176bd' : '' }}">
+                                    <div class="col-lg-6 form-group space" data-type="cubesat" data-next="{{route('step_cubesat')}}" style="background-color: {{ (session('space_type') == 'cubsat') ? '#2176bd' : '' }}">
                                         <img src="{{ asset('media/logos/logo-light.png') }}" style="min-height: 200px;max-width: 300px">
                                         <input type="radio" class="space-type" value="cubsat" {{ (session('space_type') == 'cubsat') ? 'checked' : '' }}>
                                         <br>
                                         <label>CUBESAT</label>
                                     </div>
                                     <input type="hidden" class="craft" name="space_type" value="{{session('space_type') ? session('space_type') : '' }}">
-                                    <div class="form-group space" data-type="smallsat" data-next="{{route('step_smallsat')}}" style="background-color: {{ (session('space_type') == 'smallsat') ? '#2176bd' : '' }}">
+                                    <div class="col-lg-6 form-group space" data-type="smallsat" data-next="{{route('step_smallsat')}}" style="background-color: {{ (session('space_type') == 'smallsat') ? '#2176bd' : '' }}">
                                         <img src="{{ asset('media/logos/logo-light.png') }}" style="min-height: 200px;max-width: 300px">
                                         <input type="radio" class="space-type" value="smallsat" {{ (session('space_type') == 'smallsat') ? 'checked' : '' }}><br>
                                         <label>SMALSAT</label>
@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <a href="{{route('step_two')}}" class="btn btn-default" ><< Prev</a>
                                 </div>
-                                <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
+                                <div class="form-group" style="float: right;margin-top: -70px">
                                     <button class="btn btn-primary " disabled>Suivant >></button>
                                 </div>
                             </form>

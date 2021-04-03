@@ -53,7 +53,7 @@
                                 <!-- </div> --><br>
 
                                 <div class="form-group" style="float: right; margin-right: 175px">
-                                    <button href="{{route('step_two')}}" class="btn btn-primary disabled" >Suivant >></button>
+                                    <button href="{{route('step_two')}}" class="btn btn-primary " disabled>Suivant >></button>
                                 </div>
                             </form>
                         </div>
@@ -99,7 +99,7 @@
                 $(this).find('.trimester').attr('checked',true);
                 $(this).css("background-color","#2176bd");
                 // $(this).closest('#quarter').find('.btn').removeAttr('disabled');
-                $(el).closest('#quarter').find('.btn').removeClass('disabled');
+                $(el).closest('#quarter').find('.btn').removeAttr('disabled');
                 sessionStorage.setItem('quarter',$(this).find('.trimester').val());
                 $(this).siblings().css("background-color","");
                 $(this).siblings().find(".trimester").attr('checked',false);
@@ -112,6 +112,10 @@
             //     // $(el).closest('#quarter').find('.btn').removeAttr('disabled');
             //     $(el).closest('#quarter').find('.btn').removeClass('disabled');
             // }
+            if($(el).find('.trimester').is(':checked')){
+                $(el).css("background-color","#2176bd");
+                $(el).closest('#quarter').find('.btn').removeAttr('disabled');
+            }
         })
     });
 </script>
