@@ -75,7 +75,7 @@
                                     </div>
                                 </div><br>
                                 <div class="form-group">
-                                    <p class="text-danger d-none error-max">{{$parameters['text']}}</p>
+                                    <p class="text-danger d-none error-max">{{isset($parameters['text']) ? $parameters['text'] : ''}}</p>
                                 </div>
                                 <div class="form-group">
                                     <a href="{{route('step_three')}}" class="btn btn-default" ><< Prev</a>
