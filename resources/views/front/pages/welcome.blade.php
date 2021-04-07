@@ -122,22 +122,22 @@
                             }
                         }
 
-                        $('.paginationjs-prev').find('a').css('font-size','40px');
-                        $('.paginationjs-next').find('a').css('font-size','40px');
-                        $('.paginationjs-next').css('margin-top','-46px');
                         for(var j=0;j<all_data.length;j++){
 
                             if(j>0 && min_data == (all_data[j].q_dispo+'.'+all_data[j].annee)){
                                 $('.paginationjs-prev').find('a').text('<'+all_data[j-1].q_dispo+'.'+all_data[j-1].annee);
-                                $('.paginationjs-prev').find('a').css('font-size','17px');
+                            }
+                            if(j==0){
+                                $('.paginationjs-prev').find('a').text('');
                             }
                             if(j<all_data.length && max_data == (all_data[j].q_dispo+'.'+all_data[j].annee)){
                                 $('.paginationjs-next').find('a').text(all_data[j+1].q_dispo+'.'+all_data[j+1].annee+'>');
-                                $('.paginationjs-next').find('a').css('font-size','17px');
                                 if(j>=6){
                                     $('.paginationjs-next').css('margin-top','-24px');
                                 }
                             }
+                            if($('.paginationjs-next').find('a').text() == '»')
+                                $('.paginationjs-next').find('a').text('');
                         }
                         $('.container').find('#quarter .allquarter').html(html);
                         $('.J-paginationjs-nav').addClass('d-none');

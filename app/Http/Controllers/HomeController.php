@@ -130,6 +130,9 @@ class HomeController extends Controller
             $trim = $q_dispo.'_'.$annee;
             if(!in_array($trim, $dispo)){
                 $dispo[] = $trim;
+                if($q_dispo != $q && $annee == $year)
+                    continue;
+
                 $datas[] = (object) array('annee'=>$annee,'date'=>$quarter,'q_dispo'=>$q_dispo);
             }
         }
