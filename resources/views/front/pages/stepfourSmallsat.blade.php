@@ -61,7 +61,7 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label class="form-label">Mass (kg)</label>
-                                                    <input class="form-control masse" data-max="{{isset($parameters['masse']) ? $parameters['masse']}}"   type="number" name="masse" value="{{session('masse') ? session('masse') : ''}}">
+                                                    <input class="form-control masse" data-max="{{isset($parameters['masse']) ? $parameters['masse'] : ''}}"   type="number" name="masse" value="{{session('masse') ? session('masse') : ''}}">
                                                     <label class="form-label">Maturité technique</label>
                                                     <select class="form-control maturity" name="maturity">
                                                         <option>{{ __('Choose maturity technical') }}</option>
