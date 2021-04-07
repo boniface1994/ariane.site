@@ -55,7 +55,7 @@
         </form>
         {{-- Includable JS --}}
         @yield('scripts')
-
+        <script type="text/javascript" src="{{asset('js/pages/index.js')}}"></script>
         <script>
             document.getElementById('btnLogout').addEventListener('click', function(){
                 document.getElementById('logout-form').submit()

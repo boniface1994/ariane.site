@@ -66,7 +66,7 @@
                                         <div class="form-group row  mb-13">
                                             <div class="col-lg-8 col-md-9 col-sm-12">
                                                 <div class="ion-range-slider">
-                                                    <input type="hidden" id="altitude" data-step="0" data-type="double" data-min="0"data-max="1000" data-from="0" data-to="0" data-grid="true" name="altitude" value="{{ session('altitude') ? session('altitude') : '' }}" />
+                                                    <input type="hidden" id="altitude" data-step="0" data-type="double" data-min="0"data-max="0" data-from="0" data-to="0" data-grid="true" name="altitude" value="{{ session('altitude') ? session('altitude') : '' }}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -78,7 +78,7 @@
                                         <div class="form-group row  mb-13">
                                             <div class="col-lg-8 col-md-9 col-sm-12">
                                                 <div class="ion-range-slider">
-                                                    <input type="hidden" id="inclination" data-step="0" data-type="double" data-min="0"data-max="1000" data-from="0" data-to="0" data-grid="true" name="inclination" value="{{ session('inclination') ? session('inclination') : '' }}" />
+                                                    <input type="hidden" id="inclination" data-step="0" data-type="double" data-min="0"data-max="0" data-from="0" data-to="0" data-grid="true" name="inclination" value="{{ session('inclination') ? session('inclination') : '' }}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -142,10 +142,12 @@
 <script type="text/javascript">
     jQuery(document).ready(function () {
         $('#orbite').find('.orbite').each(function(i,el){
+            let data_latitude = $('#altitude').val();
+            let data_inclination = $('#inclination').val();
             $(el).on('click',function(){
                 let url = $(this).data('url');
                 let id = $(this).data('id');
-                var type = $(this).find('.orbite-type').val();
+                var type = $(this).data('orbitsso');
                 if($(this).data('leo')){
                     $(this).siblings('.tarif').val('tarif_leo');
                 }
@@ -158,7 +160,7 @@
                     $(this).siblings('.leo').val('');
                 }
                 if($(this).data('orbitsso')){
-                    $(this).siblings('.sso').val('sso');
+                    $(this).siblings('.sso').val($(this).data('orbitsso'));
                 }else{
                     $(this).siblings('.sso').val('');
                 }
@@ -180,7 +182,8 @@
                         if(response){
                             $('#orbite').find('#altitude').ionRangeSlider();
                             $('#orbite').find('#inclination').ionRangeSlider();
-
+                            $('#altitude').val('');
+                            $('#inclination').val('');
                             let lat = $('#altitude').data('ionRangeSlider');
                             let inc = $('#inclination').data('ionRangeSlider');
                             let min_alt =0;
@@ -230,14 +233,19 @@
                                 }
                                 setTimeout(function(){ 
                                     lat.update({
+                                        min: min_alt,
+                                        max: max_alt,
+                                        step: step_alt,
                                         from: min_alt,
-                                        to: max_alt,
-                                        step: step_alt
+                                        to: min_alt
+
                                     });
                                     inc.update({
+                                        min: min_inc,
+                                        max: max_inc,
+                                        step: step_inc,
                                         from: min_inc,
-                                        to: max_inc,
-                                        step: step_inc
+                                        to: min_inc
                                     })
                                 }, 2000);
                                 
@@ -259,57 +267,70 @@
                 $(el).closest('#orbite').find('.btn-primary').removeClass('disabled');
                 $('#orbite').find('.orb-inclination').addClass('d-none');
                 $('#orbite').find('.orb-altitude').addClass('d-none');
-                if($(el).find('.orbite-type').val() == 1){
+                if($('.sso').val() == 1){
                     $('#orbite').find('.local-time').removeClass('d-none');
                 }
 
                 if($(el).children().hasClass('altitude')){
                     $('#orbite').find('.orb-altitude').removeClass('d-none');
                     $('#orbite').find('#altitude').ionRangeSlider();
+                    let min = $(el).find('.altitude .start').val();
+                    let max = $(el).find('.altitude .end').val();
+                    let step = $(el).find('.altitude .jump').val();
                     sessionStorage.setItem('step_alt',$(el).find('.altitude .jump').val());
+                    let value = data_latitude.split(';');
+
                     let lat = $('#altitude').data('ionRangeSlider');
                     lat.update({
-                        from: sessionStorage.getItem('min_alt'),
-                        to: sessionStorage.getItem('max_alt'),
-                        step: sessionStorage.getItem('step_alt')
+                        min: min,
+                        max: max,
+                        step: step,
+                        from: value[0],
+                        to: value[1]
                     });
                 }
                 if($(el).children().hasClass('inclination')){
                     $('#orbite').find('.orb-inclination').removeClass('d-none');
                     $('#orbite').find('#inclination').ionRangeSlider();
+                    let min = $(el).find('.inclination .start').val();
+                    let max = $(el).find('.inclination .end').val();
+                    let step = $(el).find('.inclination .jump').val();
+                    let incl = data_inclination.split(';');
                     sessionStorage.setItem('step_inc',$(el).find('.inclination .jump').val());
                     let inc = $('#inclination').data('ionRangeSlider');
                     inc.update({
-                        from: sessionStorage.getItem('min_inc'),
-                        to: sessionStorage.getItem('max_inc'),
-                        step: sessionStorage.getItem('step_inc')
+                        min: min,
+                        max: max,
+                        step: step,
+                        from: incl[0],
+                        to: incl[1]
                     })
                 }
             }
         });
-        $('#orbite').find('#altitude').on('change',function(){
-            console.log('altitude',$(this).data('to'));
-            sessionStorage.setItem('min_alt',$(this).data('from'));
-            sessionStorage.setItem('max_alt',$(this).data('to'));
-        })
-        $('#orbite').find('#inclination').on('change',function(){
-            console.log('inclination',$(this).data('to'));
-            sessionStorage.setItem('min_inc',$(this).data('from'));
-            sessionStorage.setItem('max_inc',$(this).data('to'));
-        })
+        // $('#orbite').find('#altitude').on('change',function(){
+        //     console.log('altitude',$(this).data('to'));
+        //     sessionStorage.setItem('min_alt',$(this).data('from'));
+        //     sessionStorage.setItem('max_alt',$(this).data('to'));
+        // })
+        // $('#orbite').find('#inclination').on('change',function(){
+        //     console.log('inclination',$(this).data('to'));
+        //     sessionStorage.setItem('min_inc',$(this).data('from'));
+        //     sessionStorage.setItem('max_inc',$(this).data('to'));
+        // })
 
-        $('#orbite').find('.local_start').on('change',function(){
-            sessionStorage.setItem('local_start',$(this).val());
-        })
-        $('#orbite').find('.local_end').on('change',function(){
-            sessionStorage.setItem('local_end',$(this).val());
-        })
-        if(sessionStorage.getItem('local_start')){
-            $('#orbite').find('.local_start').val(sessionStorage.getItem('local_start'));
-        }
-        if(sessionStorage.getItem('local_end')){
-            $('#orbite').find('.local_end').val(sessionStorage.getItem('local_end'));
-        }
+        // $('#orbite').find('.local_start').on('change',function(){
+        //     sessionStorage.setItem('local_start',$(this).val());
+        // })
+        // $('#orbite').find('.local_end').on('change',function(){
+        //     sessionStorage.setItem('local_end',$(this).val());
+        // })
+        // if(sessionStorage.getItem('local_start')){
+        //     $('#orbite').find('.local_start').val(sessionStorage.getItem('local_start'));
+        // }
+        // if(sessionStorage.getItem('local_end')){
+        //     $('#orbite').find('.local_end').val(sessionStorage.getItem('local_end'));
+        // }
         $('#orbite').find('.ltan').on('click',function(){
             if($(this).is(':checked')){
                 sessionStorage.setItem('ltan',1);

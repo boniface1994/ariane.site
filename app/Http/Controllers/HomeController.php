@@ -46,24 +46,95 @@ class HomeController extends Controller
         $quarters = array();
         $datetime = null;
         if(count($quarters) == 0){
-            $quarters[] = date('Y-m-d',strtotime('+'.$month.' months',strtotime($date)));
+            $quarters[] = date('Y-m-d',strtotime('+'.($month + 3).' months',strtotime($date)));
             $datetime = new \DateTime($quarters[count($quarters)-1]);
             $years = $datetime->format('Y');
         }
         while ( (int)$years <= (int)$year) {
             $month +=$quarter_available['month'];
-            $quarters[] = date('Y-m-d',strtotime('+'.$month.' months',strtotime($date)));
+            $quarters[] = date('Y-m-d',strtotime('+'.($month).' months',strtotime($date)));
             $datetime = new \DateTime($quarters[count($quarters)-1]);
             $years = $datetime->format('Y');
         }
         
         $datas = array();
+        $first = ['01','02','03'];
+        $second = ['04','05','06'];
+        $third = ['07','08','09'];
+        $fourth = ['10','11','12'];
+        $dispo = array();
         foreach ($quarters as $quarter) {
             $date_q = new \DateTime($quarter);
             $annee = $date_q->format('Y');
-            $datas[] = (object) array('annee'=>$annee,'date'=>$quarter);
+            $new_month = $date_q->format('m');
+            $q_dispo = 'Q1';
+            if(in_array($new_month, $first)){
+                $q_dispo = 'Q1';
+            }elseif(in_array($new_month, $second)){
+                $q_dispo = 'Q2';
+            }elseif (in_array($new_month, $third)) {
+                $q_dispo = 'Q3';
+            }else{
+                $q_dispo = 'Q4';
+            }
+            $trim = $q_dispo.'_'.$annee;
+            if(!in_array($trim, $dispo)){
+                $dispo[] = $trim;
+                $datas[] = (object) array('annee'=>$annee,'date'=>$quarter,'q_dispo'=>$q_dispo);
+            }
         }
         return view('front.pages.welcome',compact('q','datas','year'));
+    }
+
+    public function getQuarter(){
+        $quarter_available = QuarterAvailable::first();
+        $month = $quarter_available['month'];
+        $year = $quarter_available['year'];
+        $q = strtoupper($quarter_available['quart']);
+        $datenow = new \DateTime();
+        $date = $datenow->format('Y-m-d');
+        $quarters = array();
+        $datetime = null;
+        if(count($quarters) == 0){
+            $quarters[] = date('Y-m-d',strtotime('+'.($month + 3).' months',strtotime($date)));
+            $datetime = new \DateTime($quarters[count($quarters)-1]);
+            $years = $datetime->format('Y');
+        }
+        while ( (int)$years <= (int)$year) {
+            $month +=$quarter_available['month'];
+            $quarters[] = date('Y-m-d',strtotime('+'.($month).' months',strtotime($date)));
+            $datetime = new \DateTime($quarters[count($quarters)-1]);
+            $years = $datetime->format('Y');
+        }
+        
+        $datas = array();
+        $first = ['01','02','03'];
+        $second = ['04','05','06'];
+        $third = ['07','08','09'];
+        $fourth = ['10','11','12'];
+        $dispo = array();
+        foreach ($quarters as $quarter) {
+            $date_q = new \DateTime($quarter);
+            $annee = $date_q->format('Y');
+            $new_month = $date_q->format('m');
+            $q_dispo = 'Q1';
+            if(in_array($new_month, $first)){
+                $q_dispo = 'Q1';
+            }elseif(in_array($new_month, $second)){
+                $q_dispo = 'Q2';
+            }elseif (in_array($new_month, $third)) {
+                $q_dispo = 'Q3';
+            }else{
+                $q_dispo = 'Q4';
+            }
+            $trim = $q_dispo.'_'.$annee;
+            if(!in_array($trim, $dispo)){
+                $dispo[] = $trim;
+                $datas[] = (object) array('annee'=>$annee,'date'=>$quarter,'q_dispo'=>$q_dispo);
+            }
+        }
+
+        return response()->json($datas);
     }
 
     public function oneTwo(Request $request){
@@ -72,7 +143,6 @@ class HomeController extends Controller
                 \Session::put($key,$value);
             }
         }
-
         return redirect('step_2');
     }
 

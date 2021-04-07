@@ -88,7 +88,7 @@
                                                                     <h5 class="form-label mr-2"> [{{ $opportunity->name }}]</h5>
                                                                     <h5 class="form-label mr-2">{{ __('Launch due in') }}<br> [{{$opportunity->month.' / '.$opportunity->year}}]</h5>
                                                                     <div class="form-group">
-                                                                        <h5 class="form-label">Orbite : SSO</h5><br>
+                                                                        <h5 class="form-label">Orbite : {{session('sso') ? 'SSO' : ''}} {{session('leo') ? 'LEO' : ''}}</h5><br>
                                                                         <h5 class="form-label">altitude : {{$opportunity->altitude}} km</h5><br>
                                                                         <h5 class="form-label">inclination : {{$opportunity->inclination}} °</h5>
                                                                     </div>

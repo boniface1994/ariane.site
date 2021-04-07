@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="input-group">
                                     @foreach($cubesats as $cubesat)
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 parent" >
                                         <div class="card card-custom  cubesat" data-id="{{$cubesat->id}}" data-name="{{strtolower($cubesat->name)}}" style="background-color: {{ (session('cubesat') == strtolower($cubesat->name)) ? '#2176bd' : ''}}">
                                             <div class="card-body">
                                                 <div class="input-group">
@@ -49,6 +49,9 @@
                                     @endforeach
                                     <input type="hidden" class="cubesat-id" name="cubesat" value="{{session('cubesat') ? session('cubesat') : ''}}">
                                 </div><br><br>
+                                <div class="row-form-group">
+                                    <label class="form-label"> Pour tout autre taille : <a href="">Call us </a></label>
+                                </div>
                                 <div class="form-group">
                                     <a href="{{route('step_three')}}" class="btn btn-default" ><< Prev</a>
                                 </div>
@@ -71,8 +74,8 @@
             $(el).on('click',function(){
                 $(this).css('background-color','#2176bd');
                 $(this).find('input[type="radio"]').attr('checked',true);
-                $(this).siblings().css('background-color','');
-                $(this).siblings().find('input[type="radio"]').attr('checked',false);
+                $(this).closest('.parent').siblings().find('.cubesat').css('background-color','');
+                $(this).closest('.parent').siblings().find('input[type="radio"]').attr('checked',false);
                 $('#step_4').find('.btn-primary').removeClass('disabled');
                 $('#step_4').find('.cubesat-id').val($(this).data('name'));
                 sessionStorage.setItem('cubesat',$(this).find('input[type="radio"]').val());

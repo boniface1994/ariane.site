@@ -38,11 +38,11 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label class="form-label">Longueur (mm)</label>
-                                                    <input class="form-control dimension_l" type="number" data-max="{{$parameters['dimension_l']}}" name="dimension_l" value="{{session('dimension_l') ? session('dimension_l') : ''}}">
+                                                    <input class="form-control dimension_l" type="number" data-max="{{isset($parameters['dimension_l']) ? $parameters['dimension_l'] : ''}}" name="dimension_l" value="{{session('dimension_l') ? session('dimension_l') : ''}}">
                                                     <label class="form-label">Largeur (mm)</label>
-                                                    <input class="form-control dimension_p" type="number" data-max="{{$parameters['dimension_p']}}"  name="dimension_p" value="{{session('dimension_p') ? session('dimension_p') : ''}}">
+                                                    <input class="form-control dimension_p" type="number" data-max="{{isset($parameters['dimension_p']) ? $parameters['dimension_p'] : ''}}"  name="dimension_p" value="{{session('dimension_p') ? session('dimension_p') : ''}}">
                                                     <label class="form-label">Hauteur (mm)</label>
-                                                    <input class="form-control dimension_i" type="number" data-max="{{$parameters['dimension_i']}}" name="dimension_i" value="{{session('dimension_i') ? session('dimension_i') : ''}}">
+                                                    <input class="form-control dimension_i" type="number" data-max="{{isset($parameters['dimension_i']) ? $parameters['dimension_i'] : ''}}" name="dimension_i" value="{{session('dimension_i') ? session('dimension_i') : ''}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label class="form-label">Mass (kg)</label>
-                                                    <input class="form-control masse" data-max="{{$parameters['masse']}}"   type="number" name="masse" value="{{session('masse') ? session('masse') : ''}}">
+                                                    <input class="form-control masse" data-max="{{isset($parameters['masse']) ? $parameters['masse']}}"   type="number" name="masse" value="{{session('masse') ? session('masse') : ''}}">
                                                     <label class="form-label">Maturité technique</label>
                                                     <select class="form-control maturity" name="maturity">
                                                         <option>{{ __('Choose maturity technical') }}</option>

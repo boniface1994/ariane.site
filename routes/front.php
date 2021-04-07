@@ -29,6 +29,8 @@ Route::get('/step_5/{type}','HomeController@stepFive')->name('step_five');
 Route::post('fivesix','HomeController@fiveSix')->name('session_five');
 Route::get('/step_7','HomeController@stepSeven')->name('step_seven');
 
+Route::get('dataquater','HomeController@getQuarter')->name('allquarter');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
