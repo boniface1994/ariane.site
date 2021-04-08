@@ -23,7 +23,11 @@
             {{-- <div class="line-bar"></div> --}}
             <br><br><br><br><br><br>
             <br><br><br><br><br><br>
-            <br><br><br><br><br><br>
+            <br><br><br><br><br><br> 
+            <div class="label-launch">book your launch</div>
+            <div class="label-445">
+                <img src="{{ asset('media/logos/445.svg') }}" alt="445">
+            </div>
         </div>
     </div>
 </div>

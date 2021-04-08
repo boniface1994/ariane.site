@@ -109,3 +109,26 @@
   flex-grow: 0;
   margin: 0px 30px;
 }
+
+/* book your launch */
+
+.label-launch{
+  position: absolute;
+width: 133px;
+height: 12px;
+left: 54px;
+top: 54px;
+
+font-family: FS Meridian;
+font-style: normal;
+font-weight: 300;
+font-size: 12px;
+line-height: 12px;
+/* identical to box height */
+letter-spacing: 0.04em;
+text-transform: uppercase;
+
+/* Black */
+color: #000000;
+}
+
