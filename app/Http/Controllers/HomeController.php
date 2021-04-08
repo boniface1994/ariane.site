@@ -146,7 +146,7 @@ class HomeController extends Controller
                 \Session::put($key,$value);
             }
         }
-        return redirect('step_2');
+        return redirect('c/step_2');
     }
 
     public function stepTwo(){
@@ -160,7 +160,7 @@ class HomeController extends Controller
                 \Session::put($key,$value);
             }
         }
-        return redirect('step_3');
+        return redirect('c/step_3');
     }
 
     public function orbiteParameter($orbite_id){
@@ -179,8 +179,8 @@ class HomeController extends Controller
             }
         }
         if(session('space_type') == 'cubsat')
-            return redirect('/step_4_cubsat');
-        return redirect('/step_4_smallsat');
+            return redirect('c/step_4_cubsat');
+        return redirect('c/step_4_smallsat');
     }
 
     public function stepCubesat(){
@@ -245,7 +245,7 @@ class HomeController extends Controller
 
     public function fiveSix(Request $request){
         \Session::put('alloptions',json_encode((object)$request->request->get('alloptions')));
-        return redirect('/step_7');
+        return redirect('c/step_7');
     }
 
     public function stepSeven(){
