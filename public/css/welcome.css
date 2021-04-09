@@ -3,6 +3,11 @@
   src: url("/fonts/FSMeridian-Bold.ttf");
 }
 
+:root {
+  --orange: #EE7203;
+  --gris: #EBEBEB;
+}
+
 .content-box {
   background: #EBEBEB;
   width: 100%;
@@ -108,4 +113,115 @@
   order: 0;
   flex-grow: 0;
   margin: 0px 30px;
+}
+
+/* Pagination */
+.pagination {
+  position: sticky;
+  width: 30px;
+  height: 190px;
+  left: 100%;
+  margin-right: -27px;
+}
+
+.pagination .number {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 0px 0px;
+
+  position: absolute;
+  width: 30px;
+  height: 30px;
+
+  background: var(--gris);
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 20px;
+
+  font-family: fsmeridian;
+}
+
+.pagination .active {
+  border: 0;
+  background: var(--orange);
+  color: white;
+}
+
+.book-your-launch {
+  margin: 4em;
+  text-transform: uppercase;
+}
+
+.container-box {
+  padding: 5em;
+  position: absolute;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  /* top: 25%; */
+  bottom: auto;
+  height: 40vh;
+  justify-content: center;
+}
+
+.container-box .card-box {
+  background: white;
+  margin: 10px;
+  width: 27em;
+  height: 8em;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.container-box .card-box input[type='radio'] {
+  position: absolute;
+  margin-top: -5em;
+  margin-left: 24em;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.container-box .card-box .card-title {
+  font-size: 1.8em;
+  font-weight: 600;
+  font-family: 'fsmeridian';
+  margin: 0;
+}
+
+.page-nav {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 3em 0 3em;
+}
+
+.btn.next-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  position: absolute;
+  width: 150px;
+  height: 60px;
+  background: #CCCCCC;
+  bottom: 7em;
+  right: 7em;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: whitesmoke;
+}
+
+button.close {
+  padding: 0.4em;
+  background-color: transparent;
+  border: 1px solid var(--orange);
+  right: 3em;
+  position: relative;
+  top: -4em;
 }
