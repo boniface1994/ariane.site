@@ -73,8 +73,6 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-=======
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
@@ -178,5 +176,4 @@
         
     });
 </script>
->>>>>>> 600ef55e706ee7bc0ecea4b3e5c77e3cc4f6aa3b
 @endsection
