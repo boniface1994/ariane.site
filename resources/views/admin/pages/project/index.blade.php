@@ -33,11 +33,7 @@
                                 <option value="5">{{ __('Choose steps') }}</option>
                                 <option value="1" {{ (session('step') == 1) ? 'selected' : '' }}>{{ __('Welcom package') }}</option>
                                 <option value="2" {{ (session('step') == 2) ? 'selected' : '' }}> {{ __('Get your contact') }}</option>
-                                <optgroup label="{{ __('Fasability analitics') }}">
-                                    <option value="31" {{ (session('step') == 31) ? 'selected' : '' }}>{{ __('You provide additional information on your Satellite, including a model') }}</option>
-                                    <option value="32" {{ (session('step') == 32) ? 'selected' : '' }}>{{ __('We perform accommodation studies and flight loads predictions') }}</option>
-                                    <option value="33" {{ (session('step') == 33) ? 'selected' : '' }}>{{ __('We assess together your flight qualification logic') }}</option>
-                                </optgroup>
+                                <option value="3" {{ (session('step') == 3) ? 'selected' : '' }}>{{ __('Fasability analitics') }}</option>
                                 <option value="4" {{ (session('step') == 4) ? 'selected' : '' }}>{{ __('Qualifications status') }}</option>
                             </select>
                         </div>

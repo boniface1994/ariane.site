@@ -54,11 +54,8 @@
                         <option >{{ __('Choose steps') }}</option>
                         <option {{ ($project->step == 1) ? 'selected' : '' }}>{{ __('Welcom package') }}</option>
                         <option value="2" {{ ($project->step == 2) ? 'selected' : '' }}> {{ __('Get your contact') }}</option>
-                        <optgroup label="{{ __('Fasability analitics') }}">
-                            <option {{ ($project->step == 31) ? 'selected' : '' }}>{{ __('You provide additional information on your Satellite, including a model') }}</option>
-                            <option value="32" {{ ($project->step == 32) ? 'selected' : '' }}>{{ __('We perform accommodation studies and flight loads predictions') }}</option>
-                            <option value="33" {{ ($project->step == 33) ? 'selected' : '' }}>{{ __('We assess together your flight qualification logic') }}</option>
-                        </optgroup>
+                        <option value="3" {{ ($project->step == 3) ? 'selected' : '' }}>{{ __('Fasability analitics') }}
+                        </option>
                         <option value="4" {{ ($project->step == 4) ? 'selected' : '' }}>{{ __('Qualifications status') }}</option>
                     </select>
                     </div>

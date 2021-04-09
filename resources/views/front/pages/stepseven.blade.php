@@ -56,61 +56,62 @@
 
                         </div>
                         <div class="form-group col-lg-9"  id="step_5">
-                            <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
-                            <div class="input-group">
-                                <div class="col-md-3 ">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <h4> {{ __('Spacecraft position') }}</h4>
-                                                <img src="{{ asset('media/logos/logo-light.png') }}" class="mr-2" style="max-width: 120px" alt="" />
-                                            </div>
-                                            <div class="card ">
-                                                <div class="card-body">
-                                                    <div class="form-group">
-                                                        <a href="{{asset('upload/'.$document)}}" target="_blank" > {{ __('Terms and condition standard') }}</a>
+                            <!-- <form action="" method="POST"> -->
+                                <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
+                                <div class="input-group">
+                                    <div class="col-md-3 ">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <h4> {{ __('Spacecraft position') }}</h4>
+                                                    <img src="{{ asset('media/logos/logo-light.png') }}" class="mr-2" style="max-width: 120px" alt="" />
+                                                </div>
+                                                <div class="card ">
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <a href="{{asset('upload/'.$document)}}" target="_blank" > {{ __('Terms and condition standard') }}</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="card ">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <h4> {{ __('Select your lunch') }}</h4>
-                                                @foreach($opportunities as $opportunity)
-                                                    <div class="col-md-12">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="input-group">
-                                                                    <h5 class="form-label mr-2"> [{{ $opportunity->name }}]</h5>
-                                                                    <h5 class="form-label mr-2">{{ __('Launch due in') }}<br> [{{$opportunity->month.' / '.$opportunity->year}}]</h5>
-                                                                    <div class="form-group">
-                                                                        <h5 class="form-label">Orbite : {{session('sso') ? 'SSO' : ''}} {{session('leo') ? 'LEO' : ''}}</h5><br>
-                                                                        <h5 class="form-label">altitude : {{$opportunity->altitude}} km</h5><br>
-                                                                        <h5 class="form-label">inclination : {{$opportunity->inclination}} °</h5>
+                                    <div class="col-md-9">
+                                        <div class="card ">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <h4> {{ __('Select your lunch') }}</h4>
+                                                    @foreach($opportunities as $opportunity)
+                                                        <div class="col-md-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="input-group">
+                                                                        <h5 class="form-label mr-2"> [{{ $opportunity->name }}]</h5>
+                                                                        <h5 class="form-label mr-2">{{ __('Launch due in') }}<br> [{{$opportunity->month.' / '.$opportunity->year}}]</h5>
+                                                                        <div class="form-group">
+                                                                            <h5 class="form-label">Orbite : {{session('sso') ? 'SSO' : ''}} {{session('leo') ? 'LEO' : ''}}</h5><br>
+                                                                            <h5 class="form-label">altitude : {{$opportunity->altitude}} km</h5><br>
+                                                                            <h5 class="form-label">inclination : {{$opportunity->inclination}} °</h5>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                @endforeach
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div><br>
+                                
+                                <div class="form-group">
+                                    <a href="{{route('step_five',['type'=>session('space_type')])}}" class="btn btn-default" ><< Prev</a>
                                 </div>
-                            </div><br>
-                            
-                            <div class="form-group">
-                                <a href="{{route('step_five',['type'=>session('space_type')])}}" class="btn btn-default" ><< Prev</a>
-                            </div>
-                            <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
-                                <!-- <a class="btn btn-primary disabled" >Suivant >></a> -->
-                            </div>
+                                <div class="form-group" style="float: right; margin-right: 175px;margin-top: -70px">
+                                    <a href="{{route('connect')}}"><button class="btn btn-primary disabled" > Suivant >></button></a>
+                                </div>
+                            <!-- </form> -->
                         </div>
-                        <div id="pagination-container"></div>
                     </div>
                 </div>
             </div>
