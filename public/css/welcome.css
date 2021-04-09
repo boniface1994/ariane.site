@@ -176,6 +176,11 @@
   align-items: center;
 }
 
+.container-box .card-box.active {
+  background-color: #000000;
+  color: white;
+}
+
 .container-box .card-box input[type='radio'] {
   position: absolute;
   margin-top: -5em;
