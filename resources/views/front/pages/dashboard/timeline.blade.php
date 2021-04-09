@@ -48,7 +48,7 @@
                                                 <!--end::Badge-->
 
                                                 <!--begin::Text-->
-                                                <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">
+                                                <div class="font-weight-mormal font-size-lg timeline-content text-warning pl-3">
                                                     You are here
                                                 </div>
                                                 <!--end::Text-->

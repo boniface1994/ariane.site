@@ -21,7 +21,7 @@
                         <div class="form-group col-lg-9"  >
                             <div class="input-group">
                                 <div class="col-md-12">
-                                    <form class="form">
+                                    <form class="form" action="{{route('customer_register')}}" method="POST">
                                         @csrf
                                         <div class="form-group">
                                             <h3 class="form-label" style="font-size: 30px"> {{ __('YOUR PROJECT') }}</h3>
