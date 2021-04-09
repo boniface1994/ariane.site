@@ -30,7 +30,16 @@ Route::group(['prefix'=>'c'],function(){
 	Route::get('/step_7','HomeController@stepSeven')->name('step_seven');
 
 	Route::get('dataquater','HomeController@getQuarter')->name('allquarter');
+
 });
+
+Route::get('/connect','HomeController@connectCompte')->name('connect');
+Route::get('/signin','RegisterController@signin')->name('signin');
+Route::get('/project-name','RegisterController@beforeLogin')->name('beforelogin');
+Route::post('/before-login','RegisterController@toLogin')->name('toLogin');
+Route::get('/front-login','LoginController@login')->name('login_front');
+
+Route::get('/timeline','LoginController@timeline')->name('timeline');
 
 Auth::routes();
 
