@@ -14,7 +14,7 @@
             </div>
             <div class="launch-period">
                 <div class="number">02</div>
-                <div class="label-number">Choose your launch period</div>
+                <div class="label-number" style="font-size: 18px;">Where do you need to send your spacecraft?</div>
             </div>
             <div class="read-more">
                 <span class="text">Any questions? contact us</span>
