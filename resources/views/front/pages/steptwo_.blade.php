@@ -21,11 +21,11 @@
                 <span class="ico ico-vector-bl"></span>
             </div>
             <ul class="pagination">
-              <li class="number active" style="top: 207px">01</li>  
-              <li class="number" style="top: 247px">02</li>  
-              <li class="number" style="top: 287px">03</li>  
-              <li class="number" style="top: 327px">04</li>  
-              <li class="number" style="top: 367px">05</li>  
+              <li class="number active" style="top: 50%">01</li>  
+              <li class="number" style="top: 70%">02</li>  
+              <li class="number" style="top: 90%">03</li>  
+              <li class="number" style="top: 110%">04</li>  
+              <li class="number" style="top: 130%">05</li>  
             </ul>
         </section>
         <section class="col-md-8 right-section">
@@ -102,7 +102,7 @@
               </div>
               <h2 class="font-weight-bolder mt-5">{{ __('Your constraint') }}</h2>
               <div class="form-group row width-90">
-                <input class="form-control constraint" type="text" name="constraint" value="{{session('constraint') ? session('constraint') : '' }}">
+                <textarea class="form-control constraint" name="constraint" placeholder="Consectetur sit iaculis iaculis ullamcorper...">{{session('constraint') ? session('constraint') : '' }}</textarea>
               </div>
             </div>
             <button class="btn-back">

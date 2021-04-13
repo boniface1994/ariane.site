@@ -207,8 +207,22 @@ body {
   position: absolute;
   margin-top: -5em;
   margin-left: 21%;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.container-box .card-box input[type='radio']:checked:after {
+  width: 18px;
+  height: 18px;
+  border-radius: 15px;
+  top: 0.5px;
+  left: 0.5px;
+  position: relative;
+  background-color: white;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 5px solid var(--orange);
 }
 
 .container-box .card-box .card-title {
@@ -216,6 +230,29 @@ body {
   font-weight: 600;
   font-family: 'fsmeridian';
   margin: 0;
+}
+
+.container-box .card-box.card-img {
+  height: auto !important;
+}
+
+.container-box .card-box.card-img.active {
+  background-color: white;
+}
+.container-box .card-box.card-img.disabled {
+  background-color: #ddd;
+}
+
+.container-box .card-box.card-img input[type='radio'] {
+  height: 1.2em;
+  margin-top: -29em;
+}
+
+.container-box .card-box.card-img .card-desc{
+  position: relative;
+  right: 18em;
+  top: 14.6em;
+  color: #000;
 }
 
 .page-nav {
@@ -246,7 +283,7 @@ body {
 }
 
 button.close {
-  padding: 0.4em;
+  padding: 0.3em;
   background-color: transparent;
   border: 1px solid var(--orange);
   right: 2%;

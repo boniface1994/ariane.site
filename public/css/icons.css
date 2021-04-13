@@ -7,9 +7,12 @@
 .ico.ico-vector-l {
   background-image: url('/media/svg/icons/Navigation/Vector-left.svg');
 }
+.ico.ico-vector-r {
+  background-image: url('/media/svg/icons/Navigation/Vector-right.svg');
+}
 
 .ico {
-  display: block;
+  display: inline-flex;
   height: 18px;
   width: 18px;
   background-repeat: no-repeat;
