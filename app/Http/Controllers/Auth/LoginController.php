@@ -35,6 +35,16 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // $this->middleware('guest:admin')->except(['logout','loginForm']);
+        // $this->middleware('guest:customer')->except(['logout','frontLogin']);
+        // Auth::guard('admin')->logout();
+    }
+
+    public function loginForm(){
+        return view('admin.pages.auth.login');
+    }
+
+    public function frontLogin(){
+        return view('front.pages.signin.login');
     }
 }

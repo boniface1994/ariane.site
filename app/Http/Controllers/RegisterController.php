@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use App\Mail\MailConfirmation;
 use App\Models\Customers\Customer;
 use App\Models\Admin\Project;
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('guest:customer')->except('logout');
+    // }
     public function signin(){
     	return view('front.pages.signin.signin');
     }

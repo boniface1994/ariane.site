@@ -40,8 +40,16 @@ Route::get('/confirm_email/{id}','RegisterController@confirm');
 Route::get('/project-name','RegisterController@beforeLogin')->name('beforelogin');
 Route::post('/before-login','RegisterController@toLogin')->name('toLogin');
 Route::get('/front-login','LoginController@login')->name('login_front');
+Route::post('/login-front','LoginController@loginrequest')->name('front_login');
+Route::get('/front-logout','LoginController@logout')->name('front.logout');
 
-Route::get('/timeline','LoginController@timeline')->name('timeline');
+Route::group(['middleware' => 'auth:customer','prefix'=>'customer'],function(){
+	Route::get('/timeline/{project_id}','LoginController@timeline')->name('timeline');
+	Route::group(['prefix'=>'dashboard','namespace'=>'Front'],function(){
+		Route::get('/caracteristic/{id}','HomeController@caracteristic')->name('caracteristic');
+		Route::get('/nda','HomeController@getNda')->name('nda');
+	});
+});
 
 Auth::routes();
 
