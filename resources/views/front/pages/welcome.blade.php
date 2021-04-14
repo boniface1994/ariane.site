@@ -15,22 +15,35 @@
                         </div>
                     @endif
                     <div class="input-group">
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 left-section">
                             <div class="form-group">
                                 <img src="{{ asset('media/logos/logo-easy.svg') }}" class="mr-2" style="max-width: 120px" alt="" /><br>
                                 <label class="number">01</label>
                                 <label class="title" style="font-size: 30px">{{ __('Choose your lauch period') }}</label>
+                                <hr width="105%">
+                                <div class="read-more">
+                                    <span>Any questions?<br>contact us</span>
+                                    <span><img src="{{ asset('media/svg/icons/Navigation/Vector.svg') }}" alt="contact us"></span>
+                                </div>
                             </div>
+                            <ul class="pagination">
+                                <li class="num-page active" style="top: -32em">01</li>  
+                                <li class="num-page" style="top: -29em">02</li>  
+                                <li class="num-page" style="top: -26em">03</li>  
+                                <li class="num-page" style="top: -23em">04</li>  
+                                <li class="num-page" style="top: -20em">05</li>  
+                            </ul>
                         </div>
                         <div class="form-group col-lg-9"  id="quarter">
                             <form action="{{route('session_one')}}" method="POST">
                                 @csrf
                                 <label class="form-label top-title"> {{ __('Book your launch') }}</label>
+                                <a href="#"><i class="far fa-window-close fa-2x" style="color: var(--orange); float: right;"></i></a>
                                 <div class="input-group allquarter" data-route="{{route('allquarter')}}" data-year={{$year}} data-sess_quarter="{{session('quarter') ? session('quarter') : ''}}">
                                 </div>
                                 <div id="pagination-bar"></div>
                                 <br>
-                                <div class="form-group" style="float: right;">
+                                <div class="form-group mt-5" style="float: right;">
                                     <button href="{{route('step_two')}}" class="btn btn-next" disabled>SUIVANT</button>
                                 </div>
                             </form>
@@ -45,7 +58,14 @@
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
 <script type="text/javascript">
+
+    $( window ).resize(function() {
+        $('.pagination').css('left', $('.left-section').width() + 12 * 1 );
+    });
     jQuery(document).ready(function () {
+
+        $('.pagination').css('left', $('.left-section').width() + 12 * 1 );
+
         var all = null;
         var year = $('.allquarter').data('year');
         var session = $('.allquarter').data('sess_quarter');
