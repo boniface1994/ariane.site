@@ -76,7 +76,7 @@
                             }
 
                             $('.paginationjs-prev').find('a').css('font-size','20px').html("<i class='fa fa-angle-double-left'></i>");
-                            $('.paginationjs-next').find('a').css('font-size','40px');
+                            $('.paginationjs-next').find('a').css('font-size','20px').html("<i class='fa fa-angle-double-right'></i>");
                             $('.paginationjs-next').css('margin-top','-32px');
                             for(var j=0;j<all_data.length;j++){
 

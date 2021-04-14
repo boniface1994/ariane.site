@@ -66,6 +66,9 @@ body {
   font-size: 12px;
 }
 
+.btn.btn-next:disabled {
+  background-color: #CCCCCC;
+}
 .btn.btn-next {
   display: flex;
   flex-direction: row;
@@ -75,7 +78,7 @@ body {
   position: absolute;
   width: 150px;
   height: 60px;
-  background: #CCCCCC;
+  background: #000;
   right: 2%;
   border-radius: 0;
   text-transform: uppercase;
