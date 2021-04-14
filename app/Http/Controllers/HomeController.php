@@ -83,7 +83,7 @@ class HomeController extends Controller
                 $datas[] = (object) array('annee'=>$annee,'date'=>$quarter,'q_dispo'=>$q_dispo);
             }
         }
-        return view('front.pages.welcome1',compact('q','datas','year'));
+        return view('front.pages.welcome',compact('q','datas','year'));
     }
 
     public function getQuarter(){
