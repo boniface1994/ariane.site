@@ -82,3 +82,24 @@ body {
   font-weight: 600;
   color: whitesmoke;
 }
+
+.card .input-group input[type='radio']:checked:after {
+  width: 18px;
+  height: 17px;
+  border-radius: 15px;
+  position: relative;
+  background-color: white;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 5px solid var(--orange);
+}
+
+#pagination-bar {
+  width: 100%;
+  padding: 0 10% 0 10%;
+}
+
+.paginationjs-pages ul {
+  padding: 0;
+}

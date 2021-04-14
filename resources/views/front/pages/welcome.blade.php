@@ -8,8 +8,6 @@
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card" style="background-color: #E5E5E5;">
-                <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
-
                 <div class="card-body" style="overflow: hidden">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -23,58 +21,29 @@
                                 <label class="number">01</label>
                                 <label class="title" style="font-size: 30px">{{ __('Choose your lauch period') }}</label>
                             </div>
-
                         </div>
                         <div class="form-group col-lg-9"  id="quarter">
                             <form action="{{route('session_one')}}" method="POST">
                                 @csrf
                                 <label class="form-label top-title"> {{ __('Book your launch') }}</label>
-                                <!-- <div class="card card-custom" id="quarter">
-                                    <div class="card-body"> -->
-                                        <div class="input-group allquarter" data-route="{{route('allquarter')}}" data-year={{$year}} data-sess_quarter="{{session('quarter') ? session('quarter') : ''}}">
-                                            <!-- @foreach($datas as $data)
-                                            @if($data->annee <= $year)
-                                            <div class="card card-custom col-md-3 mr-2 mb-2 quarter" style="background-color: {{(session('quarter') == $data->date) ? '#2176bd' : ''}}" >
-                                                <div class="card-body">
-                                                    <div class="input-group">
-                                                        <h3 class="mr-2">
-                                                            {{ $data->q_dispo }}.{{ $data->annee }}
-                                                        </h3>
-                                                        <input class="radio radio-success trimester" type="radio" name="quarter" value="{{$data->date}}" {{(session('quarter') == $data->date) ? 'checked' : ''}}>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endif
-                                            @endforeach -->
-
-                                            
-                                        </div>
-                                        <div id="pagination-bar"></div>
-                                    <!-- </div> -->
-                                    <!-- <div class="input-group">
-                                        <button class="col-md-2">Prev</button>
-                                        <button class="col-md-2">Next</button>
-                                    </div> -->
-                                <!-- </div> --><br>
-
+                                <div class="input-group allquarter" data-route="{{route('allquarter')}}" data-year={{$year}} data-sess_quarter="{{session('quarter') ? session('quarter') : ''}}">
+                                </div>
+                                <div id="pagination-bar"></div>
+                                <br>
                                 <div class="form-group" style="float: right;">
-                                    <button href="{{route('step_two')}}" class="btn btn-next " disabled>SUIVANT</button>
+                                    <button href="{{route('step_two')}}" class="btn btn-next" disabled>SUIVANT</button>
                                 </div>
                             </form>
                         </div>
-                        <!-- <div id="pagination-data-container"></div>
-                        <div id="pagination-bar"></div> -->
                     </div>
                 </div>
             </div>
-            <button class="btn next-btn">Continue</button>
         </section>
     </div>
 </div>
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/jquery-paginate@1.0.1/jquery-paginate.min.js"></script> -->
 <script type="text/javascript">
     jQuery(document).ready(function () {
         var all = null;
@@ -106,7 +75,7 @@
                                 }
                             }
 
-                            $('.paginationjs-prev').find('a').css('font-size','20px').html("<i class='fa fa-arrow-left'></i>");
+                            $('.paginationjs-prev').find('a').css('font-size','20px').html("<i class='fa fa-angle-double-left'></i>");
                             $('.paginationjs-next').find('a').css('font-size','40px');
                             $('.paginationjs-next').css('margin-top','-32px');
                             for(var j=0;j<all_data.length;j++){
@@ -160,9 +129,8 @@
             var html='';
             $.each(data, function(index, item){
                 if(item.annee <= year){
-                    html += '<div class="card card-custom col-md-3 mr-2 mb-2 quarter" style="background-color: {{(session("quarter") =='+item.date+') ? "#2176bd" : ""}}" ><div class="card-body"><div class="input-group"><h3 class="mr-2">'+ item.q_dispo+'.'+item.annee +'</h3><input class="radio radio-success trimester" type="radio" data-sess="{{session("quarter")}}" name="quarter" value="'+item.date+'" {{(session("quarter") == '+item.date+') ? "checked" : ""}}></div></div></div>';
+                    html += '<label class="card card-custom col-md-3 mr-2 mb-2 quarter" style="background-color: {{(session("quarter") =='+item.date+') ? "#2176bd" : ""}}" ><div class="card-body"><div class="input-group"><h3 class="mr-2">'+ item.q_dispo+'.'+item.annee +'</h3><input class="radio radio-success trimester" type="radio" data-sess="{{session("quarter")}}" name="quarter" value="'+item.date+'" {{(session("quarter") == '+item.date+') ? "checked" : ""}}></div></div></label>';
                 }
-                
             });
                   html+='';                                      
             return html;
