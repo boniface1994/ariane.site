@@ -1,76 +1,74 @@
 @extends('layouts.front')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+@endsection
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-12">
-            <div class="card">
-                <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <div class="input-group">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <img src="{{ asset('media/logos/logo-light.png') }}" class="mr-2" style="max-width: 120px" alt="" /><br>
-                                <label class="number" style="font-size: 120px">01</label>
-                                <label class="title" style="font-size: 30px">{{ __('Choose your lauch period') }}</label>
-                            </div>
-
-                        </div>
-                        <div class="form-group col-lg-9"  id="quarter">
-                            <form action="{{route('session_one')}}" method="POST">
-                                @csrf
-                                <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
-                                <!-- <div class="card card-custom" id="quarter">
-                                    <div class="card-body"> -->
-                                        <div class="input-group allquarter" data-route="{{route('allquarter')}}" data-year={{$year}} data-sess_quarter="{{session('quarter') ? session('quarter') : ''}}">
-                                            <!-- @foreach($datas as $data)
-                                            @if($data->annee <= $year)
-                                            <div class="card card-custom col-md-3 mr-2 mb-2 quarter" style="background-color: {{(session('quarter') == $data->date) ? '#2176bd' : ''}}" >
-                                                <div class="card-body">
-                                                    <div class="input-group">
-                                                        <h3 class="mr-2">
-                                                            {{ $data->q_dispo }}.{{ $data->annee }}
-                                                        </h3>
-                                                        <input class="radio radio-success trimester" type="radio" name="quarter" value="{{$data->date}}" {{(session('quarter') == $data->date) ? 'checked' : ''}}>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endif
-                                            @endforeach -->
-
-                                            
-                                        </div>
-                                    <!-- </div> -->
-                                    <!-- <div class="input-group">
-                                        <button class="col-md-2">Prev</button>
-                                        <button class="col-md-2">Next</button>
-                                    </div> -->
-                                    <div id="pagination-bar"></div>
-                                <!-- </div> --><br>
-
-                                <div class="form-group" style="float: right; margin-right: 175px">
-                                    <button href="{{route('step_two')}}" class="btn btn-primary " disabled>Suivant >></button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- <div id="pagination-data-container"></div>
-                        <div id="pagination-bar"></div> -->
+<div class="content-box">
+    <div class="row">
+        <section class="col-md-4 left-section">
+            <div class="logo">
+                <img src="{{ asset('media/logos/logo-easy.svg') }}" alt="logo easy">
+            </div>
+            <div class="launch-period">
+                <div class="number">01</div>
+                <div class="label-number">Choose your launch period</div>
+            </div>
+            <div class="read-more">
+                <span class="text">Any questions? contact us</span>
+                <span><img src="{{ asset('media/svg/icons/Navigation/Vector.svg') }}" alt="contact us"></span>
+            </div>
+            <ul class="pagination">
+              <li class="number active" style="top: 207px">01</li>  
+              <li class="number" style="top: 247px">02</li>  
+              <li class="number" style="top: 287px">03</li>  
+              <li class="number" style="top: 327px">04</li>  
+              <li class="number" style="top: 367px">05</li>  
+            </ul>
+        </section>
+        <section class="col-md-8 right-section">
+            {{-- <div class="line-bar"></div> --}}
+            <div class="book-your-launch">BOOK YOUR LAUNCH</div>
+            <button class="close"><img src="{{ asset('media/svg/icons/Navigation/Cross.svg') }}" alt="close"></button>
+            <div class="container-box">
+                <label class="card-box">
+                    <div class="card-title">Q4.2021</div>
+                    <input type="radio" name="q4" id="">
+                </label>
+                <label class="card-box">
+                    <div class="card-title">Q4.2021</div>
+                    <input type="radio" name="q4" id="">
+                </label>
+                <label class="card-box">
+                    <div class="card-title">Q4.2021</div>
+                    <input type="radio" name="q4" id="">
+                </label>
+                <label class="card-box">
+                    <div class="card-title">Q4.2021</div>
+                    <input type="radio" name="q4" id="">
+                </label>
+                <label class="card-box">
+                    <div class="card-title">Q4.2021</div>
+                    <input type="radio" name="q4" id="">
+                </label>
+                <label class="card-box">
+                    <div class="card-title">Q4.2021</div>
+                    <input type="radio" name="q4" id="">
+                </label>
+                <div class="page-nav">
+                    <div class="prev">
+                        <span class="icon"><img src="{{ asset('media/svg/icons/Navigation/Vector-left.svg') }}" alt="previous"></span>
+                        <span>Q3.2021</span>
                     </div>
-                    <!-- @auth
-                    {{ __('You are logged in!eee') }}
-                    @endauth
-                    @guest
-                    {{ __('You are not logged in :(') }}
-                    @endguest -->
+                    <div class="next">
+                        <span>Q2.2022</span>
+                        <span class="icon"><img src="{{ asset('media/svg/icons/Navigation/Vector-right.svg') }}" alt="next"></span>
+                    </div>
                 </div>
             </div>
-        </div>
+            <button class="btn next-btn">Continue</button>
+        </section>
     </div>
 </div>
 @endsection
@@ -176,4 +174,12 @@
         
     });
 </script>
+    <script>
+        $(document).ready(function() {
+            $('.card-box input[type="radio"]').on('change', function() {
+                $('.card-box').removeClass('active');
+                $(this).parent().addClass('active');
+            })
+        })
+    </script>
 @endsection

@@ -2,6 +2,7 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+<link rel="stylesheet" href="{{ asset('css/icons.css') }}">
 @endsection
 
 @section('content')
@@ -30,7 +31,9 @@
         <section class="col-md-8 right-section">
             {{-- <div class="line-bar"></div> --}}
             <div class="book-your-launch">BOOK YOUR LAUNCH</div>
-            <button class="close"><img src="{{ asset('media/svg/icons/Navigation/Cross.svg') }}" alt="close"></button>
+            <button class="close">
+                <span class="ico ico-cross"></span>    
+            </button>
             <div class="container-box">
                 <label class="card-box">
                     <div class="card-title">Q4.2021</div>
@@ -57,13 +60,13 @@
                     <input type="radio" name="q4" id="">
                 </label>
                 <div class="page-nav">
-                    <div class="prev">
-                        <span class="icon"><img src="{{ asset('media/svg/icons/Navigation/Vector-left.svg') }}" alt="previous"></span>
+                    <div class="prev d-flex">
+                        <span class="ico ico-vector-l"></span>
                         <span>Q3.2021</span>
                     </div>
-                    <div class="next">
-                        <span>Q2.2022</span>
-                        <span class="icon"><img src="{{ asset('media/svg/icons/Navigation/Vector-right.svg') }}" alt="next"></span>
+                    <div class="next d-flex">
+                        <span class="mr-3">Q2.2022</span>
+                        <span class="ico ico-vector-r"></span>
                     </div>
                 </div>
             </div>
