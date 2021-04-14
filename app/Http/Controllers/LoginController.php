@@ -16,7 +16,7 @@ class LoginController extends Controller
 
     public function login(){
     	if(Auth::guard('customer')->user()){
-    		return \Redirect::route('timeline',['project_id'=>2]);
+    		return \Redirect::route('timeline',['project_id'=>0]);
     	}
     	return view('front.pages.signin.login');
     }
@@ -26,12 +26,15 @@ class LoginController extends Controller
         return redirect('/before-login');
     }
 
-    public function timeline($id=null){
+    public function timeline($id){
     	$detail = null;
     	$customer = Auth::guard('customer')->user();
     	if($customer->enabled){
-    		if ($id) {
+    		if ($id != 0) {
     			$detail= Project::find($id);
+    		}else{
+    			if(session('project'))
+    				$detail = Project::where('name','LIKE','%'.session('project').'%')->first();
     		}
 	    	$projects = Project::where('customer_id','=',$customer->id)->orderBy('id','desc')->get();
 	    	return view('front.pages.dashboard.timeline',compact('projects','detail'));
@@ -39,11 +42,13 @@ class LoginController extends Controller
 	    	Auth::guard('customer')->logout();
 	    	return view('front.pages.dashboard.enabled');
 	    }
+
+	    return redirect('/project-name');
     }
 
     public function loginrequest(Request $request){
         if (Auth::guard('customer')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return \Redirect::route('/timeline',['project_id'=>null]);
+            return \Redirect::route('timeline',['project_id'=>0]);
         } 
         return redirect('/before-login');
     }

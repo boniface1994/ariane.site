@@ -55,44 +55,52 @@
                             </div>
                             @if(count($projects) > 0)
                                 @if($detail)
-                                    @if($detail->nda != null)
-                                        <div class="col-md-12">
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label">Arianespace vous propose un modèle de NDA pré-rempli.Vous pouvez le signer et le renvoyer par le formulaire ci-dessous.</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <a href="{{route('nda.generate',['id'=>$detail->id])}}" target="_blank">Télécharger le NDA</a>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-12 project-option">
                                         <form class="form">
+                                            @csrf
                                             <div class="form-group">
-                                                <label class="form-label">Envoyer le NDA signé à Ariane Espae :</label>
-                                                <div class="input-group col-md-6">
-                                                    <input type="file" name="nda" class="form-control">
+                                                <div class="form-group">
+                                                    <h4 class="form-label">Vos options</h4>
+                                                </div>
+                                                <div class="input-group">
+                                                    @foreach($options as $option)
+                                                        <div class="col-md-3 mr-2  option" >
+                                                            <!-- <div class="card-body"> -->
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <h4 class="form-label mr-2">{{$option->name}}</h4>
+                                                                        <label class="checkbox checkbox-primary" style="margin-top: -10px">
+                                                                            <input type="checkbox" class="ml-3 checker" data-session="{{$option->id}}" name="alloptions[]" value="{{$option->id}}"/>
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <label class="form-label">{{$option->explication}}</label><br>
+                                                                    <!-- <label class="form-label" style="font-size: 10px">{{$option->cost}}</label> -->
+                                                                </div>
+                                                            <!-- </div> -->
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-group">
-                                                <button class="btn btn-warning">Envoyer</button>
+                                                <button class="btn btn-warning">Valider</button>
                                             </div>
                                         </form>
-                                    @else
-                                        <div class="input-group">
-                                            <div class="form-group mr-2">
-                                                <h4 class="form-label">Vous pouvez télécharger le NDA signé</h4>
-                                            </div>
-                                            <div class="form-group">
-                                                <a href="" class="btn btn-success">Télécharger le NDA</a>
-                                            </div>
-                                        </div>
-                                    @endif
+                                    </div>
                                 @else
                                 <div class="form-group">
                                     <label class="form-label">Select an project</label>
                                 </div>
                                 @endif
+                            @else
+                                <div class="col-lg-3">
+                                    <label class="btn btn-warning"><a href="">CRÉER VOTRE PREMIER PROJET</a></label>
+                                </div>
                             @endif
                         </div>
                     </div>
+                    <a href="{{route('connect')}}"> <label class="form-label"><-Back</label></a>
                 </div>
             </div>
         </div>
@@ -102,6 +110,17 @@
 @section('scripts')
 <script type="text/javascript">
     jQuery(document).ready(function () {
+        $('.project-option').find('.option').each(function(i,el){
+            $(el).on('click',function(){
+                if($(this).find('.checker').is(':checked')){
+                    $(this).find('.checker').attr('checked',false);
+                    $(this).css('background-color',"");
+                }else{
+                    $(this).find('.checker').attr('checked',true);
+                    $(this).css('background-color',"#2176bd");
+                }
+            });
+        });
     });
 </script>
 @endsection

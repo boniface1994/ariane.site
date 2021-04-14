@@ -18,18 +18,20 @@
                                 <div class="form-group">
                                     <img src="{{ asset('media/logos/logo-light.png') }}" class="mr-2" style="max-width: 120px" alt="" />
                                 </div>
-                                @foreach($projects as $project)
-                                    <div class="form-group ml-4">
-                                        <label class="form-label">{{$project->name}}</label><br>
-                                        <a href="{{route('timeline',['project_id'=>$project->id])}}">Timelines</a><br>
-                                        <a href="{{route('caracteristic',['id'=>$project->id])}}">Informations</a><br>
-                                        <a href="">Options</a><br>
-                                        <a href="">Synthèse</a><br>
-                                        <a href="">Documents</a><br>
-                                        <a href="">Votre contacts</a><br>
-                                        <a href="">NDA</a><br>
-                                    </div>
-                                @endforeach
+                                <div class="form-group" style="height: 100%;overflow-y: auto;">
+                                    @foreach($projects as $project)
+                                        <div class="form-group ml-4">
+                                            <label class="form-label">{{$project->name}}</label><br>
+                                            <a href="{{route('timeline',['project_id'=>$project->id])}}">Timelines</a><br>
+                                            <a href="{{route('caracteristic',['id'=>$project->id])}}">Informations</a><br>
+                                            <a href="{{route('option',['project_id'=>$project->id])}}">Options</a><br>
+                                            <a href="">Synthèse</a><br>
+                                            <a href="{{route('project.document',['project_id'=>$project->id])}}">Documents</a><br>
+                                            <a href="{{route('contact.ariane',['project_id'=>$project->id])}}">Votre contacts</a><br>
+                                            <a href="">NDA</a><br>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                         <div class="form-group col-lg-9"  >
@@ -47,7 +49,7 @@
                                         <label>{{Auth::guard('customer')->user()->name}}</label>
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <a class="form-label" href="{{route('front.logout')}}">Deconnexion</a>
+                                        <a class="form-label" href="{{route('beforelogin')}}">Deconnexion</a>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +60,7 @@
                                         <label class="form-label">Vous n'avez pas signé le NDA</label>
                                     </div>
                                     <div class="form-group col-lg-9">
-                                        <a href="{{route('nda')}}" target="_blank" class="btn btn-warning"> TELECHARGER LE NDA</a>
+                                        <a href="{{route('nda.generate',['id'=>$detail->id])}}" target="_blank" class="btn btn-warning"> TELECHARGER LE NDA</a>
                                     </div>
                                 </div>
                                 <div class="input-group">

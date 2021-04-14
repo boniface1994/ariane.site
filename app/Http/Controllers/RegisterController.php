@@ -87,6 +87,8 @@ class RegisterController extends Controller
     }
 
     public function beforeLogin(){
+        if(Auth::guard('customer')->user())
+            Auth::guard('customer')->logout();
     	return view('front.pages.signin.before-login');
     }
 

@@ -32,9 +32,9 @@ class RedirectIfAuthenticated
                     }
                     break;
                 
-                default:
+                case 'customer':
                     if (Auth::guard($guard)->check()) {
-                        return redirect('/customer/timeline');
+                        return \Redirect::route('timeline',['project_id'=>2]);
                     }
                     break;
             }

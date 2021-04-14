@@ -47,6 +47,7 @@
                                 <div class="input-group col-md-6">
                                     <div class="form-group">
                                         <label>{{Auth::guard('customer')->user()->name}}</label>
+
                                     </div>
                                     <div class="form-group col-md-4">
                                         <a class="form-label" href="{{route('beforelogin')}}">Deconnexion</a>
@@ -55,44 +56,31 @@
                             </div>
                             @if(count($projects) > 0)
                                 @if($detail)
-                                    @if($detail->nda != null)
-                                        <div class="col-md-12">
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label">Arianespace vous propose un modèle de NDA pré-rempli.Vous pouvez le signer et le renvoyer par le formulaire ci-dessous.</label>
-                                            </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                             <div class="form-group">
-                                                <a href="{{route('nda.generate',['id'=>$detail->id])}}" target="_blank">Télécharger le NDA</a>
+                                                <h3 class="form-label">Votre contact Arianespace pour votre projet</h3>
+                                            </div>
+                                            <div class="input-group">
+                                                <textarea name="contact_ariane" id="kt-ckeditor-2" readonly>
+                                                    {{$detail->contact_ariane}}
+                                                </textarea>
                                             </div>
                                         </div>
-                                        <form class="form">
-                                            <div class="form-group">
-                                                <label class="form-label">Envoyer le NDA signé à Ariane Espae :</label>
-                                                <div class="input-group col-md-6">
-                                                    <input type="file" name="nda" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <button class="btn btn-warning">Envoyer</button>
-                                            </div>
-                                        </form>
-                                    @else
-                                        <div class="input-group">
-                                            <div class="form-group mr-2">
-                                                <h4 class="form-label">Vous pouvez télécharger le NDA signé</h4>
-                                            </div>
-                                            <div class="form-group">
-                                                <a href="" class="btn btn-success">Télécharger le NDA</a>
-                                            </div>
-                                        </div>
-                                    @endif
+                                    </div>
                                 @else
                                 <div class="form-group">
                                     <label class="form-label">Select an project</label>
                                 </div>
                                 @endif
+                            @else
+                                <div class="col-lg-3">
+                                    <label class="btn btn-warning"><a href="">CRÉER VOTRE PREMIER PROJET</a></label>
+                                </div>
                             @endif
                         </div>
                     </div>
+                    <a href="{{route('connect')}}"> <label class="form-label"><-Back</label></a>
                 </div>
             </div>
         </div>
@@ -100,8 +88,35 @@
 </div>
 @endsection
 @section('scripts')
+<script src="{{ asset('plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
+    var KTCkeditor = function () {
+            // Private functions
+            var demos = function () {
+                ClassicEditor
+                    .create( document.querySelector( '#kt-ckeditor-2' ) )
+                    .then( editor => {
+                        console.log( editor );
+                        $('.ck-rounded-corners').css('width','80%');
+                        $('.ck-sticky-panel').css('display','none');
+                    } )
+                    .catch( error => {
+                        console.error( error );
+                    } );
+            }
+
+            return {
+                // public functions
+                init: function() {
+                    demos();
+                }
+            };
+        }();
     jQuery(document).ready(function () {
+        
+        KTCkeditor.init();
+
+        $('.ck-sticky-panel').css('display','none');
     });
 </script>
 @endsection
