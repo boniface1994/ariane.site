@@ -7,7 +7,7 @@ Route::group(['namespace' => 'Auth'], function(){
     Route::post('login', 'LoginController@login')->name('admin.login');
 });
 
-Route::group(['middleware' => 'admin'], function(){
+Route::group(['middleware' => 'auth:admin'], function(){
     Route::get('/', 'Dashboard\DashboardController@index')->name('admin.home');
 
     Route::group(['prefix'=> 'configurator', 'namespace' => 'Configurator'], function() {
