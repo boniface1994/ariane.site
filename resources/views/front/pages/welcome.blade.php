@@ -1,13 +1,16 @@
 @extends('layouts.front')
-
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ asset('css/step1.css') }}">
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card" style="background-color: #E5E5E5;">
                 <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
 
-                <div class="card-body">
+                <div class="card-body" style="overflow: hidden">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -16,8 +19,8 @@
                     <div class="input-group">
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <img src="{{ asset('media/logos/logo-light.png') }}" class="mr-2" style="max-width: 120px" alt="" /><br>
-                                <label class="number" style="font-size: 120px">01</label>
+                                <img src="{{ asset('media/logos/logo-easy.svg') }}" class="mr-2" style="max-width: 120px" alt="" /><br>
+                                <label class="number">01</label>
                                 <label class="title" style="font-size: 30px">{{ __('Choose your lauch period') }}</label>
                             </div>
 
@@ -25,7 +28,7 @@
                         <div class="form-group col-lg-9"  id="quarter">
                             <form action="{{route('session_one')}}" method="POST">
                                 @csrf
-                                <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
+                                <label class="form-label top-title"> {{ __('Book your launch') }}</label>
                                 <!-- <div class="card card-custom" id="quarter">
                                     <div class="card-body"> -->
                                         <div class="input-group allquarter" data-route="{{route('allquarter')}}" data-year={{$year}} data-sess_quarter="{{session('quarter') ? session('quarter') : ''}}">
@@ -46,16 +49,16 @@
 
                                             
                                         </div>
+                                        <div id="pagination-bar"></div>
                                     <!-- </div> -->
                                     <!-- <div class="input-group">
                                         <button class="col-md-2">Prev</button>
                                         <button class="col-md-2">Next</button>
                                     </div> -->
-                                    <div id="pagination-bar"></div>
                                 <!-- </div> --><br>
 
-                                <div class="form-group" style="float: right; margin-right: 175px">
-                                    <button href="{{route('step_two')}}" class="btn btn-primary " disabled>Suivant >></button>
+                                <div class="form-group" style="float: right;">
+                                    <button href="{{route('step_two')}}" class="btn btn-next " disabled>SUIVANT</button>
                                 </div>
                             </form>
                         </div>
@@ -87,6 +90,75 @@
             method: 'GET',
             success: function(response){
                 all = response;
+                $(function(){
+                    var container = $('#pagination-bar');
+                    container.pagination({
+                        dataSource: all,
+                        pageSize: 6,
+                        showPageNumbers: false,
+                        showNavigator: true,
+                        autoHidePrevious: false,
+                        autoHideNext: false,
+                        pageRange: null,
+                        callback: function(data, pagination) {
+                            var html = template(data);
+                            var all_data = [];
+                            var min_data = data[0].q_dispo+'.'+data[0].annee;
+                            var max_data = data[data.length - 1].q_dispo+'.'+data[data.length - 1].annee;
+                            for(var i=0; i<all.length ; i++){
+                                if(all[i].annee <=year){
+                                    all_data.push(all[i]);
+                                }
+                            }
+
+                            $('.paginationjs-prev').find('a').css('font-size','20px').html("<i class='fa fa-arrow-left'></i>");
+                            $('.paginationjs-next').find('a').css('font-size','40px');
+                            $('.paginationjs-next').css('margin-top','-32px');
+                            for(var j=0;j<all_data.length;j++){
+
+                                if(j>0 && min_data == (all_data[j].q_dispo+'.'+all_data[j].annee)){
+                                    $('.paginationjs-prev').find('a').html("<i class='fa fa-arrow-left'></i> " +all_data[j-1].q_dispo+'.'+all_data[j-1].annee);
+                                    $('.paginationjs-prev').find('a').css('font-size','15px');
+                                }
+                                if(j<all_data.length && max_data == (all_data[j].q_dispo+'.'+all_data[j].annee)){
+                                    $('.paginationjs-next').find('a').html(all_data[j+1].q_dispo+'.'+all_data[j+1].annee+" <i class='fa fa-arrow-right'></i>");
+                                    $('.paginationjs-next').find('a').css('font-size','15px');
+                                    if(j>=6){
+                                        $('.paginationjs-next').css('margin-top','-24px');
+                                    }
+                                }
+                            }
+                            $('.container').find('#quarter .allquarter').html(html);
+                            $('.J-paginationjs-nav').addClass('d-none');
+                            $('.paginationjs-next').find('a').css('float','right');
+                            $('.paginationjs-next').find('a').css('margin-right','');
+                            $('.container').find('#quarter .quarter').each(function(i,el){
+                                $(el).on('click',function(){
+                                    $(this).find('.trimester').attr('checked',true);
+                                    $(this).css("background-color","#000").css('color', '#fff');
+                                    // $(this).closest('#quarter').find('.btn').removeAttr('disabled');
+                                    $(el).closest('#quarter').find('.btn').removeAttr('disabled');
+                                    sessionStorage.setItem('quarter',$(this).find('.trimester').val());
+                                    $(this).siblings().css("background-color", "").css('color', '#000');
+                                    $(this).siblings().find(".trimester").attr('checked',false);
+                                    
+                                });
+                                $('ul').css('list-style','none');
+                                $('li').css('list-style','none');
+                                if($(el).find('.trimester').val() == session){
+                                    $(el).css("background-color","#000").css('color', '#fff');
+                                    $(el).find('.trimester').attr('checked',true);
+                                    $(el).closest('#quarter').find('.btn').removeAttr('disabled');
+                                }else{
+                                    $(el).css("background-color","");
+                                    $(el).find('.trimester').attr('checked',false);
+                                }
+                            });
+                            
+                        }
+                    });
+                
+                });
             }
         });
         function template(data) {
@@ -100,80 +172,6 @@
                   html+='';                                      
             return html;
         }
-        setTimeout(function() {
-            $(function(){
-               var container = $('#pagination-bar');
-                container.pagination({
-                    dataSource: all,
-                    pageSize: 6,
-                    showPageNumbers: false,
-                    showNavigator: true,
-                    autoHidePrevious: false,
-                    autoHideNext: false,
-                    pageRange: null,
-                    callback: function(data, pagination) {
-                        var html = template(data);
-                        var all_data = [];
-                        var min_data = data[0].q_dispo+'.'+data[0].annee;
-                        var max_data = data[data.length - 1].q_dispo+'.'+data[data.length - 1].annee;
-                        for(var i=0; i<all.length ; i++){
-                            if(all[i].annee <=year){
-                                all_data.push(all[i]);
-                            }
-                        }
-
-                        $('.paginationjs-prev').find('a').css('font-size','40px');
-                        $('.paginationjs-next').find('a').css('font-size','40px');
-                        $('.paginationjs-next').css('margin-top','-46px');
-                        for(var j=0;j<all_data.length;j++){
-
-                            if(j>0 && min_data == (all_data[j].q_dispo+'.'+all_data[j].annee)){
-                                $('.paginationjs-prev').find('a').text('<'+all_data[j-1].q_dispo+'.'+all_data[j-1].annee);
-                                $('.paginationjs-prev').find('a').css('font-size','17px');
-                            }
-                            if(j<all_data.length && max_data == (all_data[j].q_dispo+'.'+all_data[j].annee)){
-                                $('.paginationjs-next').find('a').text(all_data[j+1].q_dispo+'.'+all_data[j+1].annee+'>');
-                                $('.paginationjs-next').find('a').css('font-size','17px');
-                                if(j>=6){
-                                    $('.paginationjs-next').css('margin-top','-24px');
-                                }
-                            }
-                        }
-                        $('.container').find('#quarter .allquarter').html(html);
-                        $('.J-paginationjs-nav').addClass('d-none');
-                        $('.paginationjs-next').find('a').css('float','right');
-                        $('.paginationjs-next').find('a').css('margin-right','232px');
-                        $('.container').find('#quarter .quarter').each(function(i,el){
-                            $(el).on('click',function(){
-                                $(this).find('.trimester').attr('checked',true);
-                                $(this).css("background-color","#2176bd");
-                                // $(this).closest('#quarter').find('.btn').removeAttr('disabled');
-                                $(el).closest('#quarter').find('.btn').removeAttr('disabled');
-                                sessionStorage.setItem('quarter',$(this).find('.trimester').val());
-                                $(this).siblings().css("background-color","");
-                                $(this).siblings().find(".trimester").attr('checked',false);
-                                
-                            });
-                            $('ul').css('list-style','none');
-                            $('li').css('list-style','none');
-                            if($(el).find('.trimester').val() == session){
-                                $(el).css("background-color","#2176bd");
-                                $(el).find('.trimester').attr('checked',true);
-                                $(el).closest('#quarter').find('.btn').removeAttr('disabled');
-                            }else{
-                                $(el).css("background-color","");
-                                $(el).find('.trimester').attr('checked',false);
-                            }
-                        });
-                        
-                    }
-                });
-              
-            });
-                
-
-        },1000)
-        
     });
 </script>
 @endsection
