@@ -307,4 +307,12 @@ class HomeController extends Controller
         }
         return view('front.pages.stepseven',compact('opportunities','document','tarifs','options'));
     }
+
+    public function seventCompte(Request $request){
+        return redirect('login');
+    }
+
+    public function connectCompte(){
+        return view('front.pages.log_singin');
+    }
 }

@@ -65,15 +65,10 @@
                         <!-- <div id="pagination-data-container"></div>
                         <div id="pagination-bar"></div> -->
                     </div>
-                    <!-- @auth
-                    {{ __('You are logged in!eee') }}
-                    @endauth
-                    @guest
-                    {{ __('You are not logged in :(') }}
-                    @endguest -->
                 </div>
             </div>
-        </div>
+            <button class="btn next-btn">Continue</button>
+        </section>
     </div>
 </div>
 @endsection

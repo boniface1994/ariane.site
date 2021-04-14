@@ -19,7 +19,8 @@ class Project extends Model
     protected $fillable = [
     	'step_1','step_2','step_3','step_4','valid','received','customer_id','contact_ariane',
     	'altitude_min','altitude_max','inclination_min','inclination_max','local_time','ltan',
-    	'ltdn','sc_interface_id','orbit_type_id','propellant_type_id','supplier_type_id'
+    	'ltdn','sc_interface_id','orbit_type_id','propellant_type_id','supplier_type_id','latitude',
+        'inclination','step_inc','step_alt','local_start','local_end','constraint','name'
     ];
 
     public function customer(){
