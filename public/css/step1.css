@@ -1,6 +1,10 @@
 @font-face {
-  font-family: "fsmeridian";
+  font-family: "fsmeridian-bold";
   src: url("/fonts/FSMeridian-Bold.ttf");
+}
+@font-face {
+  font-family: "fsmeridian";
+  src: url("/fonts/FSMeridian.ttf");
 }
 
 :root {
@@ -10,13 +14,19 @@
 
 body {
   color: #000;
-  font-family: fsmeridian;
+  font-family: fsmeridian-bold;
+}
+
+.checkbox.checkbox-warning > span {
+  border: 1px solid var(--orange);
 }
 
 .number {
-  font-size: 23em !important;
+  font-size: 400px !important;
   left: -0.5em;
   position: relative;
+  top: -60px;
+  margin-bottom: -0.35em;
 }
 
 .form-group label {
@@ -32,6 +42,7 @@ body {
 
 .top-title {
   font-style: normal;
+  font-family: fsmeridian;
   font-weight: 300;
   font-size: 12px;
   line-height: 12px;
@@ -41,7 +52,7 @@ body {
 
 .input-group.content-right {
   justify-content: center;
-  padding: 15% 0 15% 0;
+  padding: 15% 0 0 0;
 }
 
 .card.card-custom {
@@ -59,11 +70,18 @@ body {
 
 .paginationjs a {
   color: #000;
+  font-family: 'fsmeridian';
+  font-size: 12px !important;
 }
 
 .paginationjs a .fa {
   color: #000;
   font-size: 12px;
+  padding-left: 5px;
+}
+
+.paginationjs a:hover {
+  text-decoration: underline !important;
 }
 
 .btn.btn-next:disabled {
@@ -79,6 +97,7 @@ body {
   width: 150px;
   height: 60px;
   background: #000;
+  bottom: 0;
   right: 2%;
   border-radius: 0;
   text-transform: uppercase;
@@ -100,7 +119,7 @@ body {
 
 #pagination-bar {
   width: 100%;
-  padding: 0 10% 0 10%;
+  padding: 3% 10% 15% 10%;
 }
 
 .paginationjs-pages ul {
@@ -132,7 +151,7 @@ body {
   box-sizing: border-box;
   border-radius: 20px;
 
-  font-family: fsmeridian;
+  font-family: fsmeridian-bold;
 }
 
 .pagination .active {
@@ -184,6 +203,14 @@ body {
 }
 /* end range */
 
+/* icon card*/
+.icon-card {
+  position: absolute;
+  bottom: 17px;
+  left: 10px;
+  color: #000;
+}
+/* end icon card*/
 
 @media (min-width: 992px) {
   .left-section {

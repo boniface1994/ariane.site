@@ -41,7 +41,7 @@
                                 <form action="{{route('session_two')}}" method="POST">
                                     @csrf
                                     <label class="form-label top-title"> {{ __('Book your launch') }}</label>
-                                    <div class="input-group content-right">
+                                    <div class="input-group content-right" style="padding:0;">
                                         @foreach($orbites as $orbite)
                                         <div class="card card-custom col-md-3 mr-2 mb-2 orbite" data-id="{{$orbite->id}}" data-url="{{route('parameter',['orbite_id'=>$orbite->id])}}" data-leo="{{$orbite->tarif_leo}}" data-gto="{{$orbite->tarif_gto}}" data-orbitleo="{{$orbite->orbit_leo}}" data-orbitsso="{{$orbite->orbit_sso}}">
                                             <div class="card-body">
@@ -50,7 +50,7 @@
                                                         {{ $orbite->name }}
                                                     </h4>
                                                 </div>
-                                                <i class="icon-xl fa fa-info-circle" data-container="body" data-offset="20px 20px" data-toggle="popover" data-placement="top" data-content="{{$orbite->explication}}"  style="margin-top: -40px;float: right;margin-right: -37px"></i>
+                                                <i class="icon-xl fa fa-info-circle icon-card" data-container="body" data-offset="20px 20px" data-toggle="popover" data-placement="top" data-content="{{$orbite->explication}}"  style="margin-top: -40px;float: right;margin-right: -37px"></i>
                                                 <input type="radio" name="orbite_type" class="d-none radio">
                                             </div>
                                             @foreach($orbite->parameters as $parameter)
@@ -76,7 +76,7 @@
                                         <input type="hidden" class="leo" name="leo" value="{{session('leo') ? session('leo') : ''}}">
                                     </div><br>
                                     <div class="orb-altitude ml-2 d-none">
-                                        <div class="form-group row ">
+                                        <div class="form-group row d-flex justify-content-center">
                                             <h3 class="form-label">{{ __('Altitude') }} <span class="text-danger">*</span></h3>
                                         </div>
                                         <div class="form-group row  mb-13">
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="orb-inclination ml-2 d-none">
-                                        <div class="form-group row " align="center">
+                                        <div class="form-group row d-flex justify-content-center">
                                             <h3 class="form-label">{{ __('Inclination') }} <span class="text-danger">*</span></h3>
                                         </div>
                                         <div class="form-group row  mb-13">
@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                     <div class="local-time ml-2 d-none">
-                                        <div class="form-group row" align="center">
+                                        <div class="form-group row d-flex justify-content-center">
                                             <h3 class="form-label">{{ __('Local time') }} <span class="text-danger">*</span></h3>
                                         </div>
                                         <div class="form-group row">
@@ -115,13 +115,13 @@
                                                     <input type="time" class="local_end form-control form-control-solid" name="local_end" value="{{ session('local_end') ? session('local_end') : '' }}" />
                                                 </div>
                                                 <div class="checkbox-inline">
-                                                    <label class="checkbox checkbox-primary">
+                                                    <label class="checkbox checkbox-warning">
                                                         <input class="local_time_type ltan" type="checkbox" {{ session('ltan') ? 'checked' : '' }} />
                                                         <input type="hidden" name="ltan" value="{{session('ltan') ? session('ltan') : 0 }}">
                                                         <span></span>
                                                         {{ __('LTAN') }}
                                                     </label>
-                                                    <label class="checkbox checkbox-primary">
+                                                    <label class="checkbox checkbox-warning">
                                                         <input class="local_time_type ltdn" type="checkbox" {{ session('ltdn') ? 'checked' : '' }}/>
                                                         <input type="hidden" name="ltdn" value="{{session('ltan') ? session('ltan') : 0 }}">
                                                         <span></span>
@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                     <div class="comment ml-2">
-                                        <div class="form-group row">
+                                        <div class="form-group row d-flex justify-content-center">
                                             <h3 class="form-label">{{ __('Your constraint') }} </h3>
                                         </div>
                                         <div class="form-group row">
@@ -277,14 +277,17 @@
                 })
                 
                 $(this).find('.radio').attr('checked',true);
-                $(this).css("background-color","#2176bd");
+                $(this).css("background-color","#000").css('color', "#fff");
+                $(this).find('i').css('color', '#fff')
                 $(this).siblings().removeAttr('checked');
-                $(this).siblings().css("background-color","");
+                $(this).siblings().css("background-color","").css('color', '#000');
+                $(this).siblings().find('i').css('color', '#000');
                 $(this).closest('#orbite').find('.btn-primary').removeClass('disabled');
 
             });
             if(sessionStorage.getItem("id") == $(el).data('id')){
-                $(el).css("background-color","#2176bd");
+                $(el).css("background-color","#000").css('color', "#fff");
+                $(el).find('i').css('color', '#fff')
                 $(el).find('.radio').attr('checked',true);
                 $(el).closest('#orbite').find('.btn-primary').removeClass('disabled');
                 $('#orbite').find('.orb-inclination').addClass('d-none');
