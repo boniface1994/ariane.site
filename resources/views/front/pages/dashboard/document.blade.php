@@ -37,7 +37,7 @@
                         <div class="form-group col-lg-9"  >
                             <div class="input-group col-md-12" >
                                 <div class="form-group col-md-6">
-                                    <select class="form-control">
+                                    <select class="form-control select_project">
                                         <option value="">Select project</option>
                                         @foreach($projects as $project)
                                             <option value="{{$project->id}}" {{($detail && $detail->id == $project->id) ? 'selected' : ''}}>{{$project->name}}</option>
@@ -166,6 +166,19 @@
 @section('scripts')
 <script type="text/javascript">
     jQuery(document).ready(function () {
+        $('.select_project').on('change',function(){
+            var project_id = $(this).val();
+            setTimeout(function(){
+                var path='';
+                var old_path = window.location.pathname.split('/');
+                for(var i=0;i<old_path.length;i++){
+                    if(i>0 && i<(old_path.length-1)){
+                        path+='/'+old_path[i];
+                    }
+                }
+                window.location.replace(window.location.origin+path+'/'+project_id);
+            },1000);
+        });
     });
 </script>
 @endsection

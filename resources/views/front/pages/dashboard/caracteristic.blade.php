@@ -43,7 +43,6 @@
                                             <option value="{{$project->id}}" {{($detail && $detail->id == $project->id) ? 'selected' : ''}}>{{$project->name}}</option>
                                         @endforeach
                                     </select>
-                                    <a href="" class="link_project"></a>
                                 </div>
                                 <div class="input-group col-md-6">
                                     <div class="form-group">
@@ -209,11 +208,16 @@
     jQuery(document).ready(function () {
         $('.select_project').on('change',function(){
             var project_id = $(this).val();
-            var link = window.location.origin+'/customer/timeline/'+project_id;
-            $(this).siblings('a').attr('href',link);
             setTimeout(function(){
-                $(this).siblings('a').click();
-            },2000);
+                var path='';
+                var old_path = window.location.pathname.split('/');
+                for(var i=0;i<old_path.length;i++){
+                    if(i>0 && i<(old_path.length-1)){
+                        path+='/'+old_path[i];
+                    }
+                }
+                window.location.replace(window.location.origin+path+'/'+project_id);
+            },1000);
         });
         
         if($('.orbit_type').val()){
@@ -231,7 +235,6 @@
                 url: url,
                 method: 'GET',
                 success: function(response){
-                    console.log(response);
                     for(var i=0;i<response.length;i++){
                         if(response[i].type == 'altitude'){
                             $('.altitude').find('#altitude').ionRangeSlider();
@@ -299,7 +302,6 @@
                 url: url,
                 method: 'GET',
                 success: function(response){
-                    console.log(response);
                     for(var i=0;i<response.length;i++){
                         if(response[i].type == 'altitude'){
                             $('.altitude').find('#altitude').ionRangeSlider();
