@@ -168,6 +168,7 @@ return [
         App\Providers\MetronicServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -218,6 +219,7 @@ return [
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
         // 'Redis' => Illuminate\Support\Facades\Redis::class,
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,

@@ -40,8 +40,24 @@ Route::get('/confirm_email/{id}','RegisterController@confirm');
 Route::get('/project-name','RegisterController@beforeLogin')->name('beforelogin');
 Route::post('/before-login','RegisterController@toLogin')->name('toLogin');
 Route::get('/front-login','LoginController@login')->name('login_front');
+Route::post('/login-front','LoginController@loginrequest')->name('front_login');
+Route::get('/front-logout','LoginController@logout')->name('front.logout');
 
-Route::get('/timeline','LoginController@timeline')->name('timeline');
+Route::group(['middleware' => 'auth:customer','prefix'=>'customer'],function(){
+	Route::get('/timeline/{project_id}','LoginController@timeline')->name('timeline');
+	Route::group(['prefix'=>'dashboard','namespace'=>'Front'],function(){
+		Route::get('/orbit-parameter/{orbit_id}','HomeController@getOrbitParameters')->name('orbit.parameter');
+		Route::get('/caracteristic/{id}','HomeController@caracteristic')->name('caracteristic');
+		Route::get('/option/{project_id}','HomeController@option')->name('option');
+		Route::get('/document/{project_id}','HomeController@document')->name('project.document');
+		Route::post('/upload-doc','HomeController@uploadDoc')->name('upload-doc');
+		Route::get('/delete-doc/{id}','HomeController@deleteDoc')->name('delete-doc');
+		Route::get('/contact-ariane/{project_id}','HomeController@contact')->name('contact.ariane');
+		Route::get('/nda/{project_id}','HomeController@ndaPage')->name('nda');
+		Route::get('/generate-nda/{id}','HomeController@getNda')->name('nda.generate');
+		Route::post('/update-project','HomeController@updateProject')->name('project.update');
+	});
+});
 
 Auth::routes();
 

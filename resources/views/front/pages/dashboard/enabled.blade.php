@@ -20,23 +20,17 @@
                         </div>
                         <div class="form-group col-lg-9"  >
                             <div class="input-group">
+                                <div class="form-group col-lg-3">
+                                    <label class="form-label">Your account are created</label>
+                                </div>
+                                <div class="form-group col-lg-9">
+                                    <label class="form-label"> An email has been sent with link enable you to confirm that your Ariane Espace dashboard has been created</label>
+                                    <p>Please check your spam folder if email has not arrived within 2 minutes</p>
+                                </div>
+                            </div>
+                            <div class="input-group">
                                 <div class="col-md-12">
-                                    <form class="form" action="{{route('front_login')}}" method="POST">
-                                        @csrf
-                                        <div class="form-group">
-                                            <h3 class="form-label" style="font-size: 30px"> {{ __('Access to your Arianespace dashboard') }}</h3>
-                                            <div class="form-group">
-                                                <input class="form-control col-lg-6" type="text" name="email" placeholder="Email">
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="form-control col-lg-6" type="password" name="password" placeholder="Password">
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                                <button class="btn btn-primary" style="float: center;">VALID</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    
                                 </div>
                             </div><br>
                         </div>
