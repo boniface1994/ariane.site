@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\Admin\Project;
 
 class LoginController extends Controller
 {
+	use AuthenticatesUsers;
 	// protected $redirectTo = '/timeline';
     // public function __construct()
     // {
-    //     $this->middleware('guest:customer')->except('logout');
+    //     $this->middleware('guest:customer')->except(['logout','login']);
     // }
 
     public function login(){
