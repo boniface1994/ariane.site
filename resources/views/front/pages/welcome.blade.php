@@ -39,7 +39,7 @@
                                 @csrf
                                 <label class="form-label top-title"> {{ __('Book your launch') }}</label>
                                 <a href="#"><i class="far fa-window-close fa-2x" style="color: var(--orange); float: right;"></i></a>
-                                <div class="input-group allquarter" data-route="{{route('allquarter')}}" data-year={{$year}} data-sess_quarter="{{session('quarter') ? session('quarter') : ''}}">
+                                <div class="input-group allquarter content-right" data-route="{{route('allquarter')}}" data-year={{$year}} data-sess_quarter="{{session('quarter') ? session('quarter') : ''}}">
                                 </div>
                                 <div id="pagination-bar"></div>
                                 <br>
