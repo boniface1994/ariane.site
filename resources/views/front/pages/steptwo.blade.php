@@ -1,31 +1,47 @@
 @extends('layouts.front')
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ asset('css/step1.css') }}">
+@endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card" style="background-color: #E5E5E5;">
                 <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
 
-                <div class="card-body">
+                <div class="card-body" style="overflow: hidden">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
                     <div class="input-group">
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 left-section">
                             <div class="form-group">
-                                <img src="{{ asset('media/logos/logo-light.png') }}" class="mr-2" style="max-width: 120px" alt="" /><br>
+                                <img src="{{ asset('media/logos/logo-easy.svg') }}" class="mr-2" style="max-width: 120px" alt="" /><br>
                                 <label class="number" style="font-size: 120px">02</label>
                                 <label class="title" style="font-size: 30px">{{ __('Describe your spacecraft') }}</label>
+                                <hr width="105%">
+                                <div class="read-more">
+                                    <span>Any questions?<br>contact us</span>
+                                    <span><img src="{{ asset('media/svg/icons/Navigation/Vector.svg') }}" alt="contact us"></span>
+                                </div>
                             </div>
+                            <ul class="pagination">
+                                <li class="num-page active" style="top: -32em">01</li>  
+                                <li class="num-page" style="top: -29em">02</li>  
+                                <li class="num-page" style="top: -26em">03</li>  
+                                <li class="num-page" style="top: -23em">04</li>  
+                                <li class="num-page" style="top: -20em">05</li>  
+                            </ul>
                         </div>
-                            <div class="form-group col-lg-9 justify-content-center"  id="orbite">
+                            <div class="form-group col-lg-9 d-flex justify-content-center"  id="orbite">
                                 <form action="{{route('session_two')}}" method="POST">
                                     @csrf
-                                    <label class="form-label" style="font-size: 30px"> {{ __('Book your launch') }}</label>
-                                    <div class="input-group">
+                                    <label class="form-label top-title"> {{ __('Book your launch') }}</label>
+                                    <div class="input-group content-right">
                                         @foreach($orbites as $orbite)
                                         <div class="card card-custom col-md-3 mr-2 mb-2 orbite" data-id="{{$orbite->id}}" data-url="{{route('parameter',['orbite_id'=>$orbite->id])}}" data-leo="{{$orbite->tarif_leo}}" data-gto="{{$orbite->tarif_gto}}" data-orbitleo="{{$orbite->orbit_leo}}" data-orbitsso="{{$orbite->orbit_sso}}">
                                             <div class="card-body">
@@ -64,27 +80,27 @@
                                             <h3 class="form-label">{{ __('Altitude') }} <span class="text-danger">*</span></h3>
                                         </div>
                                         <div class="form-group row  mb-13">
-                                            <div class="col-lg-8 col-md-9 col-sm-12">
+                                            <div class="col-lg-8 col-md-9 col-sm-12 range">
                                                 <div class="ion-range-slider">
-                                                    <input type="hidden" id="altitude" data-step="0" data-type="double" data-min="0"data-max="0" data-from="0" data-to="0" data-grid="true" name="altitude" value="{{ session('altitude') ? session('altitude') : '' }}" />
+                                                    <input type="hidden" id="altitude" data-skin="round" data-step="0" data-type="double" data-min="0"data-max="0" data-from="0" data-to="0" data-grid="true" name="altitude" value="{{ session('altitude') ? session('altitude') : '' }}" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="orb-inclination ml-2 d-none">
-                                        <div class="form-group row ">
+                                        <div class="form-group row " align="center">
                                             <h3 class="form-label">{{ __('Inclination') }} <span class="text-danger">*</span></h3>
                                         </div>
                                         <div class="form-group row  mb-13">
-                                            <div class="col-lg-8 col-md-9 col-sm-12">
+                                            <div class="col-lg-8 col-md-9 col-sm-12 range">
                                                 <div class="ion-range-slider">
-                                                    <input type="hidden" id="inclination" data-step="0" data-type="double" data-min="0"data-max="0" data-from="0" data-to="0" data-grid="true" name="inclination" value="{{ session('inclination') ? session('inclination') : '' }}" />
+                                                    <input type="hidden" id="inclination" data-skin="round" data-step="0" data-type="double" data-min="0"data-max="0" data-from="0" data-to="0" data-grid="true" name="inclination" value="{{ session('inclination') ? session('inclination') : '' }}" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="local-time ml-2 d-none">
-                                        <div class="form-group row">
+                                        <div class="form-group row" align="center">
                                             <h3 class="form-label">{{ __('Local time') }} <span class="text-danger">*</span></h3>
                                         </div>
                                         <div class="form-group row">
@@ -140,7 +156,13 @@
 @section('scripts')
 <script src="{{ asset('plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
+    $( window ).resize(function() {
+        $('.pagination').css('left', $('.left-section').width() + 12 * 1 );
+    });
     jQuery(document).ready(function () {
+        
+        $('.pagination').css('left', $('.left-section').width() + 12 * 1 );
+
         $('#orbite').find('.orbite').each(function(i,el){
             let data_latitude = $('#altitude').val();
             let data_inclination = $('#inclination').val();

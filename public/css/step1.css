@@ -1,0 +1,202 @@
+@font-face {
+  font-family: "fsmeridian";
+  src: url("/fonts/FSMeridian-Bold.ttf");
+}
+
+:root {
+  --orange: #EE7203;
+  --gris: #EBEBEB;
+}
+
+body {
+  color: #000;
+  font-family: fsmeridian;
+}
+
+.number {
+  font-size: 23em !important;
+  left: -0.5em;
+  position: relative;
+}
+
+.form-group label {
+  color: #000;
+}
+
+.card-body .form-group .title {
+  text-transform: uppercase;
+  font-size: 25px;
+  line-height: 100%;
+  letter-spacing: -0.04em;
+}
+
+.top-title {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.input-group.content-right {
+  justify-content: center;
+  padding: 15% 0 15% 0;
+}
+
+.card.card-custom {
+  border-radius: 0;
+  margin: 10px;
+}
+
+.allquarter .input-group input[type='radio'] {
+  position: absolute;
+  margin-top: -1.5em;
+  margin-left: 110%;
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.paginationjs a {
+  color: #000;
+}
+
+.paginationjs a .fa {
+  color: #000;
+  font-size: 12px;
+}
+
+.btn.btn-next:disabled {
+  background-color: #CCCCCC;
+}
+.btn.btn-next {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  position: absolute;
+  width: 150px;
+  height: 60px;
+  background: #000;
+  right: 2%;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: whitesmoke;
+}
+
+.card .input-group input[type='radio']:checked:after {
+  width: 18px;
+  height: 17px;
+  border-radius: 15px;
+  position: relative;
+  background-color: white;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 5px solid var(--orange);
+}
+
+#pagination-bar {
+  width: 100%;
+  padding: 0 10% 0 10%;
+}
+
+.paginationjs-pages ul {
+  padding: 0;
+}
+
+
+/* Pagination */
+.pagination {
+  position: absolute;
+  width: 30px;
+  height: 190px;
+  /* left: 22.5em; */
+}
+
+.pagination .num-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 0px 0px;
+
+  position: absolute;
+  width: 30px;
+  height: 30px;
+
+  background: var(--gris);
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 20px;
+
+  font-family: fsmeridian;
+}
+
+.pagination .active {
+  border: 0;
+  background: var(--orange);
+  color: white;
+}
+
+.read-more {
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* range */
+.range {
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+.irs--round .irs-bar {
+  background-color: var(--orange);
+}
+
+.irs--round .irs-from:before, .irs--round .irs-to:before, .irs--round .irs-single:before {
+  display: none;
+}
+
+.irs--round .irs-handle {
+  top: 32px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--orange);
+  background-color: var(--orange);
+}
+
+.irs--round .irs-from, .irs--round .irs-to, .irs--round .irs-single {
+  padding: 11px 3px !important;
+  background-color: transparent;
+  color: var(--orange);
+}
+
+.irs--round .irs-from:before, .irs--round .irs-to:before, .irs--round .irs-single:before  {
+  border-color: var(--orange);
+}
+
+.irs--round .irs-min, .irs--round .irs-max {
+  display: none;
+}
+/* end range */
+
+
+@media (min-width: 992px) {
+  .left-section {
+    border-right: 2px solid #ccc;
+  }
+}
+@media (max-width: 992px) {
+  .number {
+    font-size: 16em !important;
+    left: 0;
+  }
+
+  .pagination {
+    display: none;
+  }
+}
